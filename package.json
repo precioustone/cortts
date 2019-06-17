@@ -16,9 +16,11 @@
     "react-native-action-button": "^2.8.5",
     "react-native-collapsible-toolbar": "^0.1.2",
     "react-native-elements": "^1.1.0",
+    "react-native-swipe-list-view": "^1.5.5",
     "react-native-vector-icons": "^6.5.0",
     "react-native-web": "^0.11.4",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-redux": "^7.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"
