@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar,StyleSheet, ScrollView, Text, View } from 'react-native';
+import { Platform, StatusBar,StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import { Avatar, Icon } from 'react-native-elements';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Toolbar } from '../components/customToolbar';
+import { properties } from '../store/store';
 
 //import NavBackButton from '../components/NavBackButton';
 
@@ -20,6 +22,7 @@ export default class Dashboard extends Component{
 
     state = {
         fontLoaded: false,
+        listViewData: properties,
     };
 
     async componentWillMount() {
@@ -46,22 +49,40 @@ export default class Dashboard extends Component{
     );
 
     renderContent = () => (
-        <View>
-            {new Array(20).fill().map((_, i) => (
-                <View
-                    // eslint-disable-next-line
-                    key={i}
-                    style={{
-                        backgroundColor: '#F5F5F5',
-                        padding: 10,
-                        borderBottomWidth: 1,
-                        borderBottomColor: '#E5E5E5'
-                    }}
+        <SwipeListView
+            useFlatList
+            data={this.state.listViewData}
+            renderItem={ (data, rowMap) => (
+                <TouchableOpacity
+                    onPress={() => console.log(data.item.key)}
+                    activeOpacity={1.0}    
                 >
-                    <Text>{`Item ${i + 1}`}</Text>
+                    <View style={styles.rowFront}>
+                        <Text style={{fontFamily: 'raleway-bold', fontSize: 20}}>{data.item.title}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={{fontFamily: 'raleway-bold', color: '#02B598', flex: 6}}>{data.item.area}</Text>
+                            <Text style={{fontFamily: 'raleway-bold', color: '#03C06A', flex: 4}}>{data.item.date}</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )}
+            renderHiddenItem={ (data, rowMap) => (
+                <View style={styles.rowBack}>
+                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnLeft}}>
+                        <View style={{...styles.backRightBtn, ...styles.backRightBtnLeft}}>
+                            <Ionicons name="md-trash" style={styles.actionButtonIcon} />
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnRight}}>
+                        <View style={{...styles.backRightBtn, ...styles.backRightBtnRight}}>
+                            <Ionicons name="md-create" style={styles.actionButtonIcon} />
+                        </View>
+                    </TouchableOpacity>
                 </View>
-            ))}
-        </View>
+            )}
+            leftOpenValue={75}
+            rightOpenValue={-75}
+        />
     );
 
     renderNavBar = () => (
@@ -131,4 +152,37 @@ const styles = StyleSheet.create({
     avatar: {
         flex: 1,
     },
+    rowFront: {
+        fontFamily: 'raleway-bold',
+		backgroundColor: '#E5E5E5',
+		borderBottomColor: '#C0C0C0',
+        borderBottomWidth: 1,
+        paddingHorizontal: 40,
+        paddingTop: 30,
+        paddingBottom: 10,
+	},
+	rowBack: {
+		alignItems: 'center',
+		backgroundColor: '#DDD',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingLeft: 15,
+    },
+    backRightBtn: {
+		alignItems: 'center',
+		bottom: 0,
+		justifyContent: 'center',
+		position: 'absolute',
+		top: 0,
+		width: 75
+	},
+	backRightBtnLeft: {
+		backgroundColor: 'rgba(231,76,60,1)',
+		left: 0,
+	},
+	backRightBtnRight: {
+		backgroundColor: '#3498db',
+        right: 0,
+	},
   });

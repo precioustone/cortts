@@ -56,8 +56,8 @@ export default class RegisterScreen extends Component{
                 
                 <CustomInput 
                     placeholder= 'Full Name'
-                    onChangeText={(text) => this.handleEmail(text)}
-                    value={this.state.email}
+                    onChangeText={(text) => this.handleName(text)}
+                    value={this.state.name}
                     style={styles.text}
                 />
 
@@ -71,15 +71,15 @@ export default class RegisterScreen extends Component{
 
                 <CustomInput 
                     placeholder= 'Phone Number'
-                    onChangeText={(text) => this.handleName(text)}
-                    value={this.state.name}
+                    onChangeText={(text) => this.handlePhone(text)}
+                    value={this.state.phone}
                     style={styles.text}
                 />
 
                 <CustomInput 
                     placeholder= 'Password'
-                    onChangeText={(text) => this.handlePhone(text)}
-                    value={this.state.phone}
+                    onChangeText={(text) => this.handlePassword(text)}
+                    value={this.state.password}
                     style={styles.text}
                 />
                 <View style={styles.toggle}>
