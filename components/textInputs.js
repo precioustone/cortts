@@ -26,12 +26,29 @@ export const CustomInputWithLabel = (props) => {
     );
 };
 
+export const CustomInputWithSide = (props) => {
+    return (
+        <KeyboardAvoidingView enabled style={styles.container}>
+            
+            <Text style={{...styles.text,...props.labelStyle}}>{props.label}</Text>
+           <KeyboardAvoidingView style={{flexDirection: 'row', ...styles.textView}}>
+                <KeyboardAvoidingView enabled style={{flex: 8}}>
+                        <TextInput 
+                            {...props.inputs}
+                        />
+                </KeyboardAvoidingView>
+                <Text style={{flex: 2, color: '#737373'}}>{props.left}</Text>
+           </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+    );
+};
+
 export default CustomInput;
 
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        marginVertical: 20,
+        marginTop: 10,
     },
     textView: {
         backgroundColor: '#F5F5F5',

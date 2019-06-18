@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image,StyleSheet, ScrollView, View } from 'react-native';
-import { Font } from 'expo';
+import * as Font  from 'expo-font';
 import ActionButton from 'react-native-action-button';
 import { Ionicons, Zocial } from '@expo/vector-icons';
 
@@ -43,16 +43,16 @@ export default class ViewListing extends Component{
         const { navigate } = this.props.navigation;
 
         return (
-            <View style={styles.container}>
-            { this.state.fontLoaded ? (
+            this.state.fontLoaded && ( <View style={styles.container}>
+            
                 <Header
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
                     title={'Cortts Property Listing'}
                     initials='AE'
                     style={{fontFamily: 'raleway-bold'}}
-                />): null
-            }
+                />
+            
                 <ScrollView  >
                     
                 </ScrollView>
@@ -67,7 +67,7 @@ export default class ViewListing extends Component{
                         <Ionicons name="md-print" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                 </ActionButton>
-            </View>
+            </View>)
         );
     };
 }

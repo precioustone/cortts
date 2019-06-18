@@ -10,9 +10,6 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import { Toolbar } from '../components/customToolbar';
 import { properties } from '../store/store';
 
-//import NavBackButton from '../components/NavBackButton';
-
-
 
 export default class Dashboard extends Component{
 
@@ -41,20 +38,60 @@ export default class Dashboard extends Component{
         }
     }
 
+    //////////////////////////////////////////////////////////////
+   ////////////////////HELPER FUNCTIONS//////////////////////////
+  //////////////////////////////////////////////////////////////
+
+    //REMOVE ROW ON DELETE
+    closeRow = (rowMap, rowKey) => {
+        if ( rowMap[rowKey] ){
+            rowMap[rowKey].closeRow();
+        }
+    };
+
+    //DELETE FUNCTION
+    deleteRow = (rowMap, rowKey) => {
+        this.closeRow(rowMap,rowKey);
+        const newData = [...this.state.listViewData];
+		const prevIndex = this.state.listViewData.findIndex(item => item.key === rowKey);
+		newData.splice(prevIndex, 1);
+		this.setState({listViewData: newData});
+    };
+
+    //EDIT FUNCTION
+    handleEdit = (data) =>{
+        this.props.navigation.navigate('Edit', { 'id': data.key, })
+        console.log(data)
+    };
+
+    //NAVIGATE TO PROPERTY DESCRIPTION
+    handleView = (data) =>{
+        this.props.navigation.navigate('View', { 'id': data.key, })
+        console.log(data)
+    };
+
+
+    //////////////////////////////////////////////////////////////
+   ////////////////////COMPONENT FUNCTIONS///////////////////////
+  //////////////////////////////////////////////////////////////
+
+
+    //CUSTOM TOOLBAR
     renderToolBar = () => (
         <Toolbar 
             style={{ fontFamily: 'raleway-bold', color: '#fff', fontSize: 50 }} 
             title='Hi Anita'
         />
     );
-
+    
+    //FLATLIST FUNCTION OR CONTENT BELOW COLLAPSING TOOLBAR
     renderContent = () => (
         <SwipeListView
             useFlatList
             data={this.state.listViewData}
             renderItem={ (data, rowMap) => (
                 <TouchableOpacity
-                    onPress={() => console.log(data.item.key)}
+                    onPress={() => this.handleView(data.item)}
                     activeOpacity={1.0}    
                 >
                     <View style={styles.rowFront}>
@@ -68,12 +105,16 @@ export default class Dashboard extends Component{
             )}
             renderHiddenItem={ (data, rowMap) => (
                 <View style={styles.rowBack}>
-                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnLeft}}>
+                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnLeft}}
+                        onPress={() => this.deleteRow(rowMap, data.item.key)}
+                    >
                         <View style={{...styles.backRightBtn, ...styles.backRightBtnLeft}}>
                             <Ionicons name="md-trash" style={styles.actionButtonIcon} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnRight}}>
+                    <TouchableOpacity style={{...styles.backRightBtn, ...styles.backRightBtnRight}}
+                        onPress={() => this.handleEdit(data.item)}
+                    >
                         <View style={{...styles.backRightBtn, ...styles.backRightBtnRight}}>
                             <Ionicons name="md-create" style={styles.actionButtonIcon} />
                         </View>
@@ -85,6 +126,8 @@ export default class Dashboard extends Component{
         />
     );
 
+
+    // NAVBAR FUNCTION
     renderNavBar = () => (
         <View
             style={{
@@ -110,7 +153,13 @@ export default class Dashboard extends Component{
         </View>
     );
 
+     ////////////////////////////////////////////////////////
+    ////////////////////VIEW RENDER CODE////////////////////
+   //////////////////////////////////////////////////////// 
     render() {
+
+        const { navigate } = this.props.navigation
+
         return (
             <View style={{flex: 1}}>
                 { this.state.fontLoaded ? (
@@ -125,17 +174,11 @@ export default class Dashboard extends Component{
                     toolBarHeight={300}
                 />) : null }
 
-                <ActionButton buttonColor="#51CCE3" style={{position: 'absolute'}}>
-                    <ActionButton.Item buttonColor='#9b59b6' title="Add New property" onPress={() => this.props.navigation.navigate('Create')}>
-                        <Ionicons name="md-add" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#3498db' title="Edit" onPress={() => this.props.navigation.navigate('Edit')}>
-                        <Ionicons name="md-create" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#1abc9c' title="Delete" onPress={() => this.props.navigation.navigate('View')}>
-                        <Ionicons name="md-trash" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                </ActionButton>
+                <ActionButton buttonColor="#51CCE3" 
+                    style={{position: 'absolute'}} 
+                    onPress={ () => navigate('Create') }
+                />
+                    
 
             </View>
 

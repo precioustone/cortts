@@ -11,7 +11,7 @@ const CustomPicker = (props) => {
     return (
         <View style={{...styles.container,...props.containerStyle}}>
            
-            <Text style={{...styles.text,...props.textStyle}}>{props.text}</Text>
+            <Text style={{...styles.label,...props.labelStyle}}>{props.label}</Text>
             
             <View style={{...styles.picker,...props.viewStyle}}> 
             <Picker
@@ -29,9 +29,9 @@ export default CustomPicker;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 15,
+        marginTop: 10,
     }, 
-    text: {
+    label: {
         paddingBottom: 10,
     },
     picker: {
