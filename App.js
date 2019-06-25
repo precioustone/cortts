@@ -3,17 +3,18 @@ import { createAppContainer, createBottomTabNavigator, createStackNavigator, cre
 import { Ionicons } from '@expo/vector-icons';
 
 // Import All screens
-import SignInScreen from './screens/signinScreen.js';
-import RegisterScreen from './screens/registerScreen.js';
-import Dashboard from './screens/dashboard.js';
-import ViewListing from './screens/viewListing.js';
-import CreateListing from './screens/createListingScreen.js';
-import EditListing from './screens/editListingScreen.js';
+import SignInScreen from './screens/signinScreen';
+import RegisterScreen from './screens/registerScreen';
+import Dashboard from './screens/dashboard';
+import ViewListing from './screens/viewListing';
+import CreateListing from './screens/createListingScreen';
+import EditListing from './screens/editListingScreen';
 import Profile from './screens/profileScreen.js';
-import ForgotPassword from './screens/forgotScreen.js';
-import LoginScreen from './screens/loginScreen.js';
-import Cortts from './screens/corttsScreen.js';
-import Commercial from './screens/commercialScreen.js';
+import ForgotPassword from './screens/forgotScreen';
+import LoginScreen from './screens/loginScreen';
+import Cortts from './screens/corttsScreen';
+import Commercial from './screens/commercialScreen';
+import UploadPhotos from './screens/uploadPhotoScreen';
 
 
 const DashboardStack = createStackNavigator({
@@ -21,6 +22,7 @@ const DashboardStack = createStackNavigator({
   View: ViewListing,
   Edit: EditListing,
   Create: CreateListing,
+  Photos: UploadPhotos,
 },{
   initialRouteName: "List",
   header: null,

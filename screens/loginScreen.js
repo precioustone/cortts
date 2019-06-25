@@ -20,7 +20,7 @@ export default class LoginScreen extends Component{
     }
 
     async componentDidMount(){
-        await Font.loadAsync({ 'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf') });
+        await Font.loadAsync({ 'gotham-light': require('../assets/fonts/GothamMedium.ttf') });
 
         this.setState({ fontLoaded: true });
     }
@@ -45,7 +45,7 @@ export default class LoginScreen extends Component{
             <KeyboardAvoidingView style={styles.kAV} behavior="padding" enabled>
                 <View style={styles.top}>
                     <Image source={require('../assets/listing.png')} style={{width: 150, height: 150}} />
-                    <Text style={{color: '#737373', fontFamily: 'raleway-bold'}}>LOG IN To Cortts Listing</Text>
+                    <Text style={{color: '#737373', fontFamily: 'gotham-light'}}>LOG IN To Cortts Listing</Text>
                 </View>
                 
                 <CustomInput 
@@ -67,7 +67,7 @@ export default class LoginScreen extends Component{
                         value={this.state.remember}
                         style={{flex: 2}}
                     />
-                    <Text style={{flex: 8, color: '#737373', fontFamily: 'raleway-bold'}}>Keep me signed in</Text>
+                    <Text style={{flex: 8, color: '#737373', fontFamily: 'gotham-light'}}>Keep me signed in</Text>
                 </View>
 
                 <ButtonThickStr 
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
     button: {
         color: '#fff', 
         padding: 10,
-        fontFamily: 'raleway-bold'
+        fontFamily: 'gotham-light'
     },
     text: {
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
         width: '100%',
     },
 });

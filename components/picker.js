@@ -18,7 +18,7 @@ const CustomPicker = (props) => {
                 selectedValue={props.val}
                 style={{height: 50, width: '100%',}}
                 onValueChange={(itemValue, itemIndex) => { console.log(itemValue+' '+itemIndex)}}>
-                { appendItems }
+                {appendItems}
             </Picker>
             </View>
         </View>

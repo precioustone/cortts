@@ -21,7 +21,7 @@ export default class SignInScreen extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf'),
+            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
         color: "#000",
         padding: 10,
         fontWeight: 'bold',
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
     },
     transText: {
         color: "#fff",
         padding: 10,
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
     },
     mainView: {
         justifyContent: 'center',

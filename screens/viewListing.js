@@ -18,7 +18,7 @@ export default class ViewListing extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf'),
+            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -50,7 +50,7 @@ export default class ViewListing extends Component{
                     goBack={() => this.props.navigation.goBack()}
                     title={'Cortts Property Listing'}
                     initials='AE'
-                    style={{fontFamily: 'raleway-bold'}}
+                    style={{fontFamily: 'gotham-light'}}
                 />
             
                 <ScrollView  >

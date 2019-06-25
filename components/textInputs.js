@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, TextInput, KeyboardAvoidingView, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const CustomInput = (props) => {
     return (
@@ -43,6 +44,24 @@ export const CustomInputWithSide = (props) => {
     );
 };
 
+export const SearchBar = (props) => {
+    return (
+        <View enabled style={{...styles.container,flexDirection: 'row',}}>
+            
+            <Ionicons name='ios-arrow-round-back' onPress={props.onCancel} style={{color: '#26B469'}} />
+          
+            <KeyboardAvoidingView enabled style={{flex: 8, width: '100%'}}>
+                    <TextInput 
+                        {...props.inputs}
+                    />
+            </KeyboardAvoidingView>
+
+            <Ionicons name='ios-close' onPress={props.onClear} />
+
+        </View>
+    );
+};
+
 export default CustomInput;
 
 const styles = StyleSheet.create({
@@ -65,7 +84,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     text: {
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
         paddingBottom: 10,
     },
 });

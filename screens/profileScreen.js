@@ -14,7 +14,7 @@ export default class Profile extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf'),
+            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
         marginVertical: 15,
         fontSize: 20,
     },
     val: {
         color: '#fff',
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
         
         fontSize: 20,
     },

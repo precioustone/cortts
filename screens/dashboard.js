@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar,StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Platform, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
-import { Avatar, Icon } from 'react-native-elements';
+import { Avatar, Icon, SearchBar } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Toolbar } from '../components/customToolbar';
@@ -20,12 +20,14 @@ export default class Dashboard extends Component{
     state = {
         fontLoaded: false,
         listViewData: properties,
+        search: '',
+        searchEnabled: false,
     };
 
     async componentWillMount() {
 
         await Font.loadAsync({
-            'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf')
+            'gotham-light': require('../assets/fonts/GothamMedium.ttf')
         });
 
         this.setState({fontLoaded: true});
@@ -70,6 +72,17 @@ export default class Dashboard extends Component{
         console.log(data)
     };
 
+    search = (search) => {
+        this.setState({search})
+        let listViewData;
+        if(search != '')
+            listViewData = properties.filter( (value, index) => value['title'].includes(this.state.search));
+        else
+            listViewData = properties;
+
+        this.setState({listViewData});
+        console.log(this.state.search);
+    }
 
     //////////////////////////////////////////////////////////////
    ////////////////////COMPONENT FUNCTIONS///////////////////////
@@ -79,7 +92,7 @@ export default class Dashboard extends Component{
     //CUSTOM TOOLBAR
     renderToolBar = () => (
         <Toolbar 
-            style={{ fontFamily: 'raleway-bold', color: '#fff', fontSize: 50 }} 
+            style={{ fontFamily: 'gotham-light', color: '#fff', fontSize: 50 }} 
             title='Hi Anita'
         />
     );
@@ -95,10 +108,10 @@ export default class Dashboard extends Component{
                     activeOpacity={1.0}    
                 >
                     <View style={styles.rowFront}>
-                        <Text style={{fontFamily: 'raleway-bold', fontSize: 20}}>{data.item.title}</Text>
+                        <Text style={{fontFamily: 'gotham-light', fontSize: 18}}>{data.item.title}</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontFamily: 'raleway-bold', color: '#02B598', flex: 6}}>{data.item.area}</Text>
-                            <Text style={{fontFamily: 'raleway-bold', color: '#03C06A', flex: 4}}>{data.item.date}</Text>
+                            <Text style={{fontFamily: 'gotham-light', color: '#02B598', flex: 7}}>{data.item.area}</Text>
+                            <Text style={{fontFamily: 'gotham-light', color: '#03C06A', flex: 3}}>{data.item.date}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -129,6 +142,7 @@ export default class Dashboard extends Component{
 
     // NAVBAR FUNCTION
     renderNavBar = () => (
+        !this.state.searchEnabled ? (
         <View
             style={{
                 flexDirection: 'row',
@@ -139,8 +153,13 @@ export default class Dashboard extends Component{
             }}
         >
             
-            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'raleway-bold', flex: 9 }}>Cortts Property Listing</Text>
-            
+            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'gotham-light', flex: 9 }}>Cortts Property Listing</Text>
+            <Ionicons 
+                name='ios-search' 
+                size={24} 
+                style={{color: '#FFF', paddingHorizontal: 15}}
+                onPress={() => this.setState({searchEnabled: true})}
+            />
             <Avatar 
                 containerStyle={styles.avatar}    
                 overlayContainerStyle={{backgroundColor: '#FF7F50'}}               
@@ -148,9 +167,36 @@ export default class Dashboard extends Component{
                 rounded
                 title='AE'
                 activeOpacity={0.7} 
+                onPress={() => {}}
             />
             
-        </View>
+        </View>): (<View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flex: 1,
+                    paddingHorizontal: 15,
+                    position: 'absolute',
+                    top: 0,
+                    paddingTop: 40,
+                    elevation: 4,
+                    backgroundColor: '#F9F9F9',
+                }}
+            >
+            
+                <SearchBar 
+                    platform='android'
+                    onChangeText={this.search }
+                    onCancel={ () => this.setState({listViewData: properties, searchEnabled: false})}
+                    onClear={() => this.setState({listViewData: properties})}
+                    value={this.state.search}
+                    containerStyle={{width: '100%', backgroundColor: 'transparent'}}
+                    inputContainerStyle={{width: '100%', backgroundColor: 'transparent'}}
+                />
+                
+        </View> )
+           
     );
 
      ////////////////////////////////////////////////////////
@@ -161,6 +207,7 @@ export default class Dashboard extends Component{
         const { navigate } = this.props.navigation
 
         return (
+           
             <View style={{flex: 1}}>
                 { this.state.fontLoaded ? (
                 <CollapsibleToolbar
@@ -180,7 +227,7 @@ export default class Dashboard extends Component{
                 />
                     
 
-            </View>
+            </View>          
 
         );
     }
@@ -196,11 +243,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     rowFront: {
-        fontFamily: 'raleway-bold',
-		backgroundColor: '#E5E5E5',
+        fontFamily: 'gotham-light',
+		backgroundColor: '#FFF',
 		borderBottomColor: '#C0C0C0',
         borderBottomWidth: 1,
-        paddingHorizontal: 40,
+        paddingLeft: 40,
+        paddingRight: 15,
         paddingTop: 30,
         paddingBottom: 10,
 	},

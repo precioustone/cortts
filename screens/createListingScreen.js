@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image,StyleSheet, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert,StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
 
@@ -7,6 +7,9 @@ import Header from '../components/customHeader';
 import CustomPicker from '../components/picker';
 import { CustomInputWithLabel, CustomInputWithSide } from '../components/textInputs';
 import { ButtonThickStr } from '../components/button';
+import AppendableList from '../components/appendableList';
+
+
 
 export default class CreateListing extends Component{
 
@@ -17,7 +20,7 @@ export default class CreateListing extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'raleway-bold': require('../assets/fonts/Raleway-Bold.ttf'),
+            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -49,18 +52,31 @@ export default class CreateListing extends Component{
         linkContact: '',
         agents: '',
         fullDesc: '',
-        remark: ''
+        remark: '',
+        features: [],
+        feature: ''
     };
 
     handleClick = () => {
         const { navigate } = this.props.navigation;
-        navigate('Features', {details: this.state});
+        navigate('Photos', {details: this.state});
     };
 
     initialFunction = () => {
         const { navigate } = this.props.navigation;
         navigate('Profile');
     };
+
+    addFeatures = () => {
+        let features = [ ...this.state.features, this.state.feature];
+        this.setState({features, feature: ''});
+    }
+
+    deleteFeature = (key) =>{
+        let features = this.state.features.filter((value,index) => index != key );
+        console.log('deleted '+ key);
+        this.setState({features})
+    }
 
     render(){
 
@@ -75,10 +91,11 @@ export default class CreateListing extends Component{
                     goBack={() => this.props.navigation.goBack()}
                     title={'ADD NEW PROPERTY'}
                     initials='AE'
-                    style={{fontFamily: 'raleway-bold'}}
+                    style={{fontFamily: 'gotham-light'}}
                 />
                 <ScrollView>
                     <View style={styles.container}>
+
                         <CustomInputWithLabel
                             label='Property Description/Units:'
                             labelStyle={styles.label}
@@ -237,8 +254,18 @@ export default class CreateListing extends Component{
                                 labelStyle={styles.label}
                                 inputs={{style: styles.inputStyle, multiline: true, value: this.state.remark}}
                             />
+
+                            <AppendableList
+                                onChangeText={(feature) => this.setState({feature})}
+                                feature={this.state.feature}
+                                onPress={() => this.addFeatures()}
+                                features={this.state.features}
+                                delete={this.deleteFeature}
+                                onSubmit={this.addFeatures}
+                            />
+
                             <ButtonThickStr 
-                                onClick={() => this.handleClick()}
+                                onClick={this.handleClick}
                                 text= 'NEXT'
                                 style={styles.button}
                                 containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}
@@ -255,12 +282,12 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     label: {
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
         color: '#737373',
     },
     inputStyle: {
         width: '100%', 
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
     },
     threeInputsView: {
         justifyContent: 'space-between',
@@ -270,6 +297,6 @@ const styles = StyleSheet.create({
     button: {
         color: '#fff', 
         padding: 10,
-        fontFamily: 'raleway-bold',
+        fontFamily: 'gotham-light',
     },
 });
