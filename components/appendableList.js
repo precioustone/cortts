@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         color: "#545454"
     },
     text: {
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
         width: '100%',
     },
 });

@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     text: {
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
         paddingBottom: 10,
     },
 });

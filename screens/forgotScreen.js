@@ -18,7 +18,7 @@ export default class ForgotPassword extends Component{
     }
 
     async componentDidMount(){
-        await Font.loadAsync({ 'gotham-light': require('../assets/fonts/GothamMedium.ttf') });
+        await Font.loadAsync({ 'gotham-medium': require('../assets/fonts/GothamMedium.ttf') });
         this.setState({ fontLoaded: true });
     }
 
@@ -37,17 +37,17 @@ export default class ForgotPassword extends Component{
             this.state.fontLoaded ? (
             <KeyboardAvoidingView style={styles.kAV}  enabled>
                 <View style={styles.top}>
-                    <Text style={{color: '#02B598', fontSize: 30, fontFamily: 'gotham-light'}}>
+                    <Text style={{color: '#02B598', fontSize: 30, fontFamily: 'gotham-medium'}}>
                         Forgot Passwod? 
                     </Text>
-                    <Text style={{color: '#737373', fontFamily: 'gotham-light'}}>Enter your Email address</Text>
+                    <Text style={{color: '#737373', fontFamily: 'gotham-medium'}}>Enter your Email address</Text>
                 </View>
                 
                 <CustomInput 
                     placeholder= 'Email Address'
                     onChangeText={(text) => this.handleEmail(text)}
                     value={this.state.email}
-                    style={{width: '100%', fontFamily: 'gotham-light'}}
+                    style={{width: '100%', fontFamily: 'gotham-medium'}}
                 />
 
                 <View style={styles.toggle}>
@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     button: {
         color: '#fff', 
         padding: 10,
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
     }
 });

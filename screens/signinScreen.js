@@ -21,7 +21,7 @@ export default class SignInScreen extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
+            'gotham-medium': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
         color: "#000",
         padding: 10,
         fontWeight: 'bold',
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
     },
     transText: {
         color: "#fff",
         padding: 10,
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
     },
     mainView: {
         justifyContent: 'center',

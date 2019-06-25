@@ -14,7 +14,7 @@ export default class Profile extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
+            'gotham-medium': require('../assets/fonts/GothamMedium.ttf'),
           });
       
         this.setState({ fontLoaded: true });
@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
         marginVertical: 15,
         fontSize: 20,
     },
     val: {
         color: '#fff',
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
         
         fontSize: 20,
     },

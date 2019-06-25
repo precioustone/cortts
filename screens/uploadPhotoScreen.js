@@ -120,6 +120,6 @@ const styles = StyleSheet.create({
     button: {
         color: '#fff', 
         padding: 10,
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
     },
 });

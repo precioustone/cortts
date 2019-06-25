@@ -8,6 +8,7 @@ import CustomPicker from '../components/picker';
 import { CustomInputWithLabel, CustomInputWithSide } from '../components/textInputs';
 import { ButtonThickStr } from '../components/button';
 import AppendableList from '../components/appendableList';
+import { properties } from '../store/store';
 
 
 
@@ -20,41 +21,17 @@ export default class EditListing extends Component{
     async componentDidMount() {
 
         await Font.loadAsync({
-            'gotham-light': require('../assets/fonts/GothamMedium.ttf'),
+            'gotham-medium': require('../assets/fonts/GothamMedium.ttf'),
           });
-      
-        this.setState({ fontLoaded: true });
+    
+          let features = this.state.features.split(',');
+          this.setState({ fontLoaded: true, features});
     }
 
     state = {
         fontLoaded: false,  
-        property: '',
-        category: '',
-        section: '',
-        pType: '',
-        price: '',
-        service: '',
-        caution: '',
-        beds: '',
-        baths: '',
-        park: '',
-        sizeOfLand: '',
-        location: '',
-        nbp: '',
-        landTitle: '',
-        leaseTerm: '',
-        cortts: false,
-        npc: false,
-        commercial: false,
-        propFloor: '',
-        totalFloor: '',
-        link: '',
-        linkContact: '',
-        agents: '',
-        fullDesc: '',
-        remark: '',
-        features: [],
-        feature: ''
+        ...properties[this.props.navigation.getParam('id')],
+        feature: '',
     };
 
     handleClick = () => {
@@ -91,7 +68,7 @@ export default class EditListing extends Component{
                     goBack={() => this.props.navigation.goBack()}
                     title={'EDIT PROPERTY'}
                     initials='AE'
-                    style={{fontFamily: 'gotham-light'}}
+                    style={{fontFamily: 'gotham-medium'}}
                 />
                 <ScrollView>
                     <View style={styles.container}>
@@ -99,7 +76,7 @@ export default class EditListing extends Component{
                         <CustomInputWithLabel
                             label='Property Description/Units:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (property) => this.setState({property}) , style: styles.inputStyle, multiline: true, value: this.state.property}}
+                            inputs={{onChangeText: (property) => this.setState({property}) , style: styles.inputStyle, multiline: true, value: this.state.title}}
                         />
                         <CustomPicker 
                             label='Category:'
@@ -167,7 +144,7 @@ export default class EditListing extends Component{
                         <CustomInputWithSide
                             label='Size of Land:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (sizeOfLand) => this.setState({sizeOfLand}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.sizeOfLand}}
+                            inputs={{onChangeText: (sizeOfLand) => this.setState({landSize}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.landSize}}
                             left='Sqm'
                         />
                         <CustomInputWithLabel
@@ -178,12 +155,12 @@ export default class EditListing extends Component{
                         <CustomInputWithLabel
                             label='Near By Places:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (nbp) => this.setState({nbp}) , style: styles.inputStyle, multiline: true, value: this.state.nbp}}
+                            inputs={{onChangeText: (nbp) => this.setState({nbp}) , style: styles.inputStyle, multiline: true, value: this.state.nearPlace}}
                         />
                         <CustomInputWithLabel
                             label='Title of Land:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (landTitle) => this.setState({landTitle}) , style: styles.inputStyle, value: this.state.landTitle}}
+                            inputs={{onChangeText: (landTitle) => this.setState({landTitle}) , style: styles.inputStyle, value: this.state.pTitle}}
                         />
                         <CustomInputWithLabel
                             label='Unexpected Lease Term:'
@@ -217,14 +194,14 @@ export default class EditListing extends Component{
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
-                                val={this.state.propFloor}
+                                val={this.state.availfloor}
                             />
                             <CustomPicker 
                                 label='Total Floor of property:'
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
-                                val={this.state.totalFloor}
+                                val={this.state.floor}
                             />
                             </View>
                             <CustomPicker 
@@ -242,12 +219,12 @@ export default class EditListing extends Component{
                             <CustomInputWithLabel
                                 label='Cortts Agent:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.agents}}
+                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.corttsAgent}}
                             />
                             <CustomInputWithLabel
                                 label='Full Property Description:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.fullDesc}}
+                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.desc}}
                             />
                             <CustomInputWithLabel
                                 label='Remark:'
@@ -282,12 +259,13 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     label: {
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
         color: '#737373',
     },
     inputStyle: {
         width: '100%', 
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
+        lineHeight: 20,
     },
     threeInputsView: {
         justifyContent: 'space-between',
@@ -297,6 +275,6 @@ const styles = StyleSheet.create({
     button: {
         color: '#fff', 
         padding: 10,
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
     },
 });

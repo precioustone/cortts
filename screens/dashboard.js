@@ -27,7 +27,7 @@ export default class Dashboard extends Component{
     async componentWillMount() {
 
         await Font.loadAsync({
-            'gotham-light': require('../assets/fonts/GothamMedium.ttf')
+            'gotham-medium': require('../assets/fonts/GothamMedium.ttf')
         });
 
         this.setState({fontLoaded: true});
@@ -92,7 +92,7 @@ export default class Dashboard extends Component{
     //CUSTOM TOOLBAR
     renderToolBar = () => (
         <Toolbar 
-            style={{ fontFamily: 'gotham-light', color: '#fff', fontSize: 50 }} 
+            style={{ fontFamily: 'gotham-medium', color: '#fff', fontSize: 50 }} 
             title='Hi Anita'
         />
     );
@@ -108,10 +108,10 @@ export default class Dashboard extends Component{
                     activeOpacity={1.0}    
                 >
                     <View style={styles.rowFront}>
-                        <Text style={{fontFamily: 'gotham-light', fontSize: 18}}>{data.item.title}</Text>
+                        <Text style={{fontFamily: 'gotham-medium', fontSize: 18}}>{data.item.title}</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontFamily: 'gotham-light', color: '#02B598', flex: 7}}>{data.item.area}</Text>
-                            <Text style={{fontFamily: 'gotham-light', color: '#03C06A', flex: 3}}>{data.item.date}</Text>
+                            <Text style={{fontFamily: 'gotham-medium', color: '#02B598', flex: 7}}>{data.item.area}</Text>
+                            <Text style={{fontFamily: 'gotham-medium', color: '#03C06A', flex: 3}}>{data.item.date}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -153,7 +153,7 @@ export default class Dashboard extends Component{
             }}
         >
             
-            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'gotham-light', flex: 9 }}>Cortts Property Listing</Text>
+            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'gotham-medium', flex: 9 }}>Cortts Property Listing</Text>
             <Ionicons 
                 name='ios-search' 
                 size={24} 
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     rowFront: {
-        fontFamily: 'gotham-light',
+        fontFamily: 'gotham-medium',
 		backgroundColor: '#FFF',
 		borderBottomColor: '#C0C0C0',
         borderBottomWidth: 1,
