@@ -1,11 +1,17 @@
 export const Template = (props) => {
-    return (`
+    return (`<!DOCTYPE html>
         <html>
-            <head><title>First Pdf</title> </head>
+            <head><title>First Pdf</title> 
+            <style>
+                p {
+                    color: #ed4395;
+                }
+            </style>
+            </head>
             <body>
-                ${props.name}
-                ${props.age}
-                ${props.game}
+                <p>${props.name}</p>
+                <p>${props.age}</p>
+                <p>${props.game}</p>
             </body>
         </htm>
     `);

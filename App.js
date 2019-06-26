@@ -9,11 +9,12 @@ import Dashboard from './screens/dashboard';
 import ViewListing from './screens/viewListing';
 import CreateListing from './screens/createListingScreen';
 import EditListing from './screens/editListingScreen';
-import Profile from './screens/profileScreen.js';
+import Profile from './screens/profileScreen';
 import ForgotPassword from './screens/forgotScreen';
 import LoginScreen from './screens/loginScreen';
 import Cortts from './screens/corttsScreen';
 import Commercial from './screens/commercialScreen';
+import AuthLoadingScreen from './screens/authloadingScreen';
 import UploadPhotos from './screens/uploadPhotoScreen';
 
 
@@ -78,11 +79,12 @@ const AuthNavigator = createStackNavigator({
 });
 
 const MainNavigator = createSwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
   Auth: AuthNavigator,
   Main: TabStack,
 },
 {
-  initialRouteName: 'Auth',
+  initialRouteName: 'AuthLoading',
 });
 
 

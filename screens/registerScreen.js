@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, KeyboardAvoidingView, StyleSheet, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 
 import { ButtonThickStr } from '../components/button';
@@ -18,7 +18,8 @@ export default class RegisterScreen extends Component{
         password: '',
         phone: '',
         name: '',
-        remember: false
+        remember: false,
+        modalVisible: false,
     }
 
 
@@ -37,10 +38,29 @@ export default class RegisterScreen extends Component{
 
    handleRemember = (remember) => this.setState({remember});
 
-   handleClick = () => {
-        const { navigate } = this.props.navigation;
-        navigate('Home');
-   };
+   _signUpAsync = async () => {
+        this.setState({modalVisible: !this.state.modalVisible})
+        await AsyncStorage.setItem('userToken', 'abc');
+        this.props.navigation.navigate('Main');
+    };
+
+    renderModal = () => (<Modal animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={ 
+            this.handleClick
+        }>
+        <View 
+        style={{flex: 1, alignItems: 'center', 
+        justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.3)', padding: 30,}}>
+            <View style={{
+                padding: 15,
+                width: '100%',
+                }}>
+                <ActivityIndicator />
+            </View>
+        </View>
+    </Modal>);
 
     render(){
 
@@ -49,6 +69,7 @@ export default class RegisterScreen extends Component{
         return (
             this.state.fontLoaded ? (
             <KeyboardAvoidingView style={styles.kAV} enabled>
+                {this.renderModal()}
                 <View style={styles.top}>
                     <Image source={require('../assets/listing.png')} style={{width: 150, height: 150}} />
                     <Text style={{color: '#737373', fontFamily: 'gotham-medium'}}>LOG IN To Cortts Listing</Text>
@@ -92,7 +113,7 @@ export default class RegisterScreen extends Component{
                 </View>
 
                 <ButtonThickStr 
-                    onClick={() => this.handleClick()}
+                    onClick={() => this._signUpAsync()}
                     text= 'CREATE ACCOUNT'
                     style={styles.button}
                     containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}

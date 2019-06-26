@@ -4,7 +4,7 @@ import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
-import { Avatar, Icon, SearchBar } from 'react-native-elements';
+import { Avatar, SearchBar, Tooltip } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
 import { Toolbar } from '../components/customToolbar';
@@ -160,7 +160,15 @@ export default class Dashboard extends Component{
                 style={{color: '#FFF', paddingHorizontal: 15}}
                 onPress={() => this.setState({searchEnabled: true})}
             />
-            <Avatar 
+            <Tooltip popover={<Text>Settings</Text>}>
+                <Ionicons 
+                    name='ios-more' 
+                    size={24} 
+                    style={{color: '#FFF', transform: [{rotate: '90deg'}]}}
+                    
+                />
+            </Tooltip>
+            {/*<Avatar 
                 containerStyle={styles.avatar}    
                 overlayContainerStyle={{backgroundColor: '#FF7F50'}}               
                 size="small"
@@ -168,7 +176,7 @@ export default class Dashboard extends Component{
                 title='AE'
                 activeOpacity={0.7} 
                 onPress={() => {}}
-            />
+            />*/}
             
         </View>): (<View
                 style={{
