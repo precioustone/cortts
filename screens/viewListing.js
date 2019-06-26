@@ -5,6 +5,7 @@ import * as Print from 'expo-print';
 import * as FileSystem from 'expo-file-system';
 import ActionButton from 'react-native-action-button';
 import { Ionicons, Zocial } from '@expo/vector-icons';
+import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
 
 
 import Header from '../components/customHeader';
@@ -31,26 +32,22 @@ export default class ViewListing extends Component{
         this.setState({ fontLoaded: true, property: properties[this.state.id] });
     }
 
-    savePdf = async (uri) => {
-        let content = await FileSystem.readAsStringAsync(uri, {encoding: FileSystem.EncodingType.UTF8,});
-
-        await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+this.state.property.title+'.pdf',
-                                             content, {encoding: FileSystem.EncodingType})
-                                             .catch( (err) => console.log(err) )
-        CameraRoll.saveToCameraRoll(uri);
-    }
+    
 
     createPdf = async () => {
-        const html = Template({name: 'Ebube', age: '25', game: 'splinter cell'});
+        const html = Template(this.state.property);
         
         let pdf = await Print.printToFileAsync({ html }).catch( (err) => console.log(err) );
-        console.log(pdf);
-        this.savePdf(pdf.uri);
+        CameraRoll.saveToCameraRoll(pdf.uri);
+        showMessage({
+            message: "Saved as pdf successfully",
+            type: "success",
+        });
         
     }
 
     printDirect = async () => {
-        const html = Template({name: 'Ebube', age: '25', game: 'splinter cell'});
+        const html = Template(this.state.property);
         await Print.printAsync({ html }).catch ( err => console.log(err))       
     }
 
@@ -216,6 +213,7 @@ export default class ViewListing extends Component{
                         <Ionicons name="md-print" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                 </ActionButton>
+                <FlashMessage position='top' animated={true} />
             </View>)
         );
     };

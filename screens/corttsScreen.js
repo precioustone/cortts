@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Dimensions, Image,StyleSheet, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View, WebView } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
 
 export default class Cortts extends Component{
 
@@ -11,9 +10,17 @@ export default class Cortts extends Component{
 
     render(){
         return (
-            <View>
-                
-            </View>
+            <WebView 
+                style={styles.webview}
+                source={{uri: 'https://cortts.com'}}
+            />
         );
     };
 }
+
+const styles = StyleSheet.create({
+    webview: {
+        flex: 1,
+        marginTop: 25,
+    }
+});

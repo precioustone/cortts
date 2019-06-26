@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Platform, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
@@ -63,13 +63,11 @@ export default class Dashboard extends Component{
     //EDIT FUNCTION
     handleEdit = (data) =>{
         this.props.navigation.navigate('Edit', { 'id': data.key, })
-        console.log(data)
     };
 
     //NAVIGATE TO PROPERTY DESCRIPTION
     handleView = (data) =>{
         this.props.navigation.navigate('View', { 'id': data.key, })
-        console.log(data)
     };
 
     search = (search) => {
@@ -81,8 +79,12 @@ export default class Dashboard extends Component{
             listViewData = properties;
 
         this.setState({listViewData});
-        console.log(this.state.search);
     }
+
+    _logout = async () =>{
+        await AsyncStorage.clear();
+        this.props.navigation.navigate('Auth');
+    };
 
     //////////////////////////////////////////////////////////////
    ////////////////////COMPONENT FUNCTIONS///////////////////////
@@ -160,7 +162,10 @@ export default class Dashboard extends Component{
                 style={{color: '#FFF', paddingHorizontal: 15}}
                 onPress={() => this.setState({searchEnabled: true})}
             />
-            <Tooltip popover={<Text>Settings</Text>}>
+            <Tooltip 
+                popover={<ExtraComponent onPress={this._logout} />}
+                backgroundColor='#F9F9F9'
+            >
                 <Ionicons 
                     name='ios-more' 
                     size={24} 
@@ -239,6 +244,14 @@ export default class Dashboard extends Component{
 
         );
     }
+}
+
+const ExtraComponent = (props) =>{
+    return (<TouchableOpacity onPress={() => props.onPress()}>
+        <View>
+            <Text>Logout</Text>
+        </View>
+    </TouchableOpacity>);
 }
 
 const styles = StyleSheet.create({
