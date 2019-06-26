@@ -110,8 +110,8 @@ export default class Dashboard extends Component{
                     <View style={styles.rowFront}>
                         <Text style={{fontFamily: 'gotham-medium', fontSize: 18}}>{data.item.title}</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={{fontFamily: 'gotham-medium', color: '#02B598', flex: 7}}>{data.item.area}</Text>
-                            <Text style={{fontFamily: 'gotham-medium', color: '#03C06A', flex: 3}}>{data.item.date}</Text>
+                            <Text style={{fontFamily: 'gotham-medium', color: '#02B598', flex: 6}}>{data.item.area}</Text>
+                            <Text style={{fontFamily: 'gotham-medium', color: '#03C06A', flex: 4}}>{data.item.date}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>

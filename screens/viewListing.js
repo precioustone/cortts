@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, Text, View } from 'react-native';
+import { CameraRoll, StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font  from 'expo-font';
+import * as Print from 'expo-print';
+import * as FileSystem from 'expo-file-system';
 import ActionButton from 'react-native-action-button';
 import { Ionicons, Zocial } from '@expo/vector-icons';
 
+
 import Header from '../components/customHeader';
 import { properties } from '../store/store';
+import { Template } from '../template/template';
+
 
 
 
@@ -24,6 +29,29 @@ export default class ViewListing extends Component{
           });
       
         this.setState({ fontLoaded: true, property: properties[this.state.id] });
+    }
+
+    savePdf = async (uri) => {
+        let content = await FileSystem.readAsStringAsync(uri, {encoding: FileSystem.EncodingType.UTF8,});
+
+        await FileSystem.writeAsStringAsync(FileSystem.documentDirectory+this.state.property.title+'.pdf',
+                                             content, {encoding: FileSystem.EncodingType})
+                                             .catch( (err) => console.log(err) )
+        CameraRoll.saveToCameraRoll(uri);
+    }
+
+    createPdf = async () => {
+        const html = Template({name: 'Ebube', age: '25', game: 'splinter cell'});
+        
+        let pdf = await Print.printToFileAsync({ html }).catch( (err) => console.log(err) );
+        console.log(pdf);
+        this.savePdf(pdf.uri);
+        
+    }
+
+    printDirect = async () => {
+        const html = Template({name: 'Ebube', age: '25', game: 'splinter cell'});
+        await Print.printAsync({ html }).catch ( err => console.log(err))       
     }
 
     state = {
@@ -181,10 +209,10 @@ export default class ViewListing extends Component{
                     <ActionButton.Item buttonColor='#9b59b6' title="Edit" onPress={() => this.props.navigation.navigate('Edit', { 'id': this.state.id, })}>
                         <Ionicons name="md-create" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#3498db' title="Save As pdf" onPress={() => {}}>
+                    <ActionButton.Item buttonColor='#3498db' title="Save As pdf" onPress={ this.createPdf }>
                         <Zocial name="acrobat" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#1abc9c' title="Print" onPress={() => {}}>
+                    <ActionButton.Item buttonColor='#1abc9c' title="Print" onPress={ this.printDirect }>
                         <Ionicons name="md-print" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                 </ActionButton>

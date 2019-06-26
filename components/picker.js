@@ -5,7 +5,11 @@ import { Picker, StyleSheet,Text, View } from 'react-native';
 const CustomPicker = (props) => {
 
     appendItems = props.items.map( (val, index) => {
-        return <Picker.item key={index} value={val} label={val} />
+        try{
+            return <Picker.item key={index} value={val} label={val} />
+        } catch(err){
+            console.log(err)
+        }
     });
 
     return (
