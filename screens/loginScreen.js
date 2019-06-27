@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import * as Font from 'expo-font';
+import { connect } from "react-redux";
+import { addUser } from "../redux/actions";
 
 import { ButtonThickStr } from '../components/button.js';
 
 import CustomInput from '../components/textInputs.js';
-import { ScrollView } from 'react-native-gesture-handler';
 
-export default class LoginScreen extends Component{
+class LoginScreen extends Component{
 
     static navigationOptions = {
         
@@ -39,7 +40,8 @@ export default class LoginScreen extends Component{
 
    _signInAsync = async () => {
         this.setState({modalVisible: !this.state.modalVisible})
-        await AsyncStorage.setItem('userToken', 'abc');
+        await AsyncStorage.setItem('userToken', {name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
+        this.props.addUser({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'})
         this.props.navigation.navigate('Main');
     };
 
@@ -112,6 +114,11 @@ export default class LoginScreen extends Component{
         );
     };
 };
+
+export default connect(
+    null,
+    { addUser }
+)(LoginScreen);
 
 const styles = StyleSheet.create({
     kAV: {

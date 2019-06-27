@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
+import { connect } from "react-redux";
+import { addUser } from "../redux/actions";
 
 import { ButtonThickStr } from '../components/button';
 
 import CustomInput from '../components/textInputs.js';
 
-export default class RegisterScreen extends Component{
+class RegisterScreen extends Component{
 
     static navigationOptions = {
         
@@ -40,7 +42,8 @@ export default class RegisterScreen extends Component{
 
    _signUpAsync = async () => {
         this.setState({modalVisible: !this.state.modalVisible})
-        await AsyncStorage.setItem('userToken', 'abc');
+        await AsyncStorage.setItem('userToken', {name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
+        this.props.addUser({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'})
         this.props.navigation.navigate('Main');
     };
 
@@ -126,6 +129,11 @@ export default class RegisterScreen extends Component{
         );
     };
 };
+
+export default connect(
+    null,
+    { addUser }
+)(RegisterScreen);
 
 const styles = StyleSheet.create({
     kAV: {

@@ -1,5 +1,6 @@
-export const properties = [
-    {   
+export const initialState = {
+    userToken: {},
+    properties: [{   
         key: '0',
         title: 'Semi-Detached House',
         area: 'Osapa London',
@@ -464,4 +465,4 @@ export const properties = [
         desc: 'This property is just big jare there is nothing appealing here, nonsense, SMH. Na wa for the landlord chai!! ',
         remark: 'I swear the property is just too expensive is just too expensive funny landlord.',
     },
-];
+],};

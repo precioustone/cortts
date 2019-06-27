@@ -6,17 +6,18 @@ import * as FileSystem from 'expo-file-system';
 import ActionButton from 'react-native-action-button';
 import { Ionicons, Zocial } from '@expo/vector-icons';
 import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
+import { connect } from 'react-redux';
 
 
 import Header from '../components/customHeader';
-import { properties } from '../store/store';
 import { Template } from '../template/template';
+import { getProperties, getUser } from '../redux/selectors';
 
 
 
 
 
-export default class ViewListing extends Component{
+class ViewListing extends Component{
 
     static navigationOptions = {
         header: null,
@@ -29,7 +30,7 @@ export default class ViewListing extends Component{
             'gotham-light': require('../assets/fonts/GothamLight.ttf'),
           });
       
-        this.setState({ fontLoaded: true, property: properties[this.state.id] });
+        this.setState({ fontLoaded: true, property: this.props.properties[this.state.id] });
     }
 
     
@@ -218,6 +219,16 @@ export default class ViewListing extends Component{
         );
     };
 }
+
+const mapStateToProps = ( state ) => {
+    return {userToken: getUser(state),properties: getProperties(state)};
+}
+
+
+export default connect(
+mapStateToProps
+)(ViewListing)
+
 
 const styles = StyleSheet.create({
     container: {

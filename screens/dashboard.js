@@ -6,12 +6,14 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
 import { Avatar, SearchBar, Tooltip } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import { connect } from 'react-redux';
 
 import { Toolbar } from '../components/customToolbar';
-import { properties } from '../store/store';
+import { getProperties, getUser } from '../redux/selectors';
+import { delProp, editProp } from '../redux/actions';
 
 
-export default class Dashboard extends Component{
+class Dashboard extends Component{
 
     static navigationOptions = {
         header: null,
@@ -19,7 +21,8 @@ export default class Dashboard extends Component{
 
     state = {
         fontLoaded: false,
-        listViewData: properties,
+        listViewData: this.props.properties,
+        user: this.props.userToken,
         search: '',
         searchEnabled: false,
     };
@@ -43,6 +46,7 @@ export default class Dashboard extends Component{
     //////////////////////////////////////////////////////////////
    ////////////////////HELPER FUNCTIONS//////////////////////////
   //////////////////////////////////////////////////////////////
+
 
     //REMOVE ROW ON DELETE
     closeRow = (rowMap, rowKey) => {
@@ -253,6 +257,17 @@ const ExtraComponent = (props) =>{
         </View>
     </TouchableOpacity>);
 }
+
+const mapStateToProps = ( state ) => {
+    return {userToken: getUser(state),properties: getProperties(state)};
+}
+
+
+export default connect(
+mapStateToProps,
+{delProp,editProp}
+)(Dashboard)
+
 
 const styles = StyleSheet.create({
     actionButtonIcon: {

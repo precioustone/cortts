@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { Alert,StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 import Header from '../components/customHeader';
 import CustomPicker from '../components/picker';
 import { CustomInputWithLabel, CustomInputWithSide } from '../components/textInputs';
 import { ButtonThickStr } from '../components/button';
 import AppendableList from '../components/appendableList';
-import { properties } from '../store/store';
+import { getProperties, getUser } from '../redux/selectors';
 
 
 
-export default class EditListing extends Component{
+
+class EditListing extends Component{
 
     static navigationOptions = {
         header: null,
@@ -30,7 +32,7 @@ export default class EditListing extends Component{
 
     state = {
         fontLoaded: false,  
-        ...properties[this.props.navigation.getParam('id')],
+        ...this.props.properties[this.props.navigation.getParam('id')],
         feature: '',
     };
 
@@ -253,6 +255,16 @@ export default class EditListing extends Component{
         );
     };
 }
+
+const mapStateToProps = ( state ) => {
+    return {userToken: getUser(state),properties: getProperties(state)};
+}
+
+
+export default connect(
+mapStateToProps
+)(EditListing)
+
 
 const styles = StyleSheet.create({
     container: {
