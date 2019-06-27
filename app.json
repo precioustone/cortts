@@ -27,7 +27,9 @@
       "supportsTablet": true
     },
     "android": {
-      "permissions": ["READ_EXTERNAL_STORAGE"]
+      "permissions": [
+        "READ_EXTERNAL_STORAGE"
+      ]
     },
     "description": "Cortts property listing app"
   }

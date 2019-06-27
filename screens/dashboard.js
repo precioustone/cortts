@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 import { Toolbar } from '../components/customToolbar';
 import { getProperties, getUser } from '../redux/selectors';
-import { delProp, editProp } from '../redux/actions';
+import { delProp, filterProp } from '../redux/actions';
 
 
 class Dashboard extends Component{
@@ -21,9 +21,9 @@ class Dashboard extends Component{
 
     state = {
         fontLoaded: false,
-        listViewData: this.props.properties,
-        user: this.props.userToken,
+        user: JSON.parse(this.props.userToken),
         search: '',
+        searchData: this.props.properties,
         searchEnabled: false,
     };
 
@@ -58,10 +58,11 @@ class Dashboard extends Component{
     //DELETE FUNCTION
     deleteRow = (rowMap, rowKey) => {
         this.closeRow(rowMap,rowKey);
-        const newData = [...this.state.listViewData];
-		const prevIndex = this.state.listViewData.findIndex(item => item.key === rowKey);
-		newData.splice(prevIndex, 1);
-		this.setState({listViewData: newData});
+        //const newData = [...this.props.properties];
+		//const prevIndex = this.props.properties.findIndex(item => item.key === rowKey);
+		//newData.splice(prevIndex, 1);
+        //this.setState({listViewData: newData});
+        this.props.delProp(rowKey);
     };
 
     //EDIT FUNCTION
@@ -76,13 +77,14 @@ class Dashboard extends Component{
 
     search = (search) => {
         this.setState({search})
-        let listViewData;
+        let searchData;
         if(search != '')
-            listViewData = properties.filter( (value, index) => value['title'].includes(this.state.search));
+            searchData = this.props.properties.filter( (value, index) => value['title'].includes(this.state.search));
         else
-            listViewData = properties;
+            searchData = this.props.properties;
 
-        this.setState({listViewData});
+        this.setState({searchData});
+        //this.props.filterProp(search);
     }
 
     _logout = async () =>{
@@ -99,7 +101,7 @@ class Dashboard extends Component{
     renderToolBar = () => (
         <Toolbar 
             style={{ fontFamily: 'gotham-medium', color: '#fff', fontSize: 50 }} 
-            title='Hi Anita'
+            title={'Hi '+this.state.user.name.split(' ')[0]}
         />
     );
     
@@ -107,7 +109,7 @@ class Dashboard extends Component{
     renderContent = () => (
         <SwipeListView
             useFlatList
-            data={this.state.listViewData}
+            data={this.state.searchEnabled ? this.state.searchData : this.props.properties}
             renderItem={ (data, rowMap) => (
                 <TouchableOpacity
                     onPress={() => this.handleView(data.item)}
@@ -205,8 +207,8 @@ class Dashboard extends Component{
                 <SearchBar 
                     platform='android'
                     onChangeText={this.search }
-                    onCancel={ () => this.setState({listViewData: properties, searchEnabled: false})}
-                    onClear={() => this.setState({listViewData: properties})}
+                    onCancel={ () => this.setState({listViewData: this.props.properties, searchEnabled: false})}
+                    onClear={() => this.setState({listViewData: this.props.properties, searchEnabled: false})}
                     value={this.state.search}
                     containerStyle={{width: '100%', backgroundColor: 'transparent'}}
                     inputContainerStyle={{width: '100%', backgroundColor: 'transparent'}}
@@ -221,7 +223,7 @@ class Dashboard extends Component{
    //////////////////////////////////////////////////////// 
     render() {
 
-        const { navigate } = this.props.navigation
+        const { navigate } = this.props.navigation;
 
         return (
            
@@ -259,13 +261,13 @@ const ExtraComponent = (props) =>{
 }
 
 const mapStateToProps = ( state ) => {
-    return {userToken: getUser(state),properties: getProperties(state)};
+    return { userToken: getUser(state), properties: getProperties(state) };
 }
 
 
 export default connect(
 mapStateToProps,
-{delProp,editProp}
+{ delProp, filterProp }
 )(Dashboard)
 
 

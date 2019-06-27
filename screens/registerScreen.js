@@ -41,9 +41,10 @@ class RegisterScreen extends Component{
    handleRemember = (remember) => this.setState({remember});
 
    _signUpAsync = async () => {
+        let user = JSON.stringify({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
         this.setState({modalVisible: !this.state.modalVisible})
-        await AsyncStorage.setItem('userToken', {name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
-        this.props.addUser({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'})
+        await AsyncStorage.setItem('userToken', user);
+        this.props.addUser(user);
         this.props.navigation.navigate('Main');
     };
 

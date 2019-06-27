@@ -1,4 +1,4 @@
-import { ADD_PROP, ADD_USER, DEL_PROP, DEL_USER, EDIT_PROP } from './actionTypes';
+import { ADD_PROP, ADD_USER, DEL_PROP, DEL_USER, EDIT_PROP, FILTER_PROP } from './actionTypes';
 
 export const addProp = (prop) => ({
     type: ADD_PROP,
@@ -22,5 +22,10 @@ export const delUser = () => ({
 export const editProp = (prop) => ({
     type: EDIT_PROP,
     payload: { prop },
+});
+
+export const filterProp = (keyword) => ({
+    type: FILTER_PROP,
+    payload: { keyword },
 });
 

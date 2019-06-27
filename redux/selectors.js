@@ -1,4 +1,8 @@
-export const getUserState = ( store ) => store.userToken;
+
+
+export const getUserState = ( store ) => {
+    return store.user
+};
 
 export const getPropertiesState = ( store ) => store.properties;
 

@@ -1,19 +1,31 @@
 import { ADD_USER, DEL_USER } from '../actionTypes';
-import initialState from './data';
 
+const initialState = {
+    loggedIn: false,
+    errorMsg: null,
+    email: '',
+    name: '',
+    phone: '',
+    loggedIn_at: '',
+};
 
-const user = (state = initialState, action) => {
+function user(state = '', action){
+    
     switch (action.type){
         case ADD_USER: {
             const { userToken } = action.payload;
-            return {...state, userToken};
+            //return Object.assign({}, state, 
+               // {loggedIn: true, email: userToken.email, name: userToken.name, loggedIn_at: '30-09-2019', phone: '+23480 000 0001'})
+               return state = userToken;
         }
         case DEL_USER: {
-            delete state.userToken;
-            return state;
+            //return Object.assign({}, state, 
+              //  {loggedIn: true, email: userToken.email, name: userToken.name, loggedIn_at: '30-09-2019', phone: '+23480 000 0001'})
+              return state = '';
         }
-        default:
-            return state;
+        default:{
+            return state = '';
+        }
     }
 }
 

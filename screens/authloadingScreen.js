@@ -6,8 +6,11 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class AuthLoadingScreen extends Component {
+import {addUser} from '../redux/actions';
+
+class AuthLoadingScreen extends Component {
   constructor(props) {
     super(props);
     this._bootstrapAsync();
@@ -17,6 +20,8 @@ export default class AuthLoadingScreen extends Component {
   _bootstrapAsync = async () => {
     
     const userToken = await AsyncStorage.getItem('userToken');
+
+    this.props.addUser(userToken);
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -33,3 +38,5 @@ export default class AuthLoadingScreen extends Component {
     );
   }
 }
+
+export default connect(null,{ addUser })(AuthLoadingScreen);

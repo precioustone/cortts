@@ -3,3 +3,4 @@ export const DEL_USER = "DELETE_USER";
 export const ADD_PROP = "ADD_PROPERTY";
 export const DEL_PROP = "DELETE_PROPERTY"; 
 export const EDIT_PROP = "EDIT_PROPERTY";
+export const FILTER_PROP = "FILTER_PROPERTY";

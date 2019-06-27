@@ -39,9 +39,10 @@ class LoginScreen extends Component{
 
 
    _signInAsync = async () => {
+       let user = JSON.stringify({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
         this.setState({modalVisible: !this.state.modalVisible})
-        await AsyncStorage.setItem('userToken', {name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
-        this.props.addUser({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'})
+        await AsyncStorage.setItem('userToken', user);
+        this.props.addUser(user);
         this.props.navigation.navigate('Main');
     };
 
@@ -69,7 +70,6 @@ class LoginScreen extends Component{
 
         return (
             this.state.fontLoaded ? (
-            <ScrollView>
                 <KeyboardAvoidingView style={styles.kAV} behavior="padding" enabled>
                     { this.renderModal() }
                     <View style={styles.top}>
@@ -110,7 +110,7 @@ class LoginScreen extends Component{
                         Forgot password ?
                     </Text>
                 </KeyboardAvoidingView>
-            </ScrollView>) : null
+           ) : null
         );
     };
 };

@@ -1,5 +1,5 @@
 export const initialState = {
-    userToken: {},
+    
     properties: [{   
         key: '0',
         title: 'Semi-Detached House',
