@@ -6,7 +6,7 @@ export const getUserState = ( store ) => {
 
 export const getPropertiesState = ( store ) => store.properties;
 
-export const getUser = ( store ) => getUserState(store) ? getUserState(store): null; 
+export const getUser = ( store ) => getUserState(store) ? JSON.parse(getUserState(store)): {}; 
 
 export const getProperties = ( store ) => getPropertiesState(store) ? getPropertiesState(store) : [];
 

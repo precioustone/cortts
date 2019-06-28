@@ -5,8 +5,8 @@ import { initialState } from './data';
 const properties = (state = initialState.properties, action) => {
     switch (action.type){
         case ADD_PROP: {
-            const { prop } = action.payload;
-            return [...state, prop ];
+            const { props } = action.payload;
+            return [...state, ...props ];
         }
         case DEL_PROP: {
             const { id } = action.payload;

@@ -89,7 +89,8 @@ class Dashboard extends Component{
 
     _logout = async () =>{
         await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
+        this.props.delProp();
+        this.props.navigation.navigate('AuthLoader');
     };
 
     //////////////////////////////////////////////////////////////
