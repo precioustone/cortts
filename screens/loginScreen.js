@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { connect } from "react-redux";
 import { addUser } from "../redux/actions";
@@ -7,6 +7,8 @@ import { addUser } from "../redux/actions";
 import { ButtonThickStr } from '../components/button.js';
 
 import CustomInput from '../components/textInputs.js';
+import { getUser } from '../db/database';
+import { LOGIN } from '../db/task';
 
 class LoginScreen extends Component{
 
@@ -39,10 +41,10 @@ class LoginScreen extends Component{
 
 
    _signInAsync = async () => {
-       let user = JSON.stringify({name: 'Anita Egwin', email: this.state.email, phone: '+23480 000 0001'});
+        let user = { email, password, phone, name,remember } = this.state;
+        const { navigate } = this.props.navigation;
         this.setState({modalVisible: !this.state.modalVisible})
-        await AsyncStorage.setItem('userToken', user);
-        this.props.addUser(user);
+        //getUser({type: LOGIN},user,this.props.addUser, navigate);
         this.props.navigation.navigate('Main');
     };
 

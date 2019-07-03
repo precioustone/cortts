@@ -21,13 +21,13 @@ class Dashboard extends Component{
 
     state = {
         fontLoaded: false,
-        user: JSON.parse(this.props.userToken),
+        user: this.props.userToken,
         search: '',
         searchData: this.props.properties,
         searchEnabled: false,
     };
 
-    async componentWillMount() {
+    async componentDidMount() {
 
         await Font.loadAsync({
             'gotham-medium': require('../assets/fonts/GothamMedium.ttf')
@@ -89,7 +89,7 @@ class Dashboard extends Component{
 
     _logout = async () =>{
         await AsyncStorage.clear();
-        this.props.delProp();
+        //this.props.delProp();
         this.props.navigation.navigate('AuthLoader');
     };
 
@@ -102,7 +102,7 @@ class Dashboard extends Component{
     renderToolBar = () => (
         <Toolbar 
             style={{ fontFamily: 'gotham-medium', color: '#fff', fontSize: 50 }} 
-            title={'Hi '+this.state.user.name.split(' ')[0]}
+            title={'Hi '}
         />
     );
     

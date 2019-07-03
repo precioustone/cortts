@@ -3,12 +3,13 @@ import { AsyncStorage } from 'react-native';
 
 import { LOGIN, REGISTER } from '../db/task';
 
-export const getUser = async (task, formData, action) => {
+export const getUser = async (task, formData, action, navigate) => {
+    console.log(formData);
     try{
         let response;
 
         if( task.type === LOGIN){
-            response = await fetch( 'https://app.cortts.com/api/login', {
+            response = await fetch( 'https://www.cortts.com/api/login.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -17,7 +18,7 @@ export const getUser = async (task, formData, action) => {
                 body: JSON.stringify(formData),
             });
         }else if( task.type === REGISTER){
-            response = await fetch( 'https://app.cortts.com/api/register', {
+            response = await fetch( 'https://www.cortts.com/api/register.php', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -31,20 +32,26 @@ export const getUser = async (task, formData, action) => {
 
         let user = await resJson.user;
 
-        action(JSON.stringify(user));
-        await AsyncStorage.setItem('userToken', JSON.stringify(user));
+        console.log(resJson);
+
+        //action(JSON.stringify(user));
+        //await AsyncStorage.setItem('userToken', JSON.stringify(user));
+        //if(resJson.status)
+           // navigate('Main');
+        //else
+            //return resJson.status;
     }catch(err){
-        console.log(error);
+        console.log(err);
     }
 } 
 
 export const getProps = async (action) => {
     try{
-        let response = await fetch('https://app.cortts.com/api/properties');
+        let response = await fetch('https://www.cortts.com/api/properties');
 
         let resJson = await response.json();
 
-        let properties = await resJson.properties;
+        let properties = await resJson.props;
 
         action(properties);
     }catch(err){
@@ -54,7 +61,7 @@ export const getProps = async (action) => {
 
 export const addProp = async (formData, action) => {
     try{
-        let response = await fetch('https://app.cortts.com/api/add-properties', {
+        let response = await fetch('https://www.cortts.com/api/add-properties', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -75,7 +82,7 @@ export const addProp = async (formData, action) => {
 
 export const editProp = async (formData, action) => {
     try{
-        let response = await fetch('https://app.cortts.com/api/edit-property', {
+        let response = await fetch('https://www.cortts.com/api/edit-property', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -96,7 +103,7 @@ export const editProp = async (formData, action) => {
 
 export const delProp = async (id) => {
     try{
-        let response = await fetch('https://app.cortts.com/api/del-property', {
+        let response = await fetch('https://www.cortts.com/api/del-property', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

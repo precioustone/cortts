@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image, KeyboardAvoidingView, Modal, StyleSheet, Switch, Text, View } from 'react-native';
+import { ActivityIndicator, Image, KeyboardAvoidingView, Modal, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { connect } from "react-redux";
 import { addUser } from "../redux/actions";
@@ -8,7 +8,7 @@ import { ButtonThickStr } from '../components/button';
 
 import CustomInput from '../components/textInputs.js';
 import { getUser } from '../db/database';
-import { LOGIN } from '../db/task';
+import { REGISTER } from '../db/task';
 
 class RegisterScreen extends Component{
 
@@ -44,9 +44,11 @@ class RegisterScreen extends Component{
 
    _signUpAsync = async () => {
         let user = { email, password, phone, name,remember } = this.state;
+        const { navigate } = this.props.navigation;
         this.setState({modalVisible: !this.state.modalVisible})
-        getUser({type: LOGIN},user,this.props.addUser);
-        this.props.navigation.navigate('Main');
+        let res = getUser({type: REGISTER},user,this.props.addUser, navigate);
+        //this.setState({modalVisible: res});
+        //this.props.navigation.navigate('Main');
     };
 
     renderModal = () => (<Modal animationType="slide"

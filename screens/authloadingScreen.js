@@ -8,12 +8,17 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import {addUser} from '../redux/actions';
+import { addProp, addUser } from '../redux/actions';
+import { getProps } from '../db/database';
 
 class AuthLoadingScreen extends Component {
   constructor(props) {
     super(props);
-    this._bootstrapAsync();
+  }
+
+  async componentDidMount() {
+      getProps(this.props.addProp);
+      this._bootstrapAsync();
   }
 
   // Fetch the token from storage then navigate to our appropriate place
@@ -21,22 +26,23 @@ class AuthLoadingScreen extends Component {
     
     const userToken = await AsyncStorage.getItem('userToken');
 
-    this.props.addUser(userToken);
+    //this.props.addUser(userToken);
+    if(userToken){
 
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
+    }
+
     this.props.navigation.navigate(userToken ? 'Main' : 'Auth');
   };
 
   // Render any loading content that you like here
   render() {
     return (
-      <View>
-        <ActivityIndicator />
+      <View style={{flex: 1, padding: 20, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator/>
         <StatusBar barStyle="default" />
       </View>
     );
   }
 }
 
-export default connect(null,{ addUser })(AuthLoadingScreen);
+export default connect(null,{ addProp, addUser })(AuthLoadingScreen);
