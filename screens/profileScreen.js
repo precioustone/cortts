@@ -3,9 +3,12 @@ import { ImageBackground,StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import * as Font from 'expo-font';
 import ActionButton from 'react-native-action-button';
+import { connect } from 'react-redux';
+
+import { getUser } from '../redux/selectors';
 
 
-export default class Profile extends Component{
+class Profile extends Component{
 
     static navigationOptions = {
         header: null,
@@ -18,6 +21,7 @@ export default class Profile extends Component{
           });
       
         this.setState({ fontLoaded: true });
+        console.log(this.props);
     }
 
     state = {
@@ -37,18 +41,18 @@ export default class Profile extends Component{
                 <View style={styles.container}>
                     <View style={styles.view}>
                         { this.state.fontLoaded ? (
-                        <Text style={styles.text} >{this.state.name}</Text>): null }
+                        <Text style={styles.text} >{this.props.userToken.name}</Text>): null }
                         <Avatar source={this.state.image} rounded
                         size='xlarge'/>
                         { this.state.fontLoaded ? (
-                        <Text style={styles.text} >{this.state.email}</Text>): null }
+                        <Text style={styles.text} >{this.props.userToken.email}</Text>): null }
                     </View>
 
                     <View style={styles.view}>
                     { this.state.fontLoaded ? (
                         <Text style={styles.text} >Phone</Text>): null }
                     { this.state.fontLoaded ? (
-                        <Text style={styles.val} >{this.state.phone}</Text>): null }
+                        <Text style={styles.val} >{this.props.userToken.phone}</Text>): null }
                     { this.state.fontLoaded ? (
                         <Text style={styles.text} >Password</Text>): null }
                     { this.state.fontLoaded ? (
@@ -63,6 +67,12 @@ export default class Profile extends Component{
         );
     };
 }
+
+const mapStateToProps = ( state ) => {
+    return { userToken: getUser(state)};
+}
+
+export default connect(mapStateToProps,{})(Profile)
 
 const styles = StyleSheet.create({
     actionButtonIcon: {

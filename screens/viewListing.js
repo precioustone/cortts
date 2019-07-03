@@ -99,7 +99,7 @@ class ViewListing extends Component{
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Property Type:</Text>
-                            <Text style={styles.value}>{ this.state.property.pType }</Text>
+                            <Text style={styles.value}>{ this.state.property.p_type }</Text>
                         </View>
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
@@ -132,11 +132,11 @@ class ViewListing extends Component{
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Land Size:</Text>
-                                <Text style={styles.value}>{ this.state.property.landSize }</Text>
+                                <Text style={styles.value}>{ this.state.property.land_size }</Text>
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Property Size:</Text>
-                                <Text style={styles.value}>{ this.state.property.propSize }</Text>
+                                <Text style={styles.value}>{ this.state.property.prop_size }</Text>
                             </View>
                         </View>
                         <View style={styles.contView}>
@@ -145,25 +145,25 @@ class ViewListing extends Component{
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Nearby Places:</Text>
-                            <Text style={styles.value}>{ this.state.property.nearPlace }</Text>
+                            <Text style={styles.value}>{ this.state.property.near_place }</Text>
                         </View>
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Completion Status:</Text>
-                                <Text style={styles.value}>{ this.state.property.status }</Text>
+                                <Text style={styles.value}>{ this.state.property.com_status }</Text>
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Title:</Text>
-                                <Text style={styles.value}>{ this.state.property.pTitle }</Text>
+                                <Text style={styles.value}>{ this.state.property.p_title }</Text>
                             </View>
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Unexpired Lease Term:</Text>
-                            <Text style={styles.value}>{ this.state.property.leaseTerm }</Text>
+                            <Text style={styles.value}>{ this.state.property.lease_term }</Text>
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>E-Platform:</Text>
-                            <Text style={styles.value}>{ this.state.property.ePlatform }</Text>
+                            <Text style={styles.value}>{ this.state.property.e_platform }</Text>
                         </View>
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
@@ -172,21 +172,21 @@ class ViewListing extends Component{
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Available Floor:</Text>
-                                <Text style={styles.value}>{ this.state.property.availFloor }</Text>
+                                <Text style={styles.value}>{ this.state.property.avail_floor }</Text>
                             </View>
                         </View>
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Link:</Text>
-                                <Text style={styles.value}>{ this.state.property.link }</Text>
+                                <Text style={styles.value}>{ this.state.property.linkToProp }</Text>
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Link Contact:</Text>
-                                <Text style={styles.value}>{ this.state.property.linkContact }</Text>
+                                <Text style={styles.value}>{ this.state.property.link_contact }</Text>
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Cortts Agent:</Text>
-                                <Text style={styles.value}>{ this.state.property.corttsAgent }</Text>
+                                <Text style={styles.value}>{ this.state.property.cortts_agent }</Text>
                             </View>
                         </View>
                         <View style={styles.contView}>
@@ -195,7 +195,7 @@ class ViewListing extends Component{
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Property Description:</Text>
-                            <Text style={styles.value}>{ this.state.property.desc }</Text>
+                            <Text style={styles.value}>{ this.state.property.prop_desc }</Text>
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Remark:</Text>

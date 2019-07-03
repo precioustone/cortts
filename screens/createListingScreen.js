@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { Alert,StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
+import { connect } from 'react-redux';
+import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
 
 import Header from '../components/customHeader';
 import CustomPicker from '../components/picker';
 import { CustomInputWithLabel, CustomInputWithSide } from '../components/textInputs';
 import { ButtonThickStr } from '../components/button';
 import AppendableList from '../components/appendableList';
+import { addPropFmDb} from '../db/database';
+import { addProp } from '../redux/actions';
 
 
 
-export default class CreateListing extends Component{
+class CreateListing extends Component{
 
     static navigationOptions = {
         header: null,
@@ -27,40 +31,59 @@ export default class CreateListing extends Component{
     }
 
     state = {
+        error: null,
+        modalVisible: false,
         fontLoaded: false,  
-        property: '',
+        title: '',
+        area: '',
         category: '',
         section: '',
-        pType: '',
+        p_type: '',
         price: '',
         service: '',
         caution: '',
         beds: '',
         baths: '',
         park: '',
-        sizeOfLand: '',
+        land_size: '',
         location: '',
-        nbp: '',
-        landTitle: '',
-        leaseTerm: '',
-        cortts: false,
-        npc: false,
-        commercial: false,
-        propFloor: '',
-        totalFloor: '',
-        link: '',
-        linkContact: '',
-        agents: '',
-        fullDesc: '',
+        near_place: '',
+        p_title: '',
+        lease_term: '',
+        e_platform: {cortts: false, npc: false, commercial: false},
+        avail_floor: '',
+        floor: '',
+        linkToProp: '',
+        link_contact: '',
+        cortts_agent: '',
+        prop_desc: '',
         remark: '',
         features: [],
-        feature: ''
+        feature: '',
+        added_date: '',
+        prop_size: '',
+        com_status: '',
     };
 
     handleClick = () => {
         const { navigate } = this.props.navigation;
-        navigate('Photos', {details: this.state});
+        this.setState({modalVisible: !modalVisible});
+        addPropFmDb(this.state, this.props.addProp, navigate, this.onError);
+        //navigate('Photos', {details: this.state});
     };
+
+    onError = (response) => {
+        this.setState({modalVisible: !modalVisible});
+        this.setState({error: response});
+        showMessage({
+            message: response,
+            type: "error",
+        });
+    }
+    
+    onValueChange = (id,item) => {
+        this.setState({id: item});
+    }
 
     initialFunction = () => {
         const { navigate } = this.props.navigation;
@@ -78,6 +101,25 @@ export default class CreateListing extends Component{
         this.setState({features})
     }
 
+    renderModal = () => (<Modal animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={ 
+            this.handleClick
+        }>
+        <View 
+        style={{flex: 1, alignItems: 'center', 
+        justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.3)', padding: 30,}}>
+            <View style={{
+                padding: 15,
+                width: '100%',
+                }}>
+                <ActivityIndicator />
+            </View>
+        </View>
+    </Modal>);
+
+
     render(){
 
         const { navigate } = this.props.navigation;
@@ -85,7 +127,7 @@ export default class CreateListing extends Component{
         return (
             this.state.fontLoaded ? (
             <View style={{ flex: 1 }}>
-            
+                { this.renderModal() }
                 <Header
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
@@ -99,7 +141,7 @@ export default class CreateListing extends Component{
                         <CustomInputWithLabel
                             label='Property Description/Units:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (property) => this.setState({property}) , style: styles.inputStyle, multiline: true, value: this.state.property}}
+                            inputs={{onChangeText: (title) => this.setState({title}) , style: styles.inputStyle, multiline: true, value: this.state.property}}
                         />
                         <CustomPicker 
                             label='Category:'
@@ -107,6 +149,7 @@ export default class CreateListing extends Component{
                             containerStyle={{width: '100%'}}
                             items={['Commercial', 'Residential']}
                             val={this.state.category}
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('category',itemValue)}}
                         />
 
                         <CustomPicker 
@@ -115,6 +158,7 @@ export default class CreateListing extends Component{
                             containerStyle={{width: '100%'}}
                             items={['Lease', 'Sale', 'Joint venture', 'Short-let', 'Business for Sale']}
                             val={this.state.section}
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('section',itemValue)}}
                         />
 
                         <CustomInputWithLabel
@@ -148,6 +192,7 @@ export default class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.beds}
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('beds',itemValue)}}
                         />
                         <CustomPicker 
                             label='No. of Bath(s):'
@@ -155,6 +200,7 @@ export default class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.baths}
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('baths',itemValue)}}
                         />
                         <CustomPicker 
                             label='Unit(s) of car park:'
@@ -162,51 +208,65 @@ export default class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.park}
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('park',itemValue)}}
                         />
                         </View>
                         <CustomInputWithSide
-                            label='Size of Land:'
+                            label='Land Size:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (sizeOfLand) => this.setState({sizeOfLand}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.sizeOfLand}}
+                            inputs={{onChangeText: (land_size) => this.setState({land_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.land_size}}
                             left='Sqm'
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('land_size',itemValue)}}
+                        />
+                        <CustomInputWithSide
+                            label='Property Size:'
+                            labelStyle={styles.label}
+                            inputs={{onChangeText: (prop_size) => this.setState({prop_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.prop_size}}
+                            left='Sqm'
+                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('prop_size',itemValue)}}
                         />
                         <CustomInputWithLabel
-                            label='Location Address:'
+                            label='Area:'
+                            labelStyle={styles.label}
+                            inputs={{onChangeText: (area) => this.setState({area}) , style: styles.inputStyle, multiline: true, value: this.state.area}}
+                        />
+                        <CustomInputWithLabel
+                            label='Street Address:'
                             labelStyle={styles.label}
                             inputs={{onChangeText: (location) => this.setState({location}) , style: styles.inputStyle, multiline: true, value: this.state.location}}
                         />
                         <CustomInputWithLabel
                             label='Near By Places:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (nbp) => this.setState({nbp}) , style: styles.inputStyle, multiline: true, value: this.state.nbp}}
+                            inputs={{onChangeText: (near_place) => this.setState({near_place}) , style: styles.inputStyle, multiline: true, value: this.state.near_place}}
                         />
                         <CustomInputWithLabel
                             label='Title of Land:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (landTitle) => this.setState({landTitle}) , style: styles.inputStyle, value: this.state.landTitle}}
+                            inputs={{onChangeText: (p_title) => this.setState({p_title}) , style: styles.inputStyle, value: this.state.p_title}}
                         />
                         <CustomInputWithLabel
                             label='Unexpected Lease Term:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (leaseTerm) => this.setState({leaseTerm}) , style: styles.inputStyle, multiline: true, value: this.state.leaseTerm}}
+                            inputs={{onChangeText: (lease_term) => this.setState({lease_term}) , style: styles.inputStyle, multiline: true, value: this.state.lease_term}}
                         />
                         <View>
                             <Text style={styles.label}></Text>
                             <View style={styles.threeInputsView}>
                                 <CheckBox 
                                     title='Cortts'
-                                    checked={this.state.cortts}
-                                    onPress={ () => this.setState({cortts: !this.state.cortts}) }
+                                    checked={this.state.e_platform.cortts}
+                                    onPress={ () => this.setState({cortts: !this.state.e_platform.cortts}) }
                                 />
                                 <CheckBox 
                                     title='NPC'
-                                    checked={this.state.npc}
-                                    onPress={ () => this.setState({npc: !this.state.npc}) }
+                                    checked={this.state.e_platform.npc}
+                                    onPress={ () => this.setState({npc: !this.state.e_platform.npc}) }
                                 />
                                 <CheckBox 
                                     title='Commercial'
-                                    checked={this.state.commercial}
-                                    onPress={ () => this.setState({commercial: !this.state.commercial}) }
+                                    checked={this.state.e_platform.commercial}
+                                    onPress={ () => this.setState({commercial: !this.state.e_platform.commercial}) }
                                 />
                                 
                             </View>
@@ -217,14 +277,16 @@ export default class CreateListing extends Component{
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
-                                val={this.state.propFloor}
+                                val={this.state.avail_floor}
+                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('avail_floor',itemValue)}}
                             />
                             <CustomPicker 
-                                label='Total Floor of property:'
+                                label='Total Floor of Building:'
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
-                                val={this.state.totalFloor}
+                                val={this.state.floor}
+                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('floor',itemValue)}}
                             />
                             </View>
                             <CustomPicker 
@@ -232,22 +294,28 @@ export default class CreateListing extends Component{
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['Owner', 'Developer', 'Lawyer', 'Agent',]}
-                                val={this.state.link}
+                                val={this.state.linkToProp}
+                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('linkToProp',itemValue)}}
                             />
                             <CustomInputWithLabel
                                 label='Link Contact:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, value: this.state.linkContact}}
+                                inputs={{style: styles.inputStyle, value: this.state.link_contact}}
                             />
                             <CustomInputWithLabel
                                 label='Cortts Agent:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.agents}}
+                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.cortts_agent}}
+                            />
+                            <CustomInputWithLabel
+                                label='Completion Status:'
+                                labelStyle={styles.label}
+                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.com_status, placeholder: 'completed or date'}}
                             />
                             <CustomInputWithLabel
                                 label='Full Property Description:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.fullDesc}}
+                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.prop_desc}}
                             />
                             <CustomInputWithLabel
                                 label='Remark:'
@@ -272,10 +340,13 @@ export default class CreateListing extends Component{
                             />
                         </View>
                 </ScrollView>
+                <FlashMessage position='top' animated={true} />
             </View>) : null
         );
     };
 }
+
+export default connect(null,{addProp})(CreateListing);
 
 const styles = StyleSheet.create({
     container: {

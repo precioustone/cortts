@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native';
 import { LOGIN, REGISTER } from '../db/task';
 
 export const getUser = async (task, formData, action, navigate) => {
-    console.log(formData);
+    
     try{
         let response;
 
@@ -32,14 +32,14 @@ export const getUser = async (task, formData, action, navigate) => {
 
         let user = await resJson.user;
 
-        console.log(resJson);
+        
 
-        //action(JSON.stringify(user));
-        //await AsyncStorage.setItem('userToken', JSON.stringify(user));
-        //if(resJson.status)
-           // navigate('Main');
-        //else
-            //return resJson.status;
+        action(JSON.stringify(user));
+        await AsyncStorage.setItem('userToken', JSON.stringify(user));
+        if(resJson.status)
+            navigate('Main');
+        else
+            return resJson.status;
     }catch(err){
         console.log(err);
     }
@@ -59,7 +59,7 @@ export const getProps = async (action) => {
     }
 } 
 
-export const addProp = async (formData, action) => {
+export const addPropFmDb = async (formData, action, navigate, onError) => {
     try{
         let response = await fetch('https://www.cortts.com/api/add-properties', {
             method: 'POST',
@@ -74,7 +74,12 @@ export const addProp = async (formData, action) => {
 
         let status = await resJson.status;
 
-        if (status.ok){ action(formData) };
+        if (status){ 
+            action(formData);
+            navigate('Photos', {details: formData}); 
+        }else{
+            onError(resJson.msg);
+        }
     }catch(err){
         console.log(err);
     }
@@ -95,7 +100,7 @@ export const editProp = async (formData, action) => {
 
         let status = await resJson.status;
 
-        if (status.ok){ action(formData) };
+        if (status){ action(formData) };
     }catch(err){
         console.log(err);
     }
@@ -116,7 +121,7 @@ export const delProp = async (id) => {
 
         let status = await resJson.status;
 
-        if (status.ok){ action(id) };
+        if (status){ action(id) };
     }catch(err){
         console.log(err);
     }

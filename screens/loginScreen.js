@@ -44,8 +44,8 @@ class LoginScreen extends Component{
         let user = { email, password, phone, name,remember } = this.state;
         const { navigate } = this.props.navigation;
         this.setState({modalVisible: !this.state.modalVisible})
-        //getUser({type: LOGIN},user,this.props.addUser, navigate);
-        this.props.navigation.navigate('Main');
+        let res = getUser({type: LOGIN},user,this.props.addUser, navigate);
+        //this.props.navigation.navigate('Main');
     };
 
    renderModal = () => (<Modal animationType="slide"

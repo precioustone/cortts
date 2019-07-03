@@ -29,7 +29,7 @@ export const Template = (props) => {
             </div>
             <div class="contView" >
                 <h4>Property Type:</h4>
-                <p>${ props.pType }</p>
+                <p>${ props.p_type }</p>
             </div>
             <div class="contMultView" >
                 <div class="insidediv" >
@@ -62,11 +62,11 @@ export const Template = (props) => {
             <div class="contMultView" >
                 <div class="insidediv" >
                     <h4>Land Size:</h4>
-                    <p>${ props.landSize }</p>
+                    <p>${ props.land_size }</p>
                 </div>
                 <div class="insidediv" >
                     <h4>Property Size:</h4>
-                    <p>${ props.propSize }</p>
+                    <p>${ props.prop_size }</p>
                 </div>
             </div>
             <div class="contView" >
@@ -75,25 +75,25 @@ export const Template = (props) => {
             </div>
             <div class="contView" >
                 <h4>Nearby Places:</h4>
-                <p>${ props.nearPlace }</p>
+                <p>${ props.near_place }</p>
             </div>
             <div class="contMultView" >
                 <div class="insidediv" >
                     <h4>Completion Status:</h4>
-                    <p>${ props.status }</p>
+                    <p>${ props.com_status }</p>
                 </div>
                 <div class="insidediv" >
                     <h4>Title:</h4>
-                    <p>${ props.pTitle }</p>
+                    <p>${ props.p_title }</p>
                 </div>
             </div>
             <div class="contView" >
                 <h4>Unexpired Lease Term:</h4>
-                <p>${ props.leaseTerm }</p>
+                <p>${ props.lease_term }</p>
             </div>
             <div class="contView" >
                 <h4>E-Platform:</h4>
-                <p>${ props.ePlatform }</p>
+                <p>${ props.e_platform }</p>
             </div>
             <div class="contMultView" >
                 <div class="insidediv" >
@@ -102,21 +102,21 @@ export const Template = (props) => {
                 </div>
                 <div class="insidediv" >
                     <h4>Available Floor:</h4>
-                    <p>${ props.availFloor }</p>
+                    <p>${ props.avail_floor }</p>
                 </div>
             </div>
             <div class="contMultView" >
                 <div class="insidediv" >
                     <h4>Link:</h4>
-                    <p>${ props.link }</p>
+                    <p>${ props.linkToProp }</p>
                 </div>
                 <div class="insidediv" >
                     <h4>Link Contact:</h4>
-                    <p>${ props.linkContact }</p>
+                    <p>${ props.link_contact }</p>
                 </div>
                 <div class="insidediv" >
                     <h4>Cortts Agent:</h4>
-                    <p>${ props.corttsAgent }</p>
+                    <p>${ props.cortts_agent }</p>
                 </div>
             </div>
             <div class="contView" >
@@ -125,7 +125,7 @@ export const Template = (props) => {
             </div>
             <div class="contView" >
                 <h4>Property Description:</h4>
-                <p>${ props.desc }</p>
+                <p>${ props.prop_desc }</p>
             </div>
             <div class="contView" >
                 <h4>Remark:</h4>

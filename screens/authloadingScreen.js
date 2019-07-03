@@ -26,7 +26,7 @@ class AuthLoadingScreen extends Component {
     
     const userToken = await AsyncStorage.getItem('userToken');
 
-    //this.props.addUser(userToken);
+    this.props.addUser(userToken);
     if(userToken){
 
     }

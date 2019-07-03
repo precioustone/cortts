@@ -41,6 +41,7 @@ class Dashboard extends Component{
             StatusBar.setTranslucent(true);
             StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)', true);
         }
+        console.log(this.state.user.fullname);
     }
 
     //////////////////////////////////////////////////////////////
@@ -102,7 +103,7 @@ class Dashboard extends Component{
     renderToolBar = () => (
         <Toolbar 
             style={{ fontFamily: 'gotham-medium', color: '#fff', fontSize: 50 }} 
-            title={'Hi '}
+            title={'Hi '+this.state.user.fullname.split(' ')[0]}
         />
     );
     
@@ -120,7 +121,7 @@ class Dashboard extends Component{
                         <Text style={{fontFamily: 'gotham-medium', fontSize: 18}}>{data.item.title}</Text>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={{fontFamily: 'gotham-medium', color: '#02B598', flex: 6}}>{data.item.area}</Text>
-                            <Text style={{fontFamily: 'gotham-medium', color: '#03C06A', flex: 4}}>{data.item.date}</Text>
+                            <Text style={{fontFamily: 'gotham-medium', color: '#03C06A', flex: 4}}>{data.item.added_date}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
