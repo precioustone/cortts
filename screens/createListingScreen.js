@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert,StyleSheet, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -31,29 +31,30 @@ class CreateListing extends Component{
     }
 
     state = {
-        error: null,
+        key: (new Date).getTime(),
+        msg: null,
         modalVisible: false,
         fontLoaded: false,  
         title: '',
         area: '',
-        category: '',
-        section: '',
+        category: 'Commercial',
+        section: 'Lease',
         p_type: '',
         price: '',
         service: '',
         caution: '',
-        beds: '',
-        baths: '',
-        park: '',
+        beds: '1',
+        baths: '1',
+        park: '1',
         land_size: '',
         location: '',
         near_place: '',
         p_title: '',
         lease_term: '',
         e_platform: {cortts: false, npc: false, commercial: false},
-        avail_floor: '',
-        floor: '',
-        linkToProp: '',
+        avail_floor: '1',
+        floor: '1',
+        linkToProp: 'Owner',
         link_contact: '',
         cortts_agent: '',
         prop_desc: '',
@@ -67,23 +68,57 @@ class CreateListing extends Component{
 
     handleClick = () => {
         const { navigate } = this.props.navigation;
-        this.setState({modalVisible: !modalVisible});
-        addPropFmDb(this.state, this.props.addProp, navigate, this.onError);
+        this.setState({ modalVisible: !this.state.modalVisible });
+        let data = this.formatData(this.state);
+        addPropFmDb(data, this.props.addProp, navigate, this.onError);
         //navigate('Photos', {details: this.state});
     };
 
     onError = (response) => {
-        this.setState({modalVisible: !modalVisible});
-        this.setState({error: response});
+        this.setState({modalVisible: !this.state.modalVisible});
+        this.setState({msg: response});
         showMessage({
-            message: response,
-            type: "error",
+            message: this.state.msg,
+            type: "danger",
+            autoHide: false,
         });
     }
-    
-    onValueChange = (id,item) => {
-        this.setState({id: item});
+
+    onSuccess = (response) => {
+        this.setState({modalVisible: !this.state.modalVisible});
+        this.setState({msg: response});
+        showMessage({
+            message: this.state.msg,
+            type: "success",
+            autoHide: false,
+        });
+        this.props.navigation.navigate('Photos', {id: this.state.key});
     }
+
+    formatData = (data) => {
+        let { features } = data;
+        let { e_platform } = data;
+
+        let platform = '';
+
+        if (e_platform.cortts){
+            platform = platform+' cortts,';
+        }
+        if (e_platform.npc){
+            platform = platform+' npc,';
+        }
+        if (e_platform.commercial){
+            platform = platform+' commercial';
+        }
+
+        e_platform = platform;
+
+        features = features.join(" ,");
+
+        return {...data, features, e_platform};
+
+    }
+    
 
     initialFunction = () => {
         const { navigate } = this.props.navigation;
@@ -149,7 +184,7 @@ class CreateListing extends Component{
                             containerStyle={{width: '100%'}}
                             items={['Commercial', 'Residential']}
                             val={this.state.category}
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('category',itemValue)}}
+                            onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}
                         />
 
                         <CustomPicker 
@@ -158,7 +193,7 @@ class CreateListing extends Component{
                             containerStyle={{width: '100%'}}
                             items={['Lease', 'Sale', 'Joint venture', 'Short-let', 'Business for Sale']}
                             val={this.state.section}
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('section',itemValue)}}
+                            onValueChange={(itemValue, itemIndex) => this.setState({section: itemValue})}
                         />
 
                         <CustomInputWithLabel
@@ -192,7 +227,7 @@ class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.beds}
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('beds',itemValue)}}
+                            onValueChange={(itemValue, itemIndex) => this.setState({beds: itemValue})}
                         />
                         <CustomPicker 
                             label='No. of Bath(s):'
@@ -200,7 +235,7 @@ class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.baths}
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('baths',itemValue)}}
+                            onValueChange={(itemValue, itemIndex) => this.setState({baths: itemValue})}
                         />
                         <CustomPicker 
                             label='Unit(s) of car park:'
@@ -208,7 +243,7 @@ class CreateListing extends Component{
                             containerStyle={{}}
                             items={['1', '2', '3', '4', '5', '6', '7']}
                             val={this.state.park}
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('park',itemValue)}}
+                            onValueChange={(itemValue, itemIndex) => this.setState({park: itemValue})}
                         />
                         </View>
                         <CustomInputWithSide
@@ -216,14 +251,12 @@ class CreateListing extends Component{
                             labelStyle={styles.label}
                             inputs={{onChangeText: (land_size) => this.setState({land_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.land_size}}
                             left='Sqm'
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('land_size',itemValue)}}
                         />
                         <CustomInputWithSide
                             label='Property Size:'
                             labelStyle={styles.label}
                             inputs={{onChangeText: (prop_size) => this.setState({prop_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.prop_size}}
                             left='Sqm'
-                            onValueChange={(itemValue, itemIndex) => {this.onValueChange('prop_size',itemValue)}}
                         />
                         <CustomInputWithLabel
                             label='Area:'
@@ -256,17 +289,17 @@ class CreateListing extends Component{
                                 <CheckBox 
                                     title='Cortts'
                                     checked={this.state.e_platform.cortts}
-                                    onPress={ () => this.setState({cortts: !this.state.e_platform.cortts}) }
+                                    onPress={ () => this.setState({e_platform: {cortts: !this.state.e_platform.cortts}}) }
                                 />
                                 <CheckBox 
                                     title='NPC'
                                     checked={this.state.e_platform.npc}
-                                    onPress={ () => this.setState({npc: !this.state.e_platform.npc}) }
+                                    onPress={ () => this.setState({e_platform: {npc: !this.state.e_platform.npc}}) }
                                 />
                                 <CheckBox 
                                     title='Commercial'
                                     checked={this.state.e_platform.commercial}
-                                    onPress={ () => this.setState({commercial: !this.state.e_platform.commercial}) }
+                                    onPress={ () => this.setState({commercial: {commercial: !this.state.e_platform.commercial}}) }
                                 />
                                 
                             </View>
@@ -278,7 +311,7 @@ class CreateListing extends Component{
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
                                 val={this.state.avail_floor}
-                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('avail_floor',itemValue)}}
+                                onValueChange={(itemValue, itemIndex) => this.setState({avail_floor:itemValue})}
                             />
                             <CustomPicker 
                                 label='Total Floor of Building:'
@@ -286,7 +319,7 @@ class CreateListing extends Component{
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
                                 val={this.state.floor}
-                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('floor',itemValue)}}
+                                onValueChange={(itemValue, itemIndex) => this.setState({floor: itemValue})}
                             />
                             </View>
                             <CustomPicker 
@@ -295,32 +328,32 @@ class CreateListing extends Component{
                                 containerStyle={{}}
                                 items={['Owner', 'Developer', 'Lawyer', 'Agent',]}
                                 val={this.state.linkToProp}
-                                onValueChange={(itemValue, itemIndex) => {this.onValueChange('linkToProp',itemValue)}}
+                                onValueChange={(itemValue, itemIndex) => this.setState({linkToProp: itemValue})}
                             />
                             <CustomInputWithLabel
                                 label='Link Contact:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, value: this.state.link_contact}}
+                                inputs={{style: styles.inputStyle, value: this.state.link_contact, onChangeText: (link_contact) => this.setState({link_contact})}}
                             />
                             <CustomInputWithLabel
                                 label='Cortts Agent:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.cortts_agent}}
+                                inputs={{onChangeText: (cortts_agent) => this.setState({cortts_agent}), style: styles.inputStyle, multiline: true, value: this.state.cortts_agent}}
                             />
                             <CustomInputWithLabel
                                 label='Completion Status:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.com_status, placeholder: 'completed or date'}}
+                                inputs={{onChangeText: (com_status) => this.setState({com_status}), style: styles.inputStyle, multiline: true, value: this.state.com_status, placeholder: 'completed or date'}}
                             />
                             <CustomInputWithLabel
                                 label='Full Property Description:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.prop_desc}}
+                                inputs={{onChangeText: (prop_desc) => this.setState({prop_desc}), style: styles.inputStyle, multiline: true, value: this.state.prop_desc}}
                             />
                             <CustomInputWithLabel
                                 label='Remark:'
                                 labelStyle={styles.label}
-                                inputs={{style: styles.inputStyle, multiline: true, value: this.state.remark}}
+                                inputs={{onChangeText: (remark) => this.setState({remark}), style: styles.inputStyle, multiline: true, value: this.state.remark}}
                             />
 
                             <AppendableList

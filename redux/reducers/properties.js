@@ -10,6 +10,7 @@ const properties = (state = [], action) => {
         }
         case DEL_PROP: {
             const { id } = action.payload;
+            console.log(id);
             let properties = state.filter((val,ind) => val.key != id);
             return properties;
         }

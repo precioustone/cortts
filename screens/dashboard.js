@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { Toolbar } from '../components/customToolbar';
 import { getProperties, getUser } from '../redux/selectors';
 import { delProp, filterProp } from '../redux/actions';
+import { delPropFmDb } from '../db/database';
 
 
 class Dashboard extends Component{
@@ -63,7 +64,8 @@ class Dashboard extends Component{
 		//const prevIndex = this.props.properties.findIndex(item => item.key === rowKey);
 		//newData.splice(prevIndex, 1);
         //this.setState({listViewData: newData});
-        this.props.delProp(rowKey);
+        delPropFmDb(rowKey, this.props.delProp);
+        //this.props.delProp(rowKey);
     };
 
     //EDIT FUNCTION

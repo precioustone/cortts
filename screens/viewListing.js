@@ -73,7 +73,7 @@ class ViewListing extends Component{
                 <Header
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
-                    title={this.state.property['title']}
+                    title={this.state.property.title}
                     initials='AE'
                     style={{fontFamily: 'gotham-medium'}}
                 />
@@ -81,7 +81,7 @@ class ViewListing extends Component{
                 <ScrollView  >
                     <View style={styles.container}>
                         <View style={{ alignItems: 'flex-end', flexDirection: 'row', justifyContent: 'flex-end', padding: 15}}>
-                            <Text style={{...styles.header, color: '#03C06A'}}>{this.state.property['date']}</Text>
+                            <Text style={{...styles.header, color: '#03C06A'}}>{this.state.property.added_date}</Text>
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Property Description/Units:</Text>

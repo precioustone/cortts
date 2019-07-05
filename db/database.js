@@ -59,9 +59,9 @@ export const getProps = async (action) => {
     }
 } 
 
-export const addPropFmDb = async (formData, action, navigate, onError) => {
+export const addPropFmDb = async (formData, action, onSuccess, onError) => {
     try{
-        let response = await fetch('https://www.cortts.com/api/add-properties', {
+        let response = await fetch('https://www.cortts.com/api/properties.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -73,10 +73,11 @@ export const addPropFmDb = async (formData, action, navigate, onError) => {
         let resJson = await response.json();
 
         let status = await resJson.status;
-
+        console.log(resJson);
         if (status){ 
             action(formData);
-            navigate('Photos', {details: formData}); 
+            //navigate('Photos', {details: formData}); 
+            onSuccess(resJson.msg)
         }else{
             onError(resJson.msg);
         }
@@ -106,16 +107,10 @@ export const editProp = async (formData, action) => {
     }
 } 
 
-export const delProp = async (id) => {
+export const delPropFmDb = async (id, action) => {
+    
     try{
-        let response = await fetch('https://www.cortts.com/api/del-property', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({id: id}),
-        });
+        let response = await fetch('https://www.cortts.com/api/del-property/'+id);
 
         let resJson = await response.json();
 
