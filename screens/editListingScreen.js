@@ -277,7 +277,15 @@ const styles = StyleSheet.create({
     inputStyle: {
         width: '100%', 
         fontFamily: 'gotham-medium',
-        lineHeight: 20,
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginBottom: 15,
+        fontSize: 18,
+        color: '#3F4EA5',
     },
     threeInputsView: {
         justifyContent: 'space-between',

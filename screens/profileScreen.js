@@ -41,7 +41,7 @@ class Profile extends Component{
                 <View style={styles.container}>
                     <View style={styles.view}>
                         { this.state.fontLoaded ? (
-                        <Text style={styles.text} >{this.props.userToken.name}</Text>): null }
+                        <Text style={styles.text} >{this.props.userToken.fullname}</Text>): null }
                         <Avatar source={this.state.image} rounded
                         size='xlarge'/>
                         { this.state.fontLoaded ? (
@@ -72,7 +72,7 @@ const mapStateToProps = ( state ) => {
     return { userToken: getUser(state)};
 }
 
-export default connect(mapStateToProps,{})(Profile)
+export default connect(mapStateToProps,null)(Profile)
 
 const styles = StyleSheet.create({
     actionButtonIcon: {

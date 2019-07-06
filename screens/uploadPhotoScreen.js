@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Image, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Modal, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { ButtonThickStr } from '../components/button';
 import ImageBrowser from '../components/ImageBrowser';
@@ -14,7 +15,7 @@ export default class UploadPhotos extends Component{
         super(props);
         this.state = {
             property: props.details,
-            images: [],
+            images: null,
             modalVisible: false,
             imageBrowserOpen: false,
         };
@@ -72,31 +73,52 @@ export default class UploadPhotos extends Component{
         </View>
     </Modal>);
 
+renderItem(item) {
+    return (
+        <TouchableOpacity  
+                 style={{flex:1/3, //here you can use flex:1 also
+                 aspectRatio:1}}>
+                <Image style={{flex: 1}} resizeMode='cover' source={{ uri:  item.file}}></Image>
+        </TouchableOpacity>
+    )
+}
+
     render() {
         let { images } = this.state;
-        let renderImages = images.map((value,index) => {
+        {/*let renderImages = images.map((value,index) => {
             return <Image source={{uri: value.file}} style={styles.image} />
-        });
+        });*/}
         if (this.state.imageBrowserOpen) {
             return(<ImageBrowser max={30} callback={this.imageBrowserCallback}/>);
         }
         return (
-            <ScrollView>
-                <View style={styles.container}>
+            <View style={styles.container}>
 
-                    { this.renderModal() }
-                    <View style={styles.renderImage}>
-                        { renderImages }
-                    </View>
-                    
+                { this.renderModal() }
+                <View style={styles.renderImage}>
+                    {this.state.images ? (<FlatList
+                        numColumns={3}
+                        data={this.state.images}
+                        renderItem={({ item }) => this.renderItem(item)}
+                    />):
+                         (<TouchableOpacity onPress={this.handleClick}>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 200, width: '100%'}}>
+                            <Ionicons name='ios-camera' size={50} />
+                            <Text>UploadPhotos</Text>
+                        </View>
+                    </TouchableOpacity>)
+                    }
+                </View>
+                <View style={{ width: '100%', paddingVertical: 20, backgroundColor: '#fff'}}>
                     <ButtonThickStr 
-                        onClick={this.handleClick}
-                        text= 'SELECT IMAGES'
+                        onClick={() => this.props.navigation.navigate('List')}
+                        text= 'Skip'
                         style={styles.button}
                         containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}
                     />
                 </View>
-            </ScrollView>  
+            </View>
+            
         );
     }
 }
@@ -107,10 +129,11 @@ const styles = StyleSheet.create({
         padding: 15,
     },
     renderImage: {
+        flex: 1,
         flexWrap: 'wrap',
         flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     image: {
         width: 100,

@@ -17,9 +17,11 @@ class AuthLoadingScreen extends Component {
   }
 
   async componentDidMount() {
-      getProps(this.props.addProp);
-      this._bootstrapAsync();
+      getProps(this.props.addProp, this.onSuccess);
+      //this._bootstrapAsync();
   }
+
+  onSuccess = () => this._bootstrapAsync()
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {

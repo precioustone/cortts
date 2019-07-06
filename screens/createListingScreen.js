@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Alert, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -47,13 +47,13 @@ class CreateListing extends Component{
         baths: '1',
         park: '1',
         land_size: '',
-        location: '',
+        address: '',
         near_place: '',
         p_title: '',
         lease_term: '',
         e_platform: {cortts: false, npc: false, commercial: false},
         avail_floor: '1',
-        floor: '1',
+        total_floor: '1',
         linkToProp: 'Owner',
         link_contact: '',
         cortts_agent: '',
@@ -70,7 +70,7 @@ class CreateListing extends Component{
         const { navigate } = this.props.navigation;
         this.setState({ modalVisible: !this.state.modalVisible });
         let data = this.formatData(this.state);
-        addPropFmDb(data, this.props.addProp, navigate, this.onError);
+        addPropFmDb(data, this.props.addProp, this.onSuccess, this.onError);
         //navigate('Photos', {details: this.state});
     };
 
@@ -85,6 +85,7 @@ class CreateListing extends Component{
     }
 
     onSuccess = (response) => {
+        console.log(response);
         this.setState({modalVisible: !this.state.modalVisible});
         this.setState({msg: response});
         showMessage({
@@ -158,10 +159,11 @@ class CreateListing extends Component{
     render(){
 
         const { navigate } = this.props.navigation;
+        const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
 
         return (
             this.state.fontLoaded ? (
-            <View style={{ flex: 1 }}>
+            <View style={{flex: 1}}>
                 { this.renderModal() }
                 <Header
                     initialFunction={() => this.initialFunction()}
@@ -171,7 +173,7 @@ class CreateListing extends Component{
                     style={{fontFamily: 'gotham-medium'}}
                 />
                 <ScrollView>
-                    <View style={styles.container}>
+                    <KeyboardAvoidingView style={styles.container} enabled={true} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
 
                         <CustomInputWithLabel
                             label='Property Description/Units:'
@@ -249,13 +251,25 @@ class CreateListing extends Component{
                         <CustomInputWithSide
                             label='Land Size:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (land_size) => this.setState({land_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.land_size}}
-                            left='Sqm'
+                            inputs={{
+                                onChangeText: (land_size) => this.setState({land_size}) ,
+                                //style: styles.inputStyle, 
+                                value: this.state.land_size,
+                                rightIcon: <Text>Sqm</Text>,
+                                inputContainerStyle: styles.inputStyleWithSide,
+                                containerStyle: {padding: 0}
+                            }}
                         />
                         <CustomInputWithSide
                             label='Property Size:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (prop_size) => this.setState({prop_size}) , style: styles.inputStyle, placeholder: '0.00', value: this.state.prop_size}}
+                            inputs={{
+                                onChangeText: (prop_size) => this.setState({prop_size}) , //style: styles.inputStyle,  
+                                value: this.state.land_size,
+                                rightIcon: <Text>Sqm</Text>,
+                                inputContainerStyle: styles.inputStyleWithSide,
+                                containerStyle: {padding: 0}
+                            }}
                             left='Sqm'
                         />
                         <CustomInputWithLabel
@@ -266,7 +280,7 @@ class CreateListing extends Component{
                         <CustomInputWithLabel
                             label='Street Address:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (location) => this.setState({location}) , style: styles.inputStyle, multiline: true, value: this.state.location}}
+                            inputs={{onChangeText: (address) => this.setState({address}) , style: styles.inputStyle, multiline: true, value: this.state.address}}
                         />
                         <CustomInputWithLabel
                             label='Near By Places:'
@@ -318,8 +332,8 @@ class CreateListing extends Component{
                                 labelStyle={styles.label}
                                 containerStyle={{}}
                                 items={['1', '2', '3', '4', '5', '6', '7']}
-                                val={this.state.floor}
-                                onValueChange={(itemValue, itemIndex) => this.setState({floor: itemValue})}
+                                val={this.state.total_floor}
+                                onValueChange={(itemValue, itemIndex) => this.setState({total_floor: itemValue})}
                             />
                             </View>
                             <CustomPicker 
@@ -371,7 +385,7 @@ class CreateListing extends Component{
                                 style={styles.button}
                                 containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}
                             />
-                        </View>
+                        </KeyboardAvoidingView>
                 </ScrollView>
                 <FlashMessage position='top' animated={true} />
             </View>) : null
@@ -384,6 +398,7 @@ export default connect(null,{addProp})(CreateListing);
 const styles = StyleSheet.create({
     container: {
         padding: 15,
+        justifyContent: 'center'
     },
     label: {
         fontFamily: 'gotham-medium',
@@ -392,6 +407,24 @@ const styles = StyleSheet.create({
     inputStyle: {
         width: '100%', 
         fontFamily: 'gotham-medium',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginBottom: 15,
+        fontSize: 18,
+        color: '#000',
+    },
+    inputStyleWithSide: {
+        
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        backgroundColor: '#FFF',
     },
     threeInputsView: {
         justifyContent: 'space-between',

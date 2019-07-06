@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Picker, StyleSheet,Text, View } from 'react-native';
 
+export default class CustomPicker extends Component{
 
-const CustomPicker = (props) => {
+    constructor(props){
+        super(props);
 
-    appendItems = props.items.map( (val, index) => {
-        try{
-            return <Picker.item key={index} value={val} label={val} />
-        } catch(err){
-            console.log(err)
-        }
-    });
+        this.state = {
+            list: props.items
+        };
+    }
 
-    return (
-        <View style={{...styles.container,...props.containerStyle}}>
-           
-            <Text style={{...styles.label,...props.labelStyle}}>{props.label}</Text>
+    itemList = () =>{
+        return( this.state.list.map( (x,i) => { 
+              return( <Picker.Item label={x} key={i} value={x}  />)} ));
+    }
+
+    render(){
+        
+        return (
+            <View style={{...styles.container,...this.props.containerStyle}}>
             
-            <View style={{...styles.picker,...props.viewStyle}}> 
-            <Picker
-                selectedValue={props.val}
-                style={{height: 50, width: '100%',}}
-                onValueChange={props.onValueChange}>
-                {appendItems}
-            </Picker>
+                <Text style={{...styles.label,...this.props.labelStyle}}>{this.props.label}</Text>
+                
+                <View style={{...styles.picker,...this.props.viewStyle}}> 
+                <Picker
+                    selectedValue={this.props.val}
+                    style={{height: 50, width: '100%',}}
+                    onValueChange={this.props.onValueChange}>
+                    {this.itemList()}
+                </Picker>
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
 };
 
-export default CustomPicker;
 
 const styles = StyleSheet.create({
     container: {

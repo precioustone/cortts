@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Platform, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Platform, RefreshControl, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 
 import { Toolbar } from '../components/customToolbar';
 import { getProperties, getUser } from '../redux/selectors';
-import { delProp, filterProp } from '../redux/actions';
-import { delPropFmDb } from '../db/database';
+import { addProp, delProp, filterProp } from '../redux/actions';
+import { delPropFmDb, getProps } from '../db/database';
 
 
 class Dashboard extends Component{
@@ -21,6 +21,7 @@ class Dashboard extends Component{
     };
 
     state = {
+        refreshing: false,
         fontLoaded: false,
         user: this.props.userToken,
         search: '',
@@ -78,6 +79,15 @@ class Dashboard extends Component{
         this.props.navigation.navigate('View', { 'id': data.key, })
     };
 
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        getProps(this.props.addProp, this.onSuccess)
+    }
+
+    onSuccess = () => {
+        this.setState({refreshing: false});
+    }
+
     search = (search) => {
         this.setState({search})
         let searchData;
@@ -114,6 +124,15 @@ class Dashboard extends Component{
         <SwipeListView
             useFlatList
             data={this.state.searchEnabled ? this.state.searchData : this.props.properties}
+            onRefresh={this._onRefresh}
+            refreshing={this.state.refreshing}
+            refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this._onRefresh}
+                  enabled={true}
+                />
+            }
             renderItem={ (data, rowMap) => (
                 <TouchableOpacity
                     onPress={() => this.handleView(data.item)}
@@ -271,7 +290,7 @@ const mapStateToProps = ( state ) => {
 
 export default connect(
 mapStateToProps,
-{ delProp, filterProp }
+{ addProp, delProp, filterProp }
 )(Dashboard)
 
 

@@ -6,11 +6,10 @@ const properties = (state = [], action) => {
     switch (action.type){
         case ADD_PROP: {
             const { prop } = action.payload;
-            return [...state, ...prop ];
+            return [...prop ];
         }
         case DEL_PROP: {
             const { id } = action.payload;
-            console.log(id);
             let properties = state.filter((val,ind) => val.key != id);
             return properties;
         }
@@ -22,7 +21,6 @@ const properties = (state = [], action) => {
         }
         case FILTER_PROP: {
             const { keyword } = action.payload;
-            console.log(keyword);
             let properties;
             if (keyword != '')
                 properties = state.filter((val,ind) => val.title.includes(keyword));

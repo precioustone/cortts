@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Image, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { connect } from "react-redux";
+import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
 import { addUser } from "../redux/actions";
 
 import { ButtonThickStr } from '../components/button.js';
@@ -18,6 +19,7 @@ class LoginScreen extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            msg: '',
             fontLoaded: false,
             email: '',
             password: '',
@@ -42,11 +44,33 @@ class LoginScreen extends Component{
 
    _signInAsync = async () => {
         let user = { email, password, phone, name,remember } = this.state;
-        const { navigate } = this.props.navigation;
+        
         this.setState({modalVisible: !this.state.modalVisible})
-        let res = getUser({type: LOGIN},user,this.props.addUser, navigate);
+        getUser({type: LOGIN},user,this.props.addUser, this.onSuccess, this.onError);
         //this.props.navigation.navigate('Main');
     };
+
+    onError = (response) => {
+        this.setState({modalVisible: !this.state.modalVisible});
+        this.setState({msg: response});
+        showMessage({
+            message: this.state.msg,
+            type: "danger",
+            autoHide: false,
+        });
+    }
+
+    onSuccess = (response) => {
+        console.log(response);
+        this.setState({modalVisible: !this.state.modalVisible});
+        this.setState({msg: response});
+        showMessage({
+            message: this.state.msg,
+            type: "success",
+            autoHide: false,
+        });
+        this.props.navigation.navigate('Main');
+    }
 
    renderModal = () => (<Modal animationType="slide"
         transparent={true}
@@ -72,7 +96,7 @@ class LoginScreen extends Component{
 
         return (
             this.state.fontLoaded ? (
-                <KeyboardAvoidingView style={styles.kAV} behavior="padding" enabled>
+                <KeyboardAvoidingView style={styles.kAV} behavior="padding" enabled={true}>
                     { this.renderModal() }
                     <View style={styles.top}>
                         <Image source={require('../assets/listing.png')} style={{width: 150, height: 150}} />
@@ -84,11 +108,13 @@ class LoginScreen extends Component{
                         onChangeText={(text) => this.handleEmail(text)}
                         value={this.state.email}
                         style={styles.text}
+                        keyboardType='email-address'
                     />
 
                     <CustomInput 
                         placeholder= 'Password'
                         onChangeText={(text) => this.handlePassword(text)}
+                        secureTextEntry={true}
                         value={this.state.password}
                         style={styles.text}
                     />
@@ -111,6 +137,7 @@ class LoginScreen extends Component{
                         onPress={() => navigate('Forgot')}>
                         Forgot password ?
                     </Text>
+                    <FlashMessage position='top' animated={true} />
                 </KeyboardAvoidingView>
            ) : null
         );
@@ -126,6 +153,7 @@ const styles = StyleSheet.create({
     kAV: {
         flex: 1,
         paddingHorizontal: 15,
+        justifyContent: 'center'
     },
     top: {
         justifyContent: 'center',
@@ -146,5 +174,14 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'gotham-medium',
         width: '100%',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginBottom: 15,
+        fontSize: 18,
+        color: '#3F4EA5',
     },
 });

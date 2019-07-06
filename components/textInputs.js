@@ -1,28 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, KeyboardAvoidingView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Input } from 'react-native-elements';
+
 
 const CustomInput = (props) => {
     return (
-        <KeyboardAvoidingView enabled style={styles.textView}>
-            <TextInput 
-                {...props}
-            />
-        </KeyboardAvoidingView>
+        
+        <TextInput 
+            {...props}
+        />
+        
     );
 };
 
 export const CustomInputWithLabel = (props) => {
     return (
         <KeyboardAvoidingView enabled style={styles.container}>
-            
             <Text style={{...styles.text,...props.labelStyle}}>{props.label}</Text>
-           
-            <KeyboardAvoidingView enabled style={styles.textView}>
-                <TextInput 
-                    {...props.inputs}
-                />
-            </KeyboardAvoidingView>
+            <TextInput 
+                {...props.inputs}
+            />
         </KeyboardAvoidingView>
     );
 };
@@ -32,14 +30,9 @@ export const CustomInputWithSide = (props) => {
         <KeyboardAvoidingView enabled style={styles.container}>
             
             <Text style={{...styles.text,...props.labelStyle}}>{props.label}</Text>
-           <KeyboardAvoidingView style={{flexDirection: 'row', ...styles.textView}}>
-                <KeyboardAvoidingView enabled style={{flex: 8}}>
-                        <TextInput 
-                            {...props.inputs}
-                        />
-                </KeyboardAvoidingView>
-                <Text style={{flex: 2, color: '#737373'}}>{props.left}</Text>
-           </KeyboardAvoidingView>
+           <Input 
+                {...props.inputs}
+           />
         </KeyboardAvoidingView>
     );
 };

@@ -71,7 +71,7 @@ export const Template = (props) => {
             </div>
             <div class="contView" >
                 <h4>Location Address:</h4>
-                <p>${ props.location }</p>
+                <p>${ props.address }</p>
             </div>
             <div class="contView" >
                 <h4>Nearby Places:</h4>
@@ -98,7 +98,7 @@ export const Template = (props) => {
             <div class="contMultView" >
                 <div class="insidediv" >
                     <h4>No of Floors:</h4>
-                    <p>${ props.floor }</p>
+                    <p>${ props.total_floor }</p>
                 </div>
                 <div class="insidediv" >
                     <h4>Available Floor:</h4>

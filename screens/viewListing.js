@@ -30,10 +30,25 @@ class ViewListing extends Component{
             'gotham-light': require('../assets/fonts/GothamLight.ttf'),
           });
       
-        this.setState({ fontLoaded: true, property: this.props.properties[this.state.id] });
+        this.setState({ fontLoaded: true });
     }
 
-    
+    constructor(props){
+        super(props);
+
+        this.state = {
+            fontLoaded: false,
+            property: this.getPropById(this.props.navigation.getParam('id')),
+        };
+    }
+
+    getPropById = (id) => {
+        let prop = this.props.properties.find( (el) => {
+            return el.key == id;
+        });
+
+        return prop;
+    }    
 
     createPdf = async () => {
         const html = Template(this.state.property);
@@ -52,11 +67,7 @@ class ViewListing extends Component{
         await Print.printAsync({ html }).catch ( err => console.log(err))       
     }
 
-    state = {
-        fontLoaded: false,
-        Property: {},
-        id: this.props.navigation.getParam('id')
-    };
+    
 
     initialFunction = () => {
         const { navigate } = this.props.navigation;
@@ -141,7 +152,7 @@ class ViewListing extends Component{
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Location Address:</Text>
-                            <Text style={styles.value}>{ this.state.property.location }</Text>
+                            <Text style={styles.value}>{ this.state.property.address }</Text>
                         </View>
                         <View style={styles.contView}>
                             <Text style={styles.header}>Nearby Places:</Text>
@@ -168,7 +179,7 @@ class ViewListing extends Component{
                         <View style={styles.contMultView}>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>No of Floors:</Text>
-                                <Text style={styles.value}>{ this.state.property.floor }</Text>
+                                <Text style={styles.value}>{ this.state.property.total_floor }</Text>
                             </View>
                             <View style={styles.insideView}>
                                 <Text style={styles.header}>Available Floor:</Text>
@@ -221,7 +232,7 @@ class ViewListing extends Component{
 }
 
 const mapStateToProps = ( state ) => {
-    return {userToken: getUser(state),properties: getProperties(state)};
+    return {userToken: getUser(state), properties: getProperties(state)};
 }
 
 

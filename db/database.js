@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 
 import { LOGIN, REGISTER } from '../db/task';
 
-export const getUser = async (task, formData, action, navigate) => {
+export const getUser = async (task, formData, action, onSuccess, onError) => {
     
     try{
         let response;
@@ -33,19 +33,21 @@ export const getUser = async (task, formData, action, navigate) => {
         let user = await resJson.user;
 
         
-
-        action(JSON.stringify(user));
-        await AsyncStorage.setItem('userToken', JSON.stringify(user));
-        if(resJson.status)
-            navigate('Main');
+        console.log(formData);
+        
+        if(resJson.status){
+            action(JSON.stringify(user));
+            await AsyncStorage.setItem('userToken', JSON.stringify(user));
+            onSuccess(resJson.msg);
+        }
         else
-            return resJson.status;
+            onError(resJson.msg);
     }catch(err){
         console.log(err);
     }
 } 
 
-export const getProps = async (action) => {
+export const getProps = async (action, onSuccess) => {
     try{
         let response = await fetch('https://www.cortts.com/api/properties');
 
@@ -53,7 +55,13 @@ export const getProps = async (action) => {
 
         let properties = await resJson.props;
 
-        action(properties);
+        var result = properties.map(function(el) {
+            var o = Object.assign({}, el);
+            o.key = o.id;
+            return o;
+        });
+        action(result);
+        onSuccess();
     }catch(err){
         console.log(err);
     }
@@ -73,9 +81,10 @@ export const addPropFmDb = async (formData, action, onSuccess, onError) => {
         let resJson = await response.json();
 
         let status = await resJson.status;
-        console.log(resJson);
+        let props = await resJson.props;
+        
         if (status){ 
-            action(formData);
+            action(props);
             //navigate('Photos', {details: formData}); 
             onSuccess(resJson.msg)
         }else{
