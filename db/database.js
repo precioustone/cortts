@@ -3,6 +3,8 @@ import { AsyncStorage } from 'react-native';
 
 import { LOGIN, REGISTER } from '../db/task';
 
+
+
 export const getUser = async (task, formData, action, onSuccess, onError) => {
     
     try{
@@ -33,8 +35,6 @@ export const getUser = async (task, formData, action, onSuccess, onError) => {
         let user = await resJson.user;
 
         
-        console.log(formData);
-        
         if(resJson.status){
             action(JSON.stringify(user));
             await AsyncStorage.setItem('userToken', JSON.stringify(user));
@@ -43,11 +43,11 @@ export const getUser = async (task, formData, action, onSuccess, onError) => {
         else
             onError(resJson.msg);
     }catch(err){
-        console.log(err);
+        onError(err);
     }
 } 
 
-export const getProps = async (action, onSuccess) => {
+export const getProps = async (action, onSuccess, compare, onError) => {
     try{
         let response = await fetch('https://www.cortts.com/api/properties');
 
@@ -61,10 +61,41 @@ export const getProps = async (action, onSuccess) => {
             return o;
         });
         action(result);
+        compare(result);
         onSuccess();
     }catch(err){
-        console.log(err);
+        onError(err);
     }
+} 
+
+export const getUpdates = async (action, onSuccess, onError) => {
+    try{
+        let data = new FormData();
+        let modified = await AsyncStorage.getItem('lastModified');
+        data.append('date',modified );
+        response = await fetch( 'https://www.cortts.com/api/getUpdates.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+            },
+            body: data,
+        });
+       
+        let resJson = await response.json();
+      
+        let properties = await resJson.props;
+
+        var result = properties.map(function(el) {
+            var o = Object.assign({}, el);
+            o.key = o.id;
+            return o;
+        });
+        action(result);
+        onSuccess();
+    }catch(err){
+        onError(err);
+    }
+    
 } 
 
 export const addPropFmDb = async (formData, action, onSuccess, onError) => {
@@ -79,25 +110,21 @@ export const addPropFmDb = async (formData, action, onSuccess, onError) => {
         });
 
         let resJson = await response.json();
-
-        let status = await resJson.status;
-        let props = await resJson.props;
         
-        if (status){ 
-            action(props);
-            //navigate('Photos', {details: formData}); 
-            onSuccess(resJson.msg)
+        if (resJson.status){ 
+            action([formData]);
+            onSuccess(resJson.msg, resJson.status);
         }else{
-            onError(resJson.msg);
+            onError(resJson.msg, resJson.status);
         }
     }catch(err){
-        console.log(err);
+        onError(err);
     }
 } 
 
-export const editProp = async (formData, action) => {
+export const editPropFmDb = async  (formData, action, onSuccess, onError) => {
     try{
-        let response = await fetch('https://www.cortts.com/api/edit-property', {
+        let response = await fetch('https://www.cortts.com/api/edit-property.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -106,18 +133,51 @@ export const editProp = async (formData, action) => {
             body: JSON.stringify(formData),
         });
 
+
         let resJson = await response.json();
-
-        let status = await resJson.status;
-
-        if (status){ action(formData) };
+        
+        
+        if (resJson.status){ 
+            action([formData]);
+            onSuccess(resJson.msg, resJson.status);
+        }else{
+            onError(resJson.msg, resJson.status);
+        }
     }catch(err){
-        console.log(err);
+        onError(err);
+    }
+} 
+
+
+export const uploadImages = async  (formData, onSuccess, onError) => {
+    try{
+        let response = await fetch('https://www.cortts.com/api/uploadImage.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                "Content-Type": "multipart/form-data",
+            },
+            body: formData,
+        });
+
+        
+        let resJson = await response.json();
+        
+        let status = await resJson.status;
+        
+        
+        if (status){ 
+            onSuccess(resJson.msg)
+        }else{
+            onError(resJson.msg);
+        }
+    }catch(err){
+        onError(err);
     }
 } 
 
 export const delPropFmDb = async (id, action) => {
-    
+    console.log(id);
     try{
         let response = await fetch('https://www.cortts.com/api/del-property/'+id);
 
@@ -127,6 +187,6 @@ export const delPropFmDb = async (id, action) => {
 
         if (status){ action(id) };
     }catch(err){
-        console.log(err);
+        onError(err);
     }
 } 

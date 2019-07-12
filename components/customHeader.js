@@ -1,6 +1,7 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 
 const Header = (props) => {
     return (
@@ -15,15 +16,12 @@ const Header = (props) => {
                     size={48}
                 />
                 <Text style={{...props.style,...styles.text}}>{ props.title }</Text>
-                {/*<Avatar 
-                    containerStyle={styles.avatar}    
-                    overlayContainerStyle={{backgroundColor: '#FF7F50'}}               
-                    size="small"
-                    rounded
-                    title={props.initials}
-                    onPress={props.initailFunction}
-                    activeOpacity={0.7} 
-                />*/}
+                {props.show ? (<Ionicons               
+                    size={36}
+                    onPress={props.onPress}
+                    name='ios-share'
+                    style={{color: '#fff', margin: 20}}
+                />) : null}
             </View>
         </ImageBackground>
     );

@@ -5,7 +5,8 @@ import * as Print from 'expo-print';
 import * as FileSystem from 'expo-file-system';
 import ActionButton from 'react-native-action-button';
 import { Ionicons, Zocial } from '@expo/vector-icons';
-import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
+import * as Sharing from 'expo-sharing';
+import { showMessage } from 'react-native-flash-message';
 import { connect } from 'react-redux';
 
 
@@ -69,9 +70,12 @@ class ViewListing extends Component{
 
     
 
-    initialFunction = () => {
-        const { navigate } = this.props.navigation;
-        navigate('Profile');
+    share = async () => {
+        
+        const html = Template(this.state.property);
+        let pdf = await Print.printToFileAsync({ html }).catch( (err) => console.log(err) );
+
+        await Sharing.shareAsync(pdf.uri, { mimeType: 'application/pdf', dialogTitle:'Share Using '});
     };
 
     render(){
@@ -85,7 +89,8 @@ class ViewListing extends Component{
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
                     title={this.state.property.title}
-                    initials='AE'
+                    show={true}
+                    onPress={() => this.share()}
                     style={{fontFamily: 'gotham-medium'}}
                 />
             
@@ -225,7 +230,7 @@ class ViewListing extends Component{
                         <Ionicons name="md-print" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                 </ActionButton>
-                <FlashMessage position='top' animated={true} />
+               
             </View>)
         );
     };

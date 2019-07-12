@@ -2269,7 +2269,7 @@ expo-sensors@~5.0.1:
   dependencies:
     invariant "^2.2.4"
 
-expo-sharing@~5.0.1:
+expo-sharing@^5.0.1, expo-sharing@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/expo-sharing/-/expo-sharing-5.0.1.tgz#ec761be19469e39650e45972053663eae8ed0431"
   integrity sha512-oBrRpVnhPxDb6qgC4RkcGz82JfTz7ao4uI+/DC8OJGUkRyCczVHuDG0v4R6jLMPld8dkjAxUmUkba7JVgg53FQ==

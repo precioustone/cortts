@@ -1,23 +1,23 @@
 import { ADD_PROP, DEL_PROP, EDIT_PROP, FILTER_PROP } from '../actionTypes';
-import { initialState } from './data';
 
 
 const properties = (state = [], action) => {
     switch (action.type){
         case ADD_PROP: {
             const { prop } = action.payload;
-            return [...prop ];
+            return [...state,...prop ];
         }
         case DEL_PROP: {
             const { id } = action.payload;
+            console.log(id);
             let properties = state.filter((val,ind) => val.key != id);
             return properties;
         }
         case EDIT_PROP: {
             const { prop } = action.payload;
-            let properties = state.filter((val,ind) => val.key != prop.key);
-            properties = [...properties,prop];
-            return properties;
+            let properties = state.filter((val,ind) => val.key != prop[0].key);
+            
+            return [...properties,...prop ];
         }
         case FILTER_PROP: {
             const { keyword } = action.payload;

@@ -7,11 +7,13 @@ import * as Font from 'expo-font';
 import { Avatar, SearchBar, Tooltip } from 'react-native-elements';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { connect } from 'react-redux';
+import { showMessage} from 'react-native-flash-message';
 
 import { Toolbar } from '../components/customToolbar';
 import { getProperties, getUser } from '../redux/selectors';
 import { addProp, delProp, filterProp } from '../redux/actions';
-import { delPropFmDb, getProps } from '../db/database';
+import { delPropFmDb, getUpdates } from '../db/database';
+
 
 
 class Dashboard extends Component{
@@ -27,6 +29,7 @@ class Dashboard extends Component{
         search: '',
         searchData: this.props.properties,
         searchEnabled: false,
+        msg: null,
     };
 
     async componentDidMount() {
@@ -43,7 +46,8 @@ class Dashboard extends Component{
             StatusBar.setTranslucent(true);
             StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)', true);
         }
-        console.log(this.state.user.fullname);
+        console.log(this.props);
+        
     }
 
     //////////////////////////////////////////////////////////////
@@ -81,11 +85,22 @@ class Dashboard extends Component{
 
     _onRefresh = () => {
         this.setState({refreshing: true});
-        getProps(this.props.addProp, this.onSuccess)
+        getUpdates(this.props.addProp, this.onSuccess, this.onError)
     }
 
     onSuccess = () => {
         this.setState({refreshing: false});
+    }
+
+    onError = (msg) => {
+        console.log(msg)
+        this.setState({msg, refreshing: false});
+      
+        showMessage({
+            message: this.state.msg,
+            type: "danger",
+            autoHide: false,
+        });
     }
 
     search = (search) => {
@@ -124,15 +139,6 @@ class Dashboard extends Component{
         <SwipeListView
             useFlatList
             data={this.state.searchEnabled ? this.state.searchData : this.props.properties}
-            onRefresh={this._onRefresh}
-            refreshing={this.state.refreshing}
-            refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this._onRefresh}
-                  enabled={true}
-                />
-            }
             renderItem={ (data, rowMap) => (
                 <TouchableOpacity
                     onPress={() => this.handleView(data.item)}
@@ -253,6 +259,13 @@ class Dashboard extends Component{
             <View style={{flex: 1}}>
                 { this.state.fontLoaded ? (
                 <CollapsibleToolbar
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.refreshing}
+                            onRefresh={this._onRefresh}
+                            enabled={true}
+                        />
+                    }
                     renderContent={this.renderContent}
                     renderNavBar={this.renderNavBar}
                     imageSource='https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'
@@ -268,7 +281,7 @@ class Dashboard extends Component{
                     onPress={ () => navigate('Create') }
                 />
                     
-
+                   
             </View>          
 
         );

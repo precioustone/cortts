@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
+import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
 
 
 // Import All Navigator stacks
@@ -11,6 +12,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Nav />
+        <FlashMessage position='top' animated={true} />
       </Provider>
     );
   }

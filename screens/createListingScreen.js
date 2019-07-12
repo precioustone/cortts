@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Alert, KeyboardAvoidingView, Platform, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
-import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 
 import Header from '../components/customHeader';
 import CustomPicker from '../components/picker';
 import { CustomInputWithLabel, CustomInputWithSide } from '../components/textInputs';
 import { ButtonThickStr } from '../components/button';
 import AppendableList from '../components/appendableList';
-import { addPropFmDb} from '../db/database';
-import { addProp } from '../redux/actions';
-
+import { addPropFmDb, editPropFmDb} from '../db/database';
+import { CREATE_MODE, EDIT_MODE } from '../db/mode';
+import { addProp, editProp } from '../redux/actions';
 
 
 class CreateListing extends Component{
@@ -31,7 +31,9 @@ class CreateListing extends Component{
     }
 
     state = {
-        key: (new Date).getTime(),
+        key: CreateListing.uuidv4(),
+        mode: CREATE_MODE,
+        status: false,
         msg: null,
         modalVisible: false,
         fontLoaded: false,  
@@ -61,22 +63,63 @@ class CreateListing extends Component{
         remark: '',
         features: [],
         feature: '',
-        added_date: '',
+        added_date: CreateListing.getDate(),
         prop_size: '',
         com_status: '',
+        photos: '',
     };
+
+    static getDate = () => {
+        const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        let date = new Date();
+
+        return date.getDate()+' '+months[date.getMonth()]+', '+date.getFullYear();
+    }
+
+    static uuidv4 = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+
+    ePlatform = (string) => {
+        let plat = string.split(', ');
+        let obj = {cortts: false, npc: false, commercial: false};
+        for ( let value of plat){
+            if ( value == 'Cortts Website')
+                obj.cortts = true;
+            else if (value == 'Nigerian Property Centre')
+                obj.npc = true;
+            else if (value == 'Commercial website')
+                obj.commercial = true;
+        }
+        
+        this.setState({e_platform: obj});
+
+    }
+
+
 
     handleClick = () => {
-        const { navigate } = this.props.navigation;
+       
         this.setState({ modalVisible: !this.state.modalVisible });
         let data = this.formatData(this.state);
-        addPropFmDb(data, this.props.addProp, this.onSuccess, this.onError);
-        //navigate('Photos', {details: this.state});
+        if(this.state.mode == CREATE_MODE)
+            addPropFmDb(data, this.props.addProp, this.onSuccess, this.onError);
+        else if (this.state.mode == EDIT_MODE )
+            editPropFmDb(data, this.props.editProp, this.onSuccess, this.onError);
     };
 
-    onError = (response) => {
-        this.setState({modalVisible: !this.state.modalVisible});
-        this.setState({msg: response});
+    upLoadPhotos = () => {
+        const { navigate } = this.props.navigation;
+        
+        navigate('Photos', {id: this.state.key});
+    };
+
+    onError = (response, status) => {
+        this.setState({modalVisible: false, msg: response, status});
+        
         showMessage({
             message: this.state.msg,
             type: "danger",
@@ -84,16 +127,15 @@ class CreateListing extends Component{
         });
     }
 
-    onSuccess = (response) => {
-        console.log(response);
-        this.setState({modalVisible: !this.state.modalVisible});
-        this.setState({msg: response});
+    onSuccess = (response, status) => {
+        this.setState({modalVisible: false, msg: response, status, mode: EDIT_MODE});
+        
         showMessage({
             message: this.state.msg,
             type: "success",
             autoHide: false,
         });
-        this.props.navigation.navigate('Photos', {id: this.state.key});
+        
     }
 
     formatData = (data) => {
@@ -103,20 +145,28 @@ class CreateListing extends Component{
         let platform = '';
 
         if (e_platform.cortts){
-            platform = platform+' cortts,';
+            platform = platform+'Cortts Website,';
         }
         if (e_platform.npc){
-            platform = platform+' npc,';
+            platform = platform+' Nigerian Property Centre,';
         }
         if (e_platform.commercial){
-            platform = platform+' commercial';
+            platform = platform+' Commercial website';
         }
 
         e_platform = platform;
 
-        features = features.join(" ,");
+        features = features.join(", ");
 
-        return {...data, features, e_platform};
+        let newData = {...data, features, e_platform};
+
+        delete newData.msg;
+        delete newData.fontLoaded;
+        delete newData.status;
+        delete newData.mode;
+        delete newData.modalVisible;
+
+        return newData;
 
     }
     
@@ -173,12 +223,12 @@ class CreateListing extends Component{
                     style={{fontFamily: 'gotham-medium'}}
                 />
                 <ScrollView>
-                    <KeyboardAvoidingView style={styles.container} enabled={true} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
+                    <KeyboardAvoidingView style={styles.container} enabled={true} behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset}>
 
                         <CustomInputWithLabel
                             label='Property Description/Units:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (title) => this.setState({title}) , style: styles.inputStyle, multiline: true, value: this.state.property}}
+                            inputs={{onChangeText: (title) => this.setState({title}) , style: styles.inputStyle, multiline: true, value: this.state.title}}
                         />
                         <CustomPicker 
                             label='Category:'
@@ -201,7 +251,7 @@ class CreateListing extends Component{
                         <CustomInputWithLabel
                             label='Property type:'
                             labelStyle={styles.label}
-                            inputs={{onChangeText: (pType) => this.setState({pType}) , style: styles.inputStyle, value: this.state.pType}}
+                            inputs={{onChangeText: (p_type) => this.setState({p_type}) , style: styles.inputStyle, value: this.state.p_type}}
                         />
 
                         <CustomInputWithLabel
@@ -265,7 +315,7 @@ class CreateListing extends Component{
                             labelStyle={styles.label}
                             inputs={{
                                 onChangeText: (prop_size) => this.setState({prop_size}) , //style: styles.inputStyle,  
-                                value: this.state.land_size,
+                                value: this.state.prop_size,
                                 rightIcon: <Text>Sqm</Text>,
                                 inputContainerStyle: styles.inputStyleWithSide,
                                 containerStyle: {padding: 0}
@@ -303,17 +353,17 @@ class CreateListing extends Component{
                                 <CheckBox 
                                     title='Cortts'
                                     checked={this.state.e_platform.cortts}
-                                    onPress={ () => this.setState({e_platform: {cortts: !this.state.e_platform.cortts}}) }
+                                    onPress={ () => this.setState({e_platform: {...this.state.e_platform,cortts: !this.state.e_platform.cortts}}) }
                                 />
                                 <CheckBox 
                                     title='NPC'
                                     checked={this.state.e_platform.npc}
-                                    onPress={ () => this.setState({e_platform: {npc: !this.state.e_platform.npc}}) }
+                                    onPress={ () => this.setState({e_platform: {...this.state.e_platform,npc: !this.state.e_platform.npc}}) }
                                 />
                                 <CheckBox 
                                     title='Commercial'
                                     checked={this.state.e_platform.commercial}
-                                    onPress={ () => this.setState({commercial: {commercial: !this.state.e_platform.commercial}}) }
+                                    onPress={ () => this.setState({e_platform: {...this.state.e_platform,commercial: !this.state.e_platform.commercial}}) }
                                 />
                                 
                             </View>
@@ -380,20 +430,21 @@ class CreateListing extends Component{
                             />
 
                             <ButtonThickStr 
-                                onClick={this.handleClick}
-                                text= 'NEXT'
+                                onClick={ this.state.status? this.upLoadPhotos :this.handleClick}
+                                text={ this.state.status? 'Next' : 'Submit'}
                                 style={styles.button}
                                 containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}
                             />
                         </KeyboardAvoidingView>
                 </ScrollView>
-                <FlashMessage position='top' animated={true} />
+                
             </View>) : null
         );
     };
 }
 
-export default connect(null,{addProp})(CreateListing);
+
+export default connect(null,{addProp, editProp})(CreateListing);
 
 const styles = StyleSheet.create({
     container: {
@@ -414,7 +465,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 15,
         marginBottom: 15,
-        fontSize: 18,
         color: '#000',
     },
     inputStyleWithSide: {

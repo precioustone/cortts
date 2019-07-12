@@ -74,5 +74,13 @@ const styles = StyleSheet.create({
     text: {
         fontFamily: 'gotham-medium',
         width: '100%',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginBottom: 15,
+        color: '#000000',
     },
 });
