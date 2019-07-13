@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, KeyboardAvoidingView, Platform, Modal, StyleSheet, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Modal, StyleSheet, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import * as Font from 'expo-font';
 import { CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { showMessage } from 'react-native-flash-message';
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import Header from '../components/customHeader';
 import CustomPicker from '../components/picker';
@@ -86,6 +87,12 @@ class EditListing extends Component{
         navigate('Photos', {id: this.props.navigation.getParam('id')});
     };
 
+    viewPhotos = () => {
+        const { navigate } = this.props.navigation;
+        
+        navigate('ViewPhotos', {id: this.props.navigation.getParam('id')});
+    };
+
     onError = (response, status) => {
         this.setState({modalVisible: false, msg: response, status});
         
@@ -152,7 +159,6 @@ class EditListing extends Component{
 
     deleteFeature = (key) =>{
         let features = this.state.features.filter((value,index) => index != key );
-        console.log('deleted '+ key);
         this.setState({features})
     }
 
@@ -174,6 +180,31 @@ class EditListing extends Component{
         </View>
     </Modal>);
 
+    renderImagebutton = () => (
+        <View style={{ flexDirection: "row", width: '100%', height: 50, justifyContent: 'center', alignItems: "center", marginBottom: 10}}>
+            <TouchableOpacity style={{width: '50%', color: "#C5B8B8"}} onPress={ this.viewPhotos }>
+                <View style={{ flexDirection: "row", padding: 10, backgroundColor: "#C5B8B8"}}>
+                    <MaterialCommunityIcons 
+                        name='image-multiple'
+                        size={36}
+                        style={{color: '#fff'}} 
+                    />
+                    <Text style={{color: '#fff', margin: 10}}>View Images</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: '50%', backgroundColor: "#2593A8"}} onPress={this.upLoadPhotos}>
+                <View style={{ flexDirection: "row", padding: 10, color: "#2593A8"}}>
+                    <MaterialCommunityIcons 
+                        name='image-plus'
+                        size={36}
+                        style={{color: '#fff'}} 
+                    />
+                    <Text style={{color: '#fff', margin: 10}}>Add Images</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
+    );
+
 
     render(){
 
@@ -187,10 +218,12 @@ class EditListing extends Component{
                 <Header
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
-                    title={'ADD NEW PROPERTY'}
+                    title={ this.state.title }
                     initials='AE'
                     style={{fontFamily: 'gotham-medium'}}
                 />
+                { this.renderImagebutton() } 
+                
                 <ScrollView>
                     <KeyboardAvoidingView style={styles.container} enabled={true} behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset}>
 

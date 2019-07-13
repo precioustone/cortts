@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Image, KeyboardAvoidingView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Modal, StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
+import { showMessage } from 'react-native-flash-message';
+import { connect } from 'react-redux';
 
 import { ButtonThickStr } from '../components/button.js';
 
 import CustomInput from '../components/textInputs.js';
+import { forgotPassword } from '../db/database';
 
-export default class ForgotPassword extends Component{
+class ForgotPassword extends Component{
 
     static navigationOptions = {
         header: null,
@@ -15,6 +18,8 @@ export default class ForgotPassword extends Component{
     state = {
         fontLoaded: false,
         email: '',
+        msg: null,
+        modalVisible: false,
     }
 
     async componentDidMount(){
@@ -25,17 +30,55 @@ export default class ForgotPassword extends Component{
    handleEmail = (email) => this.setState({email});
 
    handleClick = () => {
-        const { navigate } = this.props.navigation;
-        navigate('Home');
-   };
+        this.setState({ modalVisible: !this.state.modalVisible });
+        let formData = new FormData();
+        formData.append('email',this.state.email);
+        forgotPassword( formData, this.onSuccess, this.onError );
+   }
+
+    onError = (response) => {
+        this.setState({ modalVisible: !this.state.modalVisible, msg: response });
+
+        showMessage({
+            message: this.state.msg,
+            type: "danger",
+            autoHide: false,
+        });
+    }
+
+    onSuccess = (response) => {
+        this.setState({ modalVisible: !this.state.modalVisible, msg: response });
+        showMessage({
+            message: this.state.msg,
+            type: "success",
+            autoHide: false,
+        });
+    }
+
+    renderModal = () => (<Modal animationType="slide"
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={ 
+            this.handleClick
+        }>
+        <View 
+        style={{flex: 1, alignItems: 'center', 
+        justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.3)', padding: 30,}}>
+            <View style={{
+                padding: 15,
+                width: '100%',
+                }}>
+                <ActivityIndicator />
+            </View>
+        </View>
+    </Modal>);
 
     render(){
-
-        const { navigate } = this.props.navigation;
 
         return (
             this.state.fontLoaded ? (
             <KeyboardAvoidingView style={styles.kAV}  enabled>
+                {this.renderModal()}
                 <View style={styles.top}>
                     <Text style={{color: '#02B598', fontSize: 30, fontFamily: 'gotham-medium'}}>
                         Forgot Passwod? 
@@ -47,7 +90,7 @@ export default class ForgotPassword extends Component{
                     placeholder= 'Email Address'
                     onChangeText={(text) => this.handleEmail(text)}
                     value={this.state.email}
-                    style={{width: '100%', fontFamily: 'gotham-medium'}}
+                    style={styles.text}
                 />
 
                 <View style={styles.toggle}>
@@ -66,6 +109,8 @@ export default class ForgotPassword extends Component{
         );
     };
 };
+
+export default connect(null,null)(ForgotPassword);
 
 const styles = StyleSheet.create({
     kAV: {
@@ -87,5 +132,18 @@ const styles = StyleSheet.create({
         color: '#fff', 
         padding: 10,
         fontFamily: 'gotham-medium',
-    }
+    },
+    text: {
+        fontFamily: 'gotham-medium',
+        width: '100%',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        borderRadius: 3,
+        backgroundColor: '#FFF',
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        marginBottom: 15,
+        fontSize: 18,
+        color: '#000000',
+    },
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, Platform, RefreshControl, StatusBar,StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, Platform, RefreshControl, StatusBar,StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,6 +13,7 @@ import { Toolbar } from '../components/customToolbar';
 import { getProperties, getUser } from '../redux/selectors';
 import { addProp, delProp, filterProp } from '../redux/actions';
 import { delPropFmDb, getUpdates } from '../db/database';
+
 
 
 
@@ -46,8 +47,36 @@ class Dashboard extends Component{
             StatusBar.setTranslucent(true);
             StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)', true);
         }
-        console.log(this.props);
         
+    }
+
+    sortByDate = (el1,el2) => {
+
+        splitdate = (date) => {
+            return date.split('-');
+          }
+        
+        splitTime = (time) => {
+        return time.split(':');
+        }
+
+        let dateTime1 = el1.modified.split(' ');
+        let date = splitdate(dateTime1[0]);
+        let time = splitTime(dateTime1[1]);
+    
+        let maxdateTime = el2.modified.split(' ');
+        let maxdate = splitdate(maxdateTime[0]);
+        let maxtime = splitTime(maxdateTime[1]);
+    
+        let date1 = new Date(date[0],date[1],date[2],time[0],time[1],time[2]);
+        let date2 = new Date(maxdate[0],maxdate[1],maxdate[2],maxtime[0],maxtime[1],maxtime[2]);
+    
+        if (date1 < date2)
+          return 1;
+        else if (date1 > date2)
+          return -1;
+    
+        return 0;
     }
 
     //////////////////////////////////////////////////////////////
@@ -93,7 +122,6 @@ class Dashboard extends Component{
     }
 
     onError = (msg) => {
-        console.log(msg)
         this.setState({msg, refreshing: false});
       
         showMessage({
@@ -103,11 +131,25 @@ class Dashboard extends Component{
         });
     }
 
+    filter = (value) => {
+        let { search } = this.state;
+        let keys = search.toLowerCase().split(' ');
+        let bool = false;
+
+        keys.forEach((el) => {
+            if(JSON.stringify(value).toLowerCase().includes(el)){
+                bool = true;
+            }
+        });
+
+        return bool;
+    }
+
     search = (search) => {
         this.setState({search})
         let searchData;
         if(search != '')
-            searchData = this.props.properties.filter( (value, index) => value['title'].includes(this.state.search));
+            searchData = this.props.properties.filter( this.filter);
         else
             searchData = this.props.properties;
 
@@ -190,7 +232,7 @@ class Dashboard extends Component{
             }}
         >
             
-            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'gotham-medium', flex: 9 }}>Cortts Property Listing</Text>
+            <Text style={{ textAlign: 'center', color: '#FFF', fontFamily: 'gotham-medium', flex: 9 }}>CORTTS PROPERTY LISTING</Text>
             <Ionicons 
                 name='ios-search' 
                 size={24} 
@@ -208,15 +250,6 @@ class Dashboard extends Component{
                     
                 />
             </Tooltip>
-            {/*<Avatar 
-                containerStyle={styles.avatar}    
-                overlayContainerStyle={{backgroundColor: '#FF7F50'}}               
-                size="small"
-                rounded
-                title='AE'
-                activeOpacity={0.7} 
-                onPress={() => {}}
-            />*/}
             
         </View>): (<View
                 style={{
@@ -253,6 +286,8 @@ class Dashboard extends Component{
     render() {
 
         const { navigate } = this.props.navigation;
+
+        this.props.properties.sort(this.sortByDate);
 
         return (
            

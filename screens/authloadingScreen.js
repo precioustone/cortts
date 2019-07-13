@@ -36,6 +36,8 @@ class AuthLoadingScreen extends Component {
     return time.split(':');
   }
 
+  
+
   compare = async (array) => {
 
       let max = null;
@@ -59,7 +61,7 @@ class AuthLoadingScreen extends Component {
           }
       });
       await AsyncStorage.setItem('lastModified', max);
-      console.log(max)
+
   }
 
   onError = (msg, status) => {

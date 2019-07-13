@@ -70,7 +70,7 @@ class CreateListing extends Component{
     };
 
     static getDate = () => {
-        const months = ["JAN", "FEB", "MAR","APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        const months = ["Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let date = new Date();
 
         return date.getDate()+' '+months[date.getMonth()]+', '+date.getFullYear();
@@ -183,7 +183,6 @@ class CreateListing extends Component{
 
     deleteFeature = (key) =>{
         let features = this.state.features.filter((value,index) => index != key );
-        console.log('deleted '+ key);
         this.setState({features})
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, Image, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import { connect } from "react-redux";
-import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import { addUser } from "../redux/actions";
 
 import { ButtonThickStr } from '../components/button';
@@ -64,7 +64,6 @@ class RegisterScreen extends Component{
     }
 
     onSuccess = (response) => {
-        console.log(response);
         this.setState({modalVisible: !this.state.modalVisible});
         this.setState({msg: response});
         showMessage({
@@ -157,7 +156,6 @@ class RegisterScreen extends Component{
                         onPress={() => navigate('Forgot')}>
                         Terms of Use and Privacy ?
                     </Text>
-                    <FlashMessage position='top' animated={true} />
                 </KeyboardAvoidingView>
             </ScrollView>) : null
         );
@@ -201,7 +199,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 15,
         marginBottom: 15,
-        fontSize: 18,
-        color: '#3F4EA5',
+        color: '#000000',
     },
 });

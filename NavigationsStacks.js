@@ -16,6 +16,7 @@ import Cortts from './screens/corttsScreen';
 import Commercial from './screens/commercialScreen';
 import AuthLoadingScreen from './screens/authloadingScreen';
 import UploadPhotos from './screens/uploadPhotoScreen';
+import ViewPhotos from './screens/viewImages';
 
 
 const DashboardStack = createStackNavigator({
@@ -24,6 +25,7 @@ const DashboardStack = createStackNavigator({
   Edit: EditListing,
   Create: CreateListing,
   Photos: UploadPhotos,
+  ViewPhotos: ViewPhotos,
 },{
   initialRouteName: "List",
   header: null,

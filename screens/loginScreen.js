@@ -61,7 +61,6 @@ class LoginScreen extends Component{
     }
 
     onSuccess = (response) => {
-        console.log(response);
         this.setState({modalVisible: !this.state.modalVisible});
         this.setState({msg: response});
         showMessage({
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 15,
         marginBottom: 15,
-        fontSize: 18,
-        color: '#3F4EA5',
+        color: '#000000',
     },
 });

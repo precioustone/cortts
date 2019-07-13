@@ -9,7 +9,6 @@ const properties = (state = [], action) => {
         }
         case DEL_PROP: {
             const { id } = action.payload;
-            console.log(id);
             let properties = state.filter((val,ind) => val.key != id);
             return properties;
         }
@@ -23,7 +22,12 @@ const properties = (state = [], action) => {
             const { keyword } = action.payload;
             let properties;
             if (keyword != '')
-                properties = state.filter((val,ind) => val.title.includes(keyword));
+                properties = state.filter((val,ind) => {
+                    return (val.title.includes(keyword) || 
+                    val.date.includes(keyword) || 
+                    val.p_type.includes(keyword) || 
+                    val.area.includes(keyword))
+                });
             else
                 properties = state;
                 

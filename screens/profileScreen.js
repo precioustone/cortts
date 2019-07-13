@@ -21,7 +21,6 @@ class Profile extends Component{
           });
       
         this.setState({ fontLoaded: true });
-        console.log(this.props);
     }
 
     state = {
@@ -60,7 +59,7 @@ class Profile extends Component{
                     </View>
                     <ActionButton
                         buttonColor="#26B469"
-                        onPress={() => { console.log("hi")}}
+                        onPress={() => { }}
                     />
                 </View>
             </ImageBackground>

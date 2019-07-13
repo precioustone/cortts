@@ -54,7 +54,12 @@ class ViewListing extends Component{
     createPdf = async () => {
         const html = Template(this.state.property);
         
-        let pdf = await Print.printToFileAsync({ html }).catch( (err) => console.log(err) );
+        let pdf = await Print.printToFileAsync({ html }).catch( (err) =>{
+            showMessage({
+                message: err,
+                type: "danger",
+            });
+        });
         CameraRoll.saveToCameraRoll(pdf.uri);
         showMessage({
             message: "Saved as pdf successfully",
@@ -65,7 +70,12 @@ class ViewListing extends Component{
 
     printDirect = async () => {
         const html = Template(this.state.property);
-        await Print.printAsync({ html }).catch ( err => console.log(err))       
+        await Print.printAsync({ html }).catch( (err) =>{
+            showMessage({
+                message: err,
+                type: "danger",
+            });
+        });      
     }
 
     
@@ -73,15 +83,21 @@ class ViewListing extends Component{
     share = async () => {
         
         const html = Template(this.state.property);
-        let pdf = await Print.printToFileAsync({ html }).catch( (err) => console.log(err) );
+        showMessage({
+            message: "Please wait ..",
+            type: "info",
+        });
+        let pdf = await Print.printToFileAsync({ html }).catch( (err) =>{
+            showMessage({
+                message: err,
+                type: "danger",
+            });
+        });
 
         await Sharing.shareAsync(pdf.uri, { mimeType: 'application/pdf', dialogTitle:'Share Using '});
     };
 
     render(){
-
-        const { navigate } = this.props.navigation;
-
         return (
             this.state.fontLoaded && ( <View style={styles.container}>
             

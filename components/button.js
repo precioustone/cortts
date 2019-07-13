@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const ButtonTrans = (props) => {
     return (
-        <TouchableOpacity style={styles.touchable} onPress={props.onClick}>
+        <TouchableOpacity style={styles.touchable} disabled={props.disabled ? props.disabled : false} onPress={props.onClick}>
             <View style={{...styles.transView, ...props.containerStyle}}>
                 <Text style={props.style}>{props.text}</Text>
             </View>
@@ -13,7 +13,7 @@ const ButtonTrans = (props) => {
 
 const ButtonThick = (props) => {
     return (
-        <TouchableOpacity style={styles.touchable} onPress={props.onClick}>
+        <TouchableOpacity style={styles.touchable} disabled={props.disabled ? props.disabled : false} onPress={props.onClick}>
             <View style={{...styles.thickView, ...props.containerStyle}}>
                 <Text style={props.style}>{props.text}</Text>
             </View>
@@ -23,7 +23,7 @@ const ButtonThick = (props) => {
 
 const ButtonWithIcon = (props) => {
     return (
-        <TouchableOpacity style={styles.touchableTwo} onPress={props.onClick}>
+        <TouchableOpacity style={styles.touchableTwo} disabled={props.disabled ? props.disabled : false} onPress={props.onClick}>
             <View style={{...styles.bWithIcon, ...props.containerStyle}}>
                 {props.icon}
                 {props.text}
@@ -34,7 +34,7 @@ const ButtonWithIcon = (props) => {
 
 const ButtonThickStr = (props) => {
     return (
-        <TouchableOpacity style={styles.touchable} onPress={props.onClick}>
+        <TouchableOpacity style={styles.touchable} disabled={props.disabled ? props.disabled : false} onPress={props.onClick}>
             <View style={{...styles.thickViewTwo, ...props.containerStyle}}>
                 <Text style={props.style}>{props.text}</Text>
             </View>

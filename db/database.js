@@ -47,6 +47,28 @@ export const getUser = async (task, formData, action, onSuccess, onError) => {
     }
 } 
 
+export const forgotPassword = async (formdata, onSuccess, onError) => {
+    try{
+        response = await fetch( 'https://www.cortts.com/api/forgot.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+            },
+            body: formdata,
+        });
+       
+        let resJson = await response.json();
+      
+        let status = await resJson.status;
+
+        
+        status ? onSuccess(await resJson.msg) : onError(await resJson.msg);
+    }catch(err){
+        onError(err);
+    }
+    
+} 
+
 export const getProps = async (action, onSuccess, compare, onError) => {
     try{
         let response = await fetch('https://www.cortts.com/api/properties');
@@ -112,7 +134,9 @@ export const addPropFmDb = async (formData, action, onSuccess, onError) => {
         let resJson = await response.json();
         
         if (resJson.status){ 
-            action([formData]);
+            let prop = resJson.prop;
+            prop.key = prop.id;
+            action([prop]);
             onSuccess(resJson.msg, resJson.status);
         }else{
             onError(resJson.msg, resJson.status);
@@ -138,7 +162,9 @@ export const editPropFmDb = async  (formData, action, onSuccess, onError) => {
         
         
         if (resJson.status){ 
-            action([formData]);
+            let prop = resJson.prop;
+            prop.key = prop.id;
+            action([prop]);
             onSuccess(resJson.msg, resJson.status);
         }else{
             onError(resJson.msg, resJson.status);
@@ -149,9 +175,10 @@ export const editPropFmDb = async  (formData, action, onSuccess, onError) => {
 } 
 
 
-export const uploadImages = async  (formData, onSuccess, onError) => {
+export const uploadImages = async  (formData, onSuccess, onError, signal) => {
     try{
         let response = await fetch('https://www.cortts.com/api/uploadImage.php', {
+            signal: signal,
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -167,17 +194,16 @@ export const uploadImages = async  (formData, onSuccess, onError) => {
         
         
         if (status){ 
-            onSuccess(resJson.msg)
+            onSuccess(resJson.msg, resJson.path);
         }else{
             onError(resJson.msg);
         }
     }catch(err){
-        onError(err);
+        onError("Image upload Canceled");
     }
 } 
 
 export const delPropFmDb = async (id, action) => {
-    console.log(id);
     try{
         let response = await fetch('https://www.cortts.com/api/del-property/'+id);
 

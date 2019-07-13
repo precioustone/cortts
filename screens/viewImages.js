@@ -19,7 +19,7 @@ import { WhiteHeader } from '../components/customHeader';
 
 
 
-class UploadPhotos extends Component{
+class ViewPhotos extends Component{
 
     static navigationOptions = {
        //title: 'SELECT IMAGES',
@@ -35,8 +35,6 @@ class UploadPhotos extends Component{
             images: null,
             imageUrls: [],
             modalVisible: false,
-            imageBrowserOpen: false,
-            progress: 0,
             uploadError: false,
             uploadSuccess: false,
             uploading: false,
@@ -55,37 +53,7 @@ class UploadPhotos extends Component{
         
         return prop;
     }  
-
-    skip = () => {
-        this.props.navigation.navigate('List');
-    }
-
     
-
-    uploadSuccess = (msg, i, path) => {
-        let progress = i / this.state.images.length;
-        this.setState({progress});
-        let uri = this.state.imageUrls.filter((el) => (el.key != i));
-        uri = [...uri, {key: i, uri: path}];
-        this.setState({imageUrls: uri,});
-        if(progress == 1){
-            this.setState({msg, images: null, uploading: false, uploadSuccess: true, shouldUpload: false, })
-            showMessage({
-                message: this.state.msg,
-                type: "success",
-                autoHide: true,
-            });
-        }
-    }
-
-    uploadError = (msg) =>{
-        this.setState({msg, uploadError: true, uploadSuccess: false, uploading: false,});
-        showMessage({
-            message: this.state.msg,
-            type: "danger",
-            autoHide: true,
-        });
-    }
 
     componentDidMount(){
         //let images = this.state.property.photos == null || this.state.property.photos == "" ? [] : JSON.parse(this.state.property.photos);
@@ -99,20 +67,7 @@ class UploadPhotos extends Component{
         this.controller.abort();
     }
 
-    handleClick = async () => {
-        const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
-
-        if (permission.status !== 'granted') {
-            const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if (newPermission.status === 'granted') {
-              //its granted.
-              this.setState({modalVisible: !this.state.modalVisible});
-            }
-        } else {
-            this.setState({modalVisible: !this.state.modalVisible});
-        }
-        
-    };
+   
 
     onSelect = () => {
         
@@ -172,25 +127,6 @@ class UploadPhotos extends Component{
         this.props.navigation.navigate('List');
     }
 
-
-    pickImage = () => this.setState({imageBrowserOpen: true, modalVisible: !this.state.modalVisible});
-
-    imageBrowserCallback = (callback) => {
-        callback.then((images) => {
-          this.setState({
-            imageBrowserOpen: false,
-            images
-          })
-        }).then(() => {
-            for( let i = 0; i < this.state.images.length; i++){
-                let uri = [];
-                uri.push({plh: require('../assets/placeholder.png'), key: i+1});
-                uri = [...this.state.imageUrls, ...uri]
-                this.setState({imageUrls: uri,});
-            }
-        }).then(() => this.setState({uploading: false, shouldUpload: true})).catch((e) => this.onError(e))
-
-    }
 
     renderModal = () => (<Modal animationType="slide"
         transparent={true}
@@ -322,7 +258,7 @@ const mapStateToProps = ( state ) => {
     return {properties: getProperties(state)};
 }
 
-export default connect(mapStateToProps, { editProp })( UploadPhotos )
+export default connect(mapStateToProps, { editProp })( ViewPhotos )
 
 const styles = StyleSheet.create({
     container: {
