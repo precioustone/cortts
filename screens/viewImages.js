@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Image, Modal, FlatList, ProgressBarAndroid, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, ImageBackground, Modal, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import ActionButton from 'react-native-action-button';
 import { connect } from 'react-redux';
-import { showMessage} from 'react-native-flash-message';
-import * as Permissions from 'expo-permissions';
 import 'abortcontroller-polyfill';
 
-import { ButtonThickStr } from '../components/button';
-import { uploadImages, } from '../db/database';
-import { EDIT_MODE } from '../db/mode';
-import { editProp } from '../redux/actions';
-import ImageBrowser from '../components/ImageBrowser';
-import { getProperties} from '../redux/selectors';
-import { editPropFmDb} from '../db/database';
+import { getImagesById} from '../redux/selectors';
 import { WhiteHeader } from '../components/customHeader';
-
-
 
 
 
@@ -29,185 +20,79 @@ class ViewPhotos extends Component{
     constructor(props){
         super(props);
         this.state = {
-            property: this.getPropById(props.navigation.getParam('id')),
-            mode: EDIT_MODE,
             msg: null,
-            images: null,
             imageUrls: [],
             modalVisible: false,
-            uploadError: false,
-            uploadSuccess: false,
-            uploading: false,
-            retryUpload: false,
-            noOfUploads: 0,
-            shouldUpload: false,
+            selected: {key: 10000, uri: ''},
         };
-
-        this.controller = new AbortController();
     }
 
-    getPropById = (id) => {
-        let prop = this.props.properties.find( (el) => {
-            return el.key == id;
-        });
-        
-        return prop;
-    }  
     
 
     componentDidMount(){
-        //let images = this.state.property.photos == null || this.state.property.photos == "" ? [] : JSON.parse(this.state.property.photos);
-        //if(images.length > 0){
-            //this.setState({imageUrls: images});
-        //}
-    }
-
-    componentWillUnmount(){
-        this.setState({uploadError: true})
-        this.controller.abort();
-    }
-
-   
-
-    onSelect = () => {
-        
-        let index = this.state.noOfUploads;
-        for ( let i= index; i < this.state.images.length; i++){
-            let item = this.state.images[i];
-            let data = new FormData();
-            data.append("image", {
-              uri: item.uri,
-              type: "image/jpeg",
-              name: item.filename || `${this.state.property.title}${i}.jpg`,
-            });
-            data.append('Content-Type', 'image/jpeg');
-            if(this.state.uploadError){
-                this.setState({noOfUploads: i})
-                break;
-            }
-            uploadImages(data, (msg, path) => this.uploadSuccess(msg, i+1, path), (err) => this.uploadError(err), this.controller.signal );
-
+        let images = this.props.images;
+        if(images.length > 0){
+            this.setState({imageUrls: images});
         }
-
-        if(this.state.retryUpload){
-            this.onSelect()
-        }
-
-    }
-
-    cancel = () =>{
-        this.controller.abort();
-        this.setState({images: null, imageUrls: [], uploading: false, shouldUpload: false, uploadError: false, uploadSuccess: false})
-    }
-
-    onSubmit = () => {
-        let data =  this.state.property
-        data.photos = JSON.stringify(this.state.imageUrls);
-        
-        editPropFmDb(this.state.property, this.props.editProp, this.onSuccess, this.onError);
-    }
-
-    onError = (response) => {
-        this.setState({modalVisible: !this.state.modalVisible, msg: response, progress: !this.state.progress});
-        showMessage({
-            message: this.state.msg,
-            type: "danger",
-            autoHide: false,
-        });
     }
 
 
-    onSuccess = (response) => {
-        this.setState({modalVisible: !this.state.modalVisible,msg: response,progress: !this.state.progress});
-        showMessage({
-            message: this.state.msg,
-            type: "success",
-            autoHide: false,
-        });
-        this.props.navigation.navigate('List');
+    handleBackPress = () => {
+        this.setState({ modalVisible: false, selected: {key: 10000, uri: ''}});
     }
 
-
-    renderModal = () => (<Modal animationType="slide"
-        transparent={true}
+    renderModal(){
+        return (<Modal animationType="slide"
+        transparent={false}
         visible={this.state.modalVisible}
         onRequestClose={ 
-            this.handleClick
+            this.handleBackPress
         }>
+
         <View 
-        style={{flex: 1, alignItems: 'center', 
-        justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.3)', padding: 30,}}>
-            <View style={{
-                padding: 15,
-                width: '100%',
-                backgroundColor: '#E2F0FF',
-                borderWidth: 1,
-                borderColor: '#E2F0FF',
-                borderRadius: 3,}}>
-                
-                <TouchableOpacity 
-                    style={{marginVertical: 15}}
-                    onPress={() => Alert.alert('Camera')}>
-                    <View>
-                        <Text>Take picture</Text>
-                    </View>
-                </TouchableOpacity>
-                
-                <TouchableOpacity 
-                    style={{marginVertical: 15}}
-                    onPress={this.pickImage}>
-                    <View>
-                        <Text>Select from Galery</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+            style={{flex: 1, alignItems: 'center', 
+            justifyContent:'center', backgroundColor: "#000", padding: 100,}}
+        >
+            
+            <ImageBackground  source={{uri: this.state.selected.uri}} style={{flex: 9, justifyContent: "center", alignItems: "center"}}>
+                <Image 
+                    source={{uri: this.state.selected.uri}}
+                    style={{width: 500, height: 700}} 
+                    
+                />
+            </ImageBackground>
         </View>
-    </Modal>);
+    </Modal>)};
 
-    buttonUpload = () =>(
-        <TouchableOpacity style={{marginHorizontal: 15}} onPress={() =>{ 
-                this.setState({uploading: true});
-                this.onSelect();
-            }
-        }>
-            <View>
-                <Text style={{color: "#000000"}}>Upload</Text>
-            </View>
-        </TouchableOpacity>);
-
-    buttonCancel = () => (
-        <TouchableOpacity style={{marginHorizontal: 15}} onPress={() => this.cancel()}>
-            <View>
-                <Text style={{color: "#000000"}}>cancel</Text>
-            </View>
-        </TouchableOpacity>);
 
 renderItem(item) {
     return (
         <TouchableOpacity  
                  style={{flex:1/3, //here you can use flex:1 also
-                 aspectRatio:1}}>
-                <Image style={{flex: 1}} resizeMode='cover' 
-                    source={ item.uri ? { uri:  item.uri} : item.plh}></Image>
+                 aspectRatio:1}}
+                 onPress={() => {
+                     this.setState({selected: item, modalVisible: true});
+                 }}>
+                <Image 
+                    source={{ uri:  item.uri}}
+                    style={{flex: 1}} 
+                    resizeMode='cover'
+                />
         </TouchableOpacity>
     )
 }
 
     render() {
         let { imageUrls } = this.state;
-        let color = this.state.uploadError ? "#d9534f" : "#2196F3";
-        if (this.state.imageBrowserOpen) {
-            return(<ImageBrowser max={30} callback={this.imageBrowserCallback}/>);
-        }
+        
         return (
             <View style={styles.container}>
                 <WhiteHeader
                     initialFunction={() => this.initialFunction()}
                     goBack={() => this.props.navigation.goBack()}
-                    title={'SELECT IMAGES'}
+                    title={this.props.navigation.getParam('title')}
                     style={{fontFamily: 'gotham-medium'}}
-                    rightButton={ this.state.uploading ? this.buttonCancel() : this.buttonUpload()}
-                    show={this.state.shouldUpload}
+                    show={false}
                 />
                 { this.renderModal() }
                 <View style={styles.renderImage}>
@@ -215,50 +100,30 @@ renderItem(item) {
                         numColumns={3}
                         data={this.state.imageUrls}
                         renderItem={({ item }) => this.renderItem(item)}
+                        keyExtractor={(item,index) => index.toString()}
                     />):
-                         (<TouchableOpacity onPress={this.handleClick}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 200, width: '100%'}}>
+                         (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 200, width: '100%'}}>
                             <Ionicons name='ios-camera' size={50} />
-                            <Text>UploadPhotos</Text>
-                        </View>
-                    </TouchableOpacity>)
+                            <Text>No Image Uploaded</Text>
+                        </View>)
                     }
                 </View>
-                <View style={{ width: '100%', paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#fff'}}>
-                    {this.state.uploading? (<View style={{width: '100%'}}>
-                        <ProgressBarAndroid 
-                            styleAttr="Horizontal" 
-                            color={ color }
-                            animating={true}
-                            progress={this.state.progress}
-                            indeterminate={false}
-                        />
-                        <Text style={{color: color, textAlign: "center"}}>uploaing...</Text>
-                    </View>) : null}
-                   
-                    <ButtonThickStr 
-                        onClick={this.state.uploadSuccess ? () => this.onSubmit() : () => this.skip()}
-                        text={ this.state.imageUrls.length <= 0 ? 'Submit' : 'Skip' }
-                        style={styles.button}
-                        containerStyle={
-                            this.state.uploading ?
-                            { backgroundColor: '#C6C6C6', borderColor: "#FFF"} :
-                            { backgroundColor: '#26B469', borderColor: "#FFF"}
-                        }
-                        disabled={this.state.uploading}
-                    />
-                </View>
+                {/*<ActionButton buttonColor="#51CCE3" 
+                    style={{position: 'absolute'}} 
+                    onPress={ () => this.update() }
+                    renderIcon={(bool)=>(<Ionicons name='md-save' size={24} color='#fff' />)}
+                />*/}
             </View>
             
         );
     }
 }
 
-const mapStateToProps = ( state ) => {
-    return {properties: getProperties(state)};
+const mapStateToProps = ( state, props ) => {
+    return {images: getImagesById(state, props.navigation.getParam('id'))};
 }
 
-export default connect(mapStateToProps, { editProp })( ViewPhotos )
+export default connect(mapStateToProps, null)( ViewPhotos )
 
 const styles = StyleSheet.create({
     container: {

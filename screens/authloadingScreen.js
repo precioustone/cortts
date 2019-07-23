@@ -9,8 +9,8 @@ import {
 import { connect } from 'react-redux';
 import { showMessage } from 'react-native-flash-message';
 
-import { addProp, addUser } from '../redux/actions';
-import { getProps } from '../db/database';
+import { addProp, addUser, uploadImage } from '../redux/actions';
+import { getProps, getImages } from '../db/database';
 
 
 class AuthLoadingScreen extends Component {
@@ -24,6 +24,7 @@ class AuthLoadingScreen extends Component {
 
   async componentDidMount() {
       getProps(this.props.addProp, this.onSuccess, this.compare, this.onError);
+      getImages(this.props.uploadImage, this.onSuccess, this.onError);
   }
 
   onSuccess = () => this._bootstrapAsync()
@@ -96,4 +97,4 @@ class AuthLoadingScreen extends Component {
   }
 }
 
-export default connect(null,{ addProp, addUser })(AuthLoadingScreen);
+export default connect(null,{ addProp, addUser, uploadImage })(AuthLoadingScreen);

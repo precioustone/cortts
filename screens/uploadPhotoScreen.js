@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Alert, Image, Modal, FlatList, ProgressBarAndroid, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Modal, FlatList, ProgressBarAndroid, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { showMessage} from 'react-native-flash-message';
 import * as Permissions from 'expo-permissions';
+import * as ImageManipulator from 'expo-image-manipulator';
+import * as Asset from 'expo-asset';
 import 'abortcontroller-polyfill';
 
 import { ButtonThickStr } from '../components/button';
-import { uploadImages, } from '../db/database';
 import { EDIT_MODE } from '../db/mode';
-import { editProp } from '../redux/actions';
 import ImageBrowser from '../components/ImageBrowser';
-import { getProperties} from '../redux/selectors';
-import { editPropFmDb} from '../db/database';
+import { getImagesById } from '../redux/selectors';
+import { uploadImage } from '../redux/actions';
+import { addImagesFmDb, editImagesFmDb,uploadImages } from '../db/database';
 import { WhiteHeader } from '../components/customHeader';
+
+
 
 
 
@@ -26,13 +29,20 @@ class UploadPhotos extends Component{
        header: null,
     };
 
+    static uuidv4 = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+    }
+
     constructor(props){
         super(props);
         this.state = {
-            property: this.getPropById(props.navigation.getParam('id')),
             mode: EDIT_MODE,
             msg: null,
             images: null,
+            compressedImages: [],
             imageUrls: [],
             modalVisible: false,
             imageBrowserOpen: false,
@@ -47,14 +57,7 @@ class UploadPhotos extends Component{
 
         this.controller = new AbortController();
     }
-
-    getPropById = (id) => {
-        let prop = this.props.properties.find( (el) => {
-            return el.key == id;
-        });
-        
-        return prop;
-    }  
+ 
 
     skip = () => {
         this.props.navigation.navigate('List');
@@ -63,13 +66,17 @@ class UploadPhotos extends Component{
     
 
     uploadSuccess = (msg, i, path) => {
-        let progress = i / this.state.images.length;
-        this.setState({progress});
-        let uri = this.state.imageUrls.filter((el) => (el.key != i));
-        uri = [...uri, {key: i, uri: path}];
-        this.setState({imageUrls: uri,});
+
+        let progress = (i + 1) / this.state.images.length;
+
+        let uri = this.state.imageUrls.filter((el) => (el.id != i));
+
+        uri = [...uri, {id: i, uri: path}];
+
+        this.setState({imageUrls: uri,progress});
+
         if(progress == 1){
-            this.setState({msg, images: null, uploading: false, uploadSuccess: true, shouldUpload: false, })
+            this.setState({msg, images: null, uploading: false, uploadSuccess: true, shouldUpload: false, uploadError: false})
             showMessage({
                 message: this.state.msg,
                 type: "success",
@@ -87,16 +94,9 @@ class UploadPhotos extends Component{
         });
     }
 
-    componentDidMount(){
-        //let images = this.state.property.photos == null || this.state.property.photos == "" ? [] : JSON.parse(this.state.property.photos);
-        //if(images.length > 0){
-            //this.setState({imageUrls: images});
-        //}
-    }
-
+    
     componentWillUnmount(){
-        this.setState({uploadError: true})
-        this.controller.abort();
+        this.setState({uploadError: true},this.controller.abort());
     }
 
     handleClick = async () => {
@@ -106,10 +106,12 @@ class UploadPhotos extends Component{
             const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
             if (newPermission.status === 'granted') {
               //its granted.
-              this.setState({modalVisible: !this.state.modalVisible});
+              //this.setState({modalVisible: true});
+              this.pickImage();
             }
         } else {
-            this.setState({modalVisible: !this.state.modalVisible});
+            //this.setState({modalVisible: true});
+            this.pickImage();
         }
         
     };
@@ -117,20 +119,30 @@ class UploadPhotos extends Component{
     onSelect = () => {
         
         let index = this.state.noOfUploads;
-        for ( let i= index; i < this.state.images.length; i++){
-            let item = this.state.images[i];
+        let { compressedImages } = this.state;
+        let max = compressedImages.length;
+
+        this.setState({uploadError: false})
+
+        for ( let i = index; i < max; i++){
+            let item = compressedImages[i];
             let data = new FormData();
+
             data.append("image", {
               uri: item.uri,
               type: "image/jpeg",
-              name: item.filename || `${this.state.property.title}${i}.jpg`,
+              name: item.filename || `${UploadPhotos.uuidv4()}${i}.jpg`,
+              title: this.props.navigation.getParam('title'),
             });
+
             data.append('Content-Type', 'image/jpeg');
+
             if(this.state.uploadError){
                 this.setState({noOfUploads: i})
                 break;
             }
-            uploadImages(data, (msg, path) => this.uploadSuccess(msg, i+1, path), (err) => this.uploadError(err), this.controller.signal );
+
+            uploadImages(data, (msg, path) => this.uploadSuccess(msg, i, path), (err) => this.uploadError(err), this.controller.signal );
 
         }
 
@@ -140,20 +152,31 @@ class UploadPhotos extends Component{
 
     }
 
+    
+
     cancel = () =>{
-        this.controller.abort();
-        this.setState({images: null, imageUrls: [], uploading: false, shouldUpload: false, uploadError: false, uploadSuccess: false})
+        this.setState({images: null, 
+            imageUrls: [], 
+            uploading: false, 
+            shouldUpload: false, 
+            uploadError: false, 
+            uploadSuccess: false, 
+            noOfUploads: 0},this.controller.abort())
     }
 
     onSubmit = () => {
-        let data =  this.state.property
-        data.photos = JSON.stringify(this.state.imageUrls);
-        
-        editPropFmDb(this.state.property, this.props.editProp, this.onSuccess, this.onError);
+        let data =  new FormData();
+
+        data.append('photos',JSON.stringify(this.props.images.concat(this.state.imageUrls)));
+        data.append('prop_id', this.props.navigation.getParam('id'));
+        if(this.props.images.length > 0)
+            editImagesFmDb(data, this.props.uploadImage, this.onSuccess, this.onError);
+        else
+            addImagesFmDb(data, this.props.uploadImage, this.onSuccess, this.onError);
     }
 
     onError = (response) => {
-        this.setState({modalVisible: !this.state.modalVisible, msg: response, progress: !this.state.progress});
+        this.setState({msg: response});
         showMessage({
             message: this.state.msg,
             type: "danger",
@@ -163,7 +186,7 @@ class UploadPhotos extends Component{
 
 
     onSuccess = (response) => {
-        this.setState({modalVisible: !this.state.modalVisible,msg: response,progress: !this.state.progress});
+        this.setState({msg: response});
         showMessage({
             message: this.state.msg,
             type: "success",
@@ -173,7 +196,12 @@ class UploadPhotos extends Component{
     }
 
 
-    pickImage = () => this.setState({imageBrowserOpen: true, modalVisible: !this.state.modalVisible});
+    pickImage = () => this.setState({imageBrowserOpen: true, modalVisible: false});
+
+    compressImage = async (image) => {
+        const compImage = await ImageManipulator.manipulateAsync(image,[{ resize: { width: 800 } }],{compress: 0.6, format: ImageManipulator.SaveFormat.JPEG});
+        return compImage;
+    }
 
     imageBrowserCallback = (callback) => {
         callback.then((images) => {
@@ -181,10 +209,16 @@ class UploadPhotos extends Component{
             imageBrowserOpen: false,
             images
           })
+        }).then(()=> {
+            for( let i = 0; i < this.state.images.length; i++){
+                this.compressImage(this.state.images[i].uri).then((image)=> {
+                    this.setState({compressedImages: [...this.state.compressedImages, {id: i, uri: image.uri}]})
+                })
+            }
         }).then(() => {
             for( let i = 0; i < this.state.images.length; i++){
                 let uri = [];
-                uri.push({plh: require('../assets/placeholder.png'), key: i+1});
+                uri.push({localUri: this.state.images[i].uri, id: i});
                 uri = [...this.state.imageUrls, ...uri]
                 this.setState({imageUrls: uri,});
             }
@@ -247,13 +281,13 @@ class UploadPhotos extends Component{
         </TouchableOpacity>);
 
 renderItem(item) {
-    return (
-        <TouchableOpacity  
+    return (  
+        <TouchableHighlight  
                  style={{flex:1/3, //here you can use flex:1 also
-                 aspectRatio:1}}>
+                 aspectRatio:1, opacity: item.uri ? 1 : 0.4}}>
                 <Image style={{flex: 1}} resizeMode='cover' 
-                    source={ item.uri ? { uri:  item.uri} : item.plh}></Image>
-        </TouchableOpacity>
+                    source={{ uri:  item.uri ? item.uri: item.localUri} }></Image>
+        </TouchableHighlight>
     )
 }
 
@@ -279,11 +313,12 @@ renderItem(item) {
                         numColumns={3}
                         data={this.state.imageUrls}
                         renderItem={({ item }) => this.renderItem(item)}
+                        keyExtractor={(item,index) => index.toString()}
                     />):
                          (<TouchableOpacity onPress={this.handleClick}>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', height: 200, width: '100%'}}>
                             <Ionicons name='ios-camera' size={50} />
-                            <Text>UploadPhotos</Text>
+                            <Text>Upload Images</Text>
                         </View>
                     </TouchableOpacity>)
                     }
@@ -297,12 +332,12 @@ renderItem(item) {
                             progress={this.state.progress}
                             indeterminate={false}
                         />
-                        <Text style={{color: color, textAlign: "center"}}>uploaing...</Text>
+                        <Text style={{color: color, textAlign: "center"}}>uploading...</Text>
                     </View>) : null}
                    
                     <ButtonThickStr 
                         onClick={this.state.uploadSuccess ? () => this.onSubmit() : () => this.skip()}
-                        text={ this.state.imageUrls.length <= 0 ? 'Submit' : 'Skip' }
+                        text={ this.state.uploadSuccess ? 'Submit' : 'Skip' }
                         style={styles.button}
                         containerStyle={
                             this.state.uploading ?
@@ -318,11 +353,11 @@ renderItem(item) {
     }
 }
 
-const mapStateToProps = ( state ) => {
-    return {properties: getProperties(state)};
+const mapStateToProps = ( state, props ) => {
+    return {images: getImagesById(state, props.navigation.getParam('id'))};
 }
 
-export default connect(mapStateToProps, { editProp })( UploadPhotos )
+export default connect(mapStateToProps, { uploadImage })( UploadPhotos )
 
 const styles = StyleSheet.create({
     container: {

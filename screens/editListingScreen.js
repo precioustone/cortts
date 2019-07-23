@@ -14,7 +14,7 @@ import AppendableList from '../components/appendableList';
 import { editPropFmDb} from '../db/database';
 import { EDIT_MODE } from '../db/mode';
 import { editProp } from '../redux/actions';
-import { getProperties, getUser } from '../redux/selectors';
+import { getPropById, getUser } from '../redux/selectors';
 
 
 
@@ -41,7 +41,7 @@ class EditListing extends Component{
         this.state = {
             mode: EDIT_MODE,
             fontLoaded: false,  
-            ...this.getPropById(this.props.navigation.getParam('id')),
+            ...this.props.property,
             feature: '',
             msg: null,
             modalVisible: false,
@@ -65,13 +65,6 @@ class EditListing extends Component{
 
     }
 
-    getPropById = (id) => {
-        let prop = this.props.properties.find( (el) => {
-            return el.key == id;
-        });
-        
-        return prop;
-    }  
 
     handleClick = () => {
        
@@ -84,13 +77,13 @@ class EditListing extends Component{
     upLoadPhotos = () => {
         const { navigate } = this.props.navigation;
         
-        navigate('Photos', {id: this.props.navigation.getParam('id')});
+        navigate('Photos', {id: this.props.navigation.getParam('id'), title: this.state.title});
     };
 
     viewPhotos = () => {
         const { navigate } = this.props.navigation;
         
-        navigate('ViewPhotos', {id: this.props.navigation.getParam('id')});
+        navigate('ViewPhotos', {id: this.props.navigation.getParam('id'), title: this.state.title});
     };
 
     onError = (response, status) => {
@@ -208,7 +201,7 @@ class EditListing extends Component{
 
     render(){
 
-        const { navigate } = this.props.navigation;
+
         const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
 
         return (
@@ -432,8 +425,9 @@ class EditListing extends Component{
                             />
 
                             <ButtonThickStr 
-                                onClick={ this.state.status? this.upLoadPhotos :this.handleClick}
-                                text={ this.state.status? 'Next' : 'Submit'}
+                                onClick={ this.state.status? () => this.props.navigation.navigate('List') :
+                                this.handleClick}
+                                text={ this.state.status? 'Done' : 'Submit'}
                                 style={styles.button}
                                 containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}
                             />
@@ -445,8 +439,8 @@ class EditListing extends Component{
     };
 }
 
-const mapStateToProps = ( state ) => {
-    return {userToken: getUser(state), properties: getProperties(state)};
+const mapStateToProps = ( state, props ) => {
+    return {userToken: getUser(state), property: getPropById(state, props.navigation.getParam('id'))};
 }
 
 

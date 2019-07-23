@@ -4,3 +4,7 @@ export const ADD_PROP = "ADD_PROPERTY";
 export const DEL_PROP = "DELETE_PROPERTY"; 
 export const EDIT_PROP = "EDIT_PROPERTY";
 export const FILTER_PROP = "FILTER_PROPERTY";
+export const DEL_IMAGE = "DEL_IMAGE";
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+export const SET_SCREEN = "SET_SCREEN";
+export const GET_SCREEN = "GET_SCREEN";

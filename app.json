@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "cortts",
-    "slug": "cortts",
+    "slug": "cortts-listing-app",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -33,6 +33,7 @@
       ],
       "package": "com.cortts.corttslisting"
     },
-    "description": "Cortts property listing app"
+    "description": "Cortts property listing app",
+    "githubUrl": "https://github.com/precioustone/cortts/"
   }
 }

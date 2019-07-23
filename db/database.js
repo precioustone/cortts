@@ -1,8 +1,7 @@
 import REACT from 'react';
 import { AsyncStorage } from 'react-native';
 
-import { LOGIN, REGISTER } from '../db/task';
-
+import { LOGIN, REGISTER, DELETE, UPLOAD } from '../db/task';
 
 
 export const getUser = async (task, formData, action, onSuccess, onError) => {
@@ -37,13 +36,14 @@ export const getUser = async (task, formData, action, onSuccess, onError) => {
         
         if(resJson.status){
             action(JSON.stringify(user));
-            await AsyncStorage.setItem('userToken', JSON.stringify(user));
+            if(formData.remember)
+                await AsyncStorage.setItem('userToken', JSON.stringify(user));
             onSuccess(resJson.msg);
         }
         else
             onError(resJson.msg);
     }catch(err){
-        onError(err);
+        onError("Something happened could not log you in, please check your network");
     }
 } 
 
@@ -64,7 +64,7 @@ export const forgotPassword = async (formdata, onSuccess, onError) => {
         
         status ? onSuccess(await resJson.msg) : onError(await resJson.msg);
     }catch(err){
-        onError(err);
+        onError("cannot reset your password, please check your network");
     }
     
 } 
@@ -86,7 +86,27 @@ export const getProps = async (action, onSuccess, compare, onError) => {
         compare(result);
         onSuccess();
     }catch(err){
-        onError(err);
+        onError("Bad network, please check your network");
+    }
+} 
+
+export const getImages = async (action, onSuccess, onError) => {
+    try{
+        let response = await fetch('https://www.cortts.com/api/images');
+
+        let resJson = await response.json();
+
+        let images = await resJson.images;
+
+
+        for (let image of images){
+            action(image.prop_id, JSON.parse(image.photos));
+        }
+
+        onSuccess();
+    }catch(err){
+        console.log(err)
+        onError("Bad network, please check your network");
     }
 } 
 
@@ -115,7 +135,7 @@ export const getUpdates = async (action, onSuccess, onError) => {
         action(result);
         onSuccess();
     }catch(err){
-        onError(err);
+        onError("Something happened could not properties update, please check your network");
     }
     
 } 
@@ -142,7 +162,7 @@ export const addPropFmDb = async (formData, action, onSuccess, onError) => {
             onError(resJson.msg, resJson.status);
         }
     }catch(err){
-        onError(err);
+        onError("Something happened could not add property, please check your network");
     }
 } 
 
@@ -170,7 +190,7 @@ export const editPropFmDb = async  (formData, action, onSuccess, onError) => {
             onError(resJson.msg, resJson.status);
         }
     }catch(err){
-        onError(err);
+        onError("Something happened could not edit property, please check your network");
     }
 } 
 
@@ -199,7 +219,8 @@ export const uploadImages = async  (formData, onSuccess, onError, signal) => {
             onError(resJson.msg);
         }
     }catch(err){
-        onError("Image upload Canceled");
+        console.log(err)
+        onError(err.message);
     }
 } 
 
@@ -213,6 +234,59 @@ export const delPropFmDb = async (id, action) => {
 
         if (status){ action(id) };
     }catch(err){
-        onError(err);
+        onError("Something happened could not delete Property, please check your network");
+    }
+} 
+
+
+export const addImagesFmDb = async (formData, action, onSuccess, onError) => {
+    try{
+        let response = await fetch('https://www.cortts.com/api/images.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+            },
+            body: formData,
+        });
+
+        let resJson = await response.json();
+        
+        if (resJson.status){ 
+            let images = await resJson.images;
+            let id = images.prop_id;
+            action(id,JSON.parse(images.photos));
+            onSuccess(resJson.msg, resJson.status);
+        }else{
+            onError(resJson.msg, resJson.status);
+        }
+    }catch(err){
+        onError("Something happened could not add images, please check your network");
+    }
+} 
+
+export const editImagesFmDb = async  (formData, action, onSuccess, onError) => {
+    try{
+        let response = await fetch('https://www.cortts.com/api/edit-images.php', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+            },
+            body: formData,
+        });
+
+
+        let resJson = await response.json();
+        
+        
+        if (resJson.status){ 
+            let images = await resJson.images;
+            let id = images.prop_id;
+            action(id,JSON.parse(images.photos));
+            onSuccess(resJson.msg, resJson.status);
+        }else{
+            onError(resJson.msg, resJson.status);
+        }
+    }catch(err){
+        onError("Something happened could not edit images, please check your network");
     }
 } 

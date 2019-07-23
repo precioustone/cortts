@@ -11,7 +11,7 @@ export const Template = (props) => {
             <body>
             <div class="container" >
             <div style=" dusplay: flex, align-items: flex-start, flex-direction: row, justify-content: 'flex-end', padding: 15">
-                <h4 style="color: #03C06A">${props.date}</h4>
+                <h4 style="color: #03C06A">${props.added_date}</h4>
             </div>
             <div class="contView" >
                 <h4>Property Description/Units:</h4>

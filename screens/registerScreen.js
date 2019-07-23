@@ -10,6 +10,8 @@ import { ButtonThickStr } from '../components/button';
 import CustomInput from '../components/textInputs.js';
 import { getUser } from '../db/database';
 import { REGISTER } from '../db/task';
+import { validateEmail, validatePhone } from '../db/validator';
+
 
 class RegisterScreen extends Component{
 
@@ -44,13 +46,26 @@ class RegisterScreen extends Component{
 
    handleRemember = (remember) => this.setState({remember});
 
-   _signUpAsync = async () => {
-        let user = { email, password, phone, name,remember } = this.state;
-        const { navigate } = this.props.navigation;
-        this.setState({modalVisible: !this.state.modalVisible})
-        let res = getUser({type: REGISTER},user,this.props.addUser, this.onSuccess, this.onError);
-        //this.setState({modalVisible: res});
-        //this.props.navigation.navigate('Main');
+    validate = (email, password, phone, name, remember) => {
+        console.log(validateEmail(email))
+        console.log(validatePhone(phone))
+        console.log(name.length > 0)
+        console.log(password.length >= 8)
+
+        if(validateEmail(email) && validatePhone(phone) && name.length > 0 && password.length >= 8){
+            this._signUpAsync(email, password, name, phone, remember);
+        }
+    } 
+
+
+   _signUpAsync = async (email, password, name, phone, remember) => {
+
+        let user = { email, password, phone, name, remember };
+        
+        this.setState({modalVisible: true});
+
+        getUser({type: REGISTER},user,this.props.addUser, this.onSuccess, this.onError);
+        
     };
 
     onError = (response) => {
@@ -147,7 +162,7 @@ class RegisterScreen extends Component{
                     </View>
 
                     <ButtonThickStr 
-                        onClick={() => this._signUpAsync()}
+                        onClick={() => this.validate(this.state.email, this.state.password, this.state.phone, this.state.name, this.state.remember)}
                         text= 'CREATE ACCOUNT'
                         style={styles.button}
                         containerStyle={{ backgroundColor: '#26B469', borderColor: "#FFF"}}

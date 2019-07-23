@@ -4,12 +4,14 @@ import * as Font from 'expo-font';
 import { connect } from "react-redux";
 import FlashMessage, { showMessage, hideMessage } from 'react-native-flash-message';
 import { addUser } from "../redux/actions";
+import { validateEmail } from '../db/validator';
 
 import { ButtonThickStr } from '../components/button.js';
 
 import CustomInput from '../components/textInputs.js';
 import { getUser } from '../db/database';
 import { LOGIN } from '../db/task';
+
 
 class LoginScreen extends Component{
 
@@ -41,13 +43,21 @@ class LoginScreen extends Component{
 
    handleRemember = (remember) => this.setState({remember});
 
+   validate = (email, password, remember) => {
+       
+        if(validateEmail(email) && password.length >= 8){
+            this._signInAsync(email, password, remember);
+        }
+    } 
 
-   _signInAsync = async () => {
-        let user = { email, password, phone, name,remember } = this.state;
+   _signInAsync = async (email, password,  remember) => {
+
+        let user = { email, password, remember };
         
-        this.setState({modalVisible: !this.state.modalVisible})
+        this.setState({modalVisible: true});
+
         getUser({type: LOGIN},user,this.props.addUser, this.onSuccess, this.onError);
-        //this.props.navigation.navigate('Main');
+        
     };
 
     onError = (response) => {
@@ -127,7 +137,7 @@ class LoginScreen extends Component{
                     </View>
 
                     <ButtonThickStr 
-                        onClick={() => this._signInAsync()}
+                        onClick={() => this.validate(this.state.email, this.state.password, this.state.remember)}
                         text= 'LOGIN'
                         style={styles.button}
                         containerStyle={{backgroundColor: '#26B469', borderColor: "#FFF"}}
