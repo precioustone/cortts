@@ -1,0 +1,482 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+MERGED from [:react-native-html-to-pdf] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-html-to-pdf\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-fs] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-fs\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-13:12
+MERGED from [:react-native-zip-archive] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-zip-archive\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-reanimated] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-gesture-handler] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-permissions] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-permissions\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\29ec74ca09dd3662839a26e296426964\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\92219e5d6d2bd6d280ba97c71d80b10a\AndroidManifest.xml:17:1-22:12
+MERGED from [:unimodules-react-native-adapter] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-app-loader-provider] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-constants] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-constants\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-30:12
+MERGED from [:expo-font] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-font\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-image-manipulator] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-image-manipulator\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-keep-awake] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-linear-gradient] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-21:12
+MERGED from [:expo-print] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-print\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-23:12
+MERGED from [:expo-sqlite] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sqlite\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-web-browser] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-web-browser\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-barcode-scanner-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-camera-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-constants-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-face-detector-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-file-system-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-font-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-permissions-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-task-manager-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-core] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\core\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-image-loader-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-sensors-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:2:1-11:12
+MERGED from [com.tom_roush:pdfbox-android:1.8.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\pdfbox-android-1.8.10.0.aar\327959473b9ea7d1eb6058e2d685bb65\AndroidManifest.xml:2:1-13:12
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\31fdb5f71013cd318d357d1330439b87\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\glide-4.9.0.aar\32f1a6d9a99f8e2a9635f9eaa29b46bd\AndroidManifest.xml:2:1-12:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\170645c59e9f46442e848f4b09a91f98\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\2c593955cd6a213529d5eaa07913d9c1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\4f17ef6f40133245b910e0fb32cd02e6\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e6da6c0f340d29b7741f77105b8d92d8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\e5009bbfa8e7ec7cca63de812072b709\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\054a376e238140675327f6ec7c2f6c90\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customtabs:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\e420d381db1cb899a0c8695113a0f678\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\e8b808105aea16e0a0126380861d4430\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\c20e07e7300f85acc9027b8754ad449c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\50f052bb6665b45e0a1ef44de28612fb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\aaf31dd9f91a24aa6cdbafdb91fa288b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\4b22f46c0dcd65246e54cc3c872dc88e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6e56cf495df6ed6277d39f837d626efb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\fd1a8e7ccb6b37cc3d463432a9a80dab\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\bdf4cb2bae7f49170c98f792e21b90f6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\53f428a2dd4dbb591053487767d2722b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b497bd2f8720b46b3229dde08b18586e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\cdd4e55ad78e3be9e399bfe4c72ee0d4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\b3709be54ef23c33cbfa28facc39ed16\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f21bc4e35b9fa024f9b0bd00b2f261b8\AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\b136468ef00d2a1bcaa7828cea15f081\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\bb6a292682d99f22946dc6b8c90d6119\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\a9f6fbbfef4f4d9981293e80d584a1a6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\837096d286296faa75e60858f3eb0ea5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\7a857231bec7237617440ab31e1424e1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\8ac1c72fbb5e004bbf87a0825cc803ff\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.9.0.aar\dcab44ffd758542f7f709dd3cd26f16f\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\7a61207166da2ee9918e12409d4f223e\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\6eb675a1bb08df20b8e8595cd63cc22b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6a8761885db16b9d60781be166a23bf3\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e447d8de050e123e5d3728649772f81b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\d134e5ae727290533d3c8bb7e9ad8b60\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\0b2c3a49e915db820a2a624c7ed0d075\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\8515b33d35f1d19e970c1433ae133e65\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c9adb6790ad841e742be1104f8c777fd\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\94d9a841acecc27e4644300a7acc84dc\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\7e5c04c5e6489f2fe7c16e1b87e7c45c\AndroidManifest.xml:2:1-13:12
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:2:1-30:12
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\1115b1e1053a02f4078a30d56bff33f1\AndroidManifest.xml:2:1-9:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+	package
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:2:5-25
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:1-44:12
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:4:5-67
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:12:5-67
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:12:5-67
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:4:22-64
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:5:5-77
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:5:22-75
+uses-permission#android.permission.READ_INTERNAL_STORAGE
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:9:22-77
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:10:5-75
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:10:22-72
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:14:5-81
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-81
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-81
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:12:5-81
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:12:5-81
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:14:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:15:5-79
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:12:5-79
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:12:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:14:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:15:22-76
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:16:5-65
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:16:22-62
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:18:5-80
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:14:5-80
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:14:5-80
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:18:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:20:5-81
+MERGED from [:react-native-fs] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-fs\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-81
+MERGED from [:react-native-fs] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-fs\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-81
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:13:5-81
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:13:5-81
+MERGED from [com.tom_roush:pdfbox-android:1.8.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\pdfbox-android-1.8.10.0.aar\327959473b9ea7d1eb6058e2d685bb65\AndroidManifest.xml:11:5-81
+MERGED from [com.tom_roush:pdfbox-android:1.8.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\pdfbox-android-1.8.10.0.aar\327959473b9ea7d1eb6058e2d685bb65\AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:20:22-78
+uses-permission#android.permission.WRITE_SETTINGS
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:21:5-73
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:21:22-70
+application
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:24:5-42:19
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\29ec74ca09dd3662839a26e296426964\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\29ec74ca09dd3662839a26e296426964\AndroidManifest.xml:11:5-20
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:17:5-28:19
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:17:5-28:19
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:15:5-19:19
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:15:5-19:19
+MERGED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-21:19
+MERGED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:11:5-21:19
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\glide-4.9.0.aar\32f1a6d9a99f8e2a9635f9eaa29b46bd\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\glide-4.9.0.aar\32f1a6d9a99f8e2a9635f9eaa29b46bd\AndroidManifest.xml:10:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\170645c59e9f46442e848f4b09a91f98\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\170645c59e9f46442e848f4b09a91f98\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\2c593955cd6a213529d5eaa07913d9c1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\2c593955cd6a213529d5eaa07913d9c1\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\4f17ef6f40133245b910e0fb32cd02e6\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\4f17ef6f40133245b910e0fb32cd02e6\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f21bc4e35b9fa024f9b0bd00b2f261b8\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f21bc4e35b9fa024f9b0bd00b2f261b8\AndroidManifest.xml:22:5-23:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.9.0.aar\dcab44ffd758542f7f709dd3cd26f16f\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.9.0.aar\dcab44ffd758542f7f709dd3cd26f16f\AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\7e5c04c5e6489f2fe7c16e1b87e7c45c\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\7e5c04c5e6489f2fe7c16e1b87e7c45c\AndroidManifest.xml:11:5-20
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:18:5-28:19
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:18:5-28:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:22:18-91
+	android:label
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:26:7-39
+	android:roundIcon
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:28:7-52
+	android:icon
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:27:7-41
+	android:allowBackup
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:29:7-34
+	android:theme
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:30:7-38
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:25:7-38
+activity#com.cortts.MainActivity
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:31:7-40:18
+	android:label
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:33:9-41
+	android:windowSoftInputMode
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:35:9-51
+	android:configChanges
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:34:9-79
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:32:9-37
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:36:9-39:25
+action#android.intent.action.MAIN
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:37:13-65
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:37:21-62
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:38:13-73
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:38:23-70
+activity#com.facebook.react.devsupport.DevSettingsActivity
+ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:41:7-84
+	android:name
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml:41:17-81
+uses-sdk
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-html-to-pdf] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-html-to-pdf\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-html-to-pdf] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-html-to-pdf\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fs] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-fs\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-fs] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-fs\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-zip-archive] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-zip-archive\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-zip-archive] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-zip-archive\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-reanimated] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-reanimated] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] C:\Users\Cortts Limited\Desktop\cortts\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-permissions] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-permissions\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-permissions] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-permissions\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\29ec74ca09dd3662839a26e296426964\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.59.8] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\react-native-0.59.8.aar\29ec74ca09dd3662839a26e296426964\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\92219e5d6d2bd6d280ba97c71d80b10a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\92219e5d6d2bd6d280ba97c71d80b10a\AndroidManifest.xml:20:5-44
+MERGED from [:unimodules-react-native-adapter] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-react-native-adapter] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-app-loader-provider] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-app-loader-provider] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-constants] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-constants\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-constants] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-constants\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:8:5-10:41
+MERGED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:8:5-10:41
+MERGED from [:expo-font] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-font\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-font] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-font\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-image-manipulator] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-image-manipulator\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-image-manipulator] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-image-manipulator\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-keep-awake] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-keep-awake] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-linear-gradient] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-linear-gradient] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-print] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-print\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-print] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-print\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sqlite] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sqlite\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sqlite] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sqlite\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-web-browser] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-web-browser\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-web-browser] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-web-browser\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-barcode-scanner-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-barcode-scanner-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-camera-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-camera-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-constants-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-constants-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-face-detector-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-face-detector-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-file-system-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-file-system-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-font-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-font-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-permissions-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-permissions-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-task-manager-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-task-manager-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-core] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\core\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-core] C:\Users\Cortts Limited\Desktop\cortts\node_modules\@unimodules\core\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-image-loader-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-image-loader-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-sensors-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-sensors-interface] C:\Users\Cortts Limited\Desktop\cortts\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\release\AndroidManifest.xml:7:5-9:41
+MERGED from [com.tom_roush:pdfbox-android:1.8.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\pdfbox-android-1.8.10.0.aar\327959473b9ea7d1eb6058e2d685bb65\AndroidManifest.xml:7:5-9:41
+MERGED from [com.tom_roush:pdfbox-android:1.8.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\pdfbox-android-1.8.10.0.aar\327959473b9ea7d1eb6058e2d685bb65\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\31fdb5f71013cd318d357d1330439b87\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\transition-28.0.0.aar\31fdb5f71013cd318d357d1330439b87\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\glide-4.9.0.aar\32f1a6d9a99f8e2a9635f9eaa29b46bd\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\glide-4.9.0.aar\32f1a6d9a99f8e2a9635f9eaa29b46bd\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\170645c59e9f46442e848f4b09a91f98\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\170645c59e9f46442e848f4b09a91f98\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\2c593955cd6a213529d5eaa07913d9c1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\2c593955cd6a213529d5eaa07913d9c1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\4f17ef6f40133245b910e0fb32cd02e6\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-tasks-16.0.1.aar\4f17ef6f40133245b910e0fb32cd02e6\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e6da6c0f340d29b7741f77105b8d92d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0.aar\e6da6c0f340d29b7741f77105b8d92d8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\e5009bbfa8e7ec7cca63de812072b709\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\e5009bbfa8e7ec7cca63de812072b709\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\054a376e238140675327f6ec7c2f6c90\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\054a376e238140675327f6ec7c2f6c90\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\e420d381db1cb899a0c8695113a0f678\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\e420d381db1cb899a0c8695113a0f678\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\e8b808105aea16e0a0126380861d4430\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\e8b808105aea16e0a0126380861d4430\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\c20e07e7300f85acc9027b8754ad449c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0.aar\c20e07e7300f85acc9027b8754ad449c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\50f052bb6665b45e0a1ef44de28612fb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-28.0.0.aar\50f052bb6665b45e0a1ef44de28612fb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\aaf31dd9f91a24aa6cdbafdb91fa288b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\loader-28.0.0.aar\aaf31dd9f91a24aa6cdbafdb91fa288b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\4b22f46c0dcd65246e54cc3c872dc88e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\4b22f46c0dcd65246e54cc3c872dc88e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6e56cf495df6ed6277d39f837d626efb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0.aar\6e56cf495df6ed6277d39f837d626efb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\fd1a8e7ccb6b37cc3d463432a9a80dab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0.aar\fd1a8e7ccb6b37cc3d463432a9a80dab\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\bdf4cb2bae7f49170c98f792e21b90f6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0.aar\bdf4cb2bae7f49170c98f792e21b90f6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\53f428a2dd4dbb591053487767d2722b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0.aar\53f428a2dd4dbb591053487767d2722b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b497bd2f8720b46b3229dde08b18586e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\customview-28.0.0.aar\b497bd2f8720b46b3229dde08b18586e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\cdd4e55ad78e3be9e399bfe4c72ee0d4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0.aar\cdd4e55ad78e3be9e399bfe4c72ee0d4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\b3709be54ef23c33cbfa28facc39ed16\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0.aar\b3709be54ef23c33cbfa28facc39ed16\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\c1000ad2cd5d57944ab2f67112bd2e74\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f21bc4e35b9fa024f9b0bd00b2f261b8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f21bc4e35b9fa024f9b0bd00b2f261b8\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\b136468ef00d2a1bcaa7828cea15f081\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0.aar\b136468ef00d2a1bcaa7828cea15f081\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\bb6a292682d99f22946dc6b8c90d6119\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\bb6a292682d99f22946dc6b8c90d6119\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\a9f6fbbfef4f4d9981293e80d584a1a6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0.aar\a9f6fbbfef4f4d9981293e80d584a1a6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\837096d286296faa75e60858f3eb0ea5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0.aar\837096d286296faa75e60858f3eb0ea5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\7a857231bec7237617440ab31e1424e1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\print-28.0.0.aar\7a857231bec7237617440ab31e1424e1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\8ac1c72fbb5e004bbf87a0825cc803ff\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\8ac1c72fbb5e004bbf87a0825cc803ff\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.9.0.aar\dcab44ffd758542f7f709dd3cd26f16f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\gifdecoder-4.9.0.aar\dcab44ffd758542f7f709dd3cd26f16f\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\7a61207166da2ee9918e12409d4f223e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\7a61207166da2ee9918e12409d4f223e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\6eb675a1bb08df20b8e8595cd63cc22b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-1.1.1.aar\6eb675a1bb08df20b8e8595cd63cc22b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6a8761885db16b9d60781be166a23bf3\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\6a8761885db16b9d60781be166a23bf3\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e447d8de050e123e5d3728649772f81b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\e447d8de050e123e5d3728649772f81b\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\d134e5ae727290533d3c8bb7e9ad8b60\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fresco-1.10.0.aar\d134e5ae727290533d3c8bb7e9ad8b60\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\0b2c3a49e915db820a2a624c7ed0d075\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-1.10.0.aar\0b2c3a49e915db820a2a624c7ed0d075\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\8515b33d35f1d19e970c1433ae133e65\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\drawee-1.10.0.aar\8515b33d35f1d19e970c1433ae133e65\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c9adb6790ad841e742be1104f8c777fd\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-1.10.0.aar\c9adb6790ad841e742be1104f8c777fd\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\94d9a841acecc27e4644300a7acc84dc\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-1.10.0.aar\94d9a841acecc27e4644300a7acc84dc\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\7e5c04c5e6489f2fe7c16e1b87e7c45c\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\7e5c04c5e6489f2fe7c16e1b87e7c45c\AndroidManifest.xml:7:5-9:41
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:8:5-10:41
+MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:8:5-10:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\1115b1e1053a02f4078a30d56bff33f1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:1.10.0] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\fbcore-1.10.0.aar\1115b1e1053a02f4078a30d56bff33f1\AndroidManifest.xml:5:5-7:41
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Cortts Limited\Desktop\cortts\android\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.STORAGE
+ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:15:5-66
+	android:name
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:15:22-63
+provider#expo.modules.filesystem.FileSystemFileProvider
+ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:18:9-27:20
+	android:grantUriPermissions
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:22:13-47
+	android:authorities
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:20:13-74
+	android:exported
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:21:13-37
+	tools:replace
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:23:13-48
+	android:name
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:19:13-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:24:13-26:70
+	android:resource
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:26:17-67
+	android:name
+		ADDED from [:expo-file-system] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-file-system\android\build\intermediates\library_manifest\release\AndroidManifest.xml:25:17-67
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:13:5-77
+	android:name
+		ADDED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:13:22-74
+service#expo.modules.location.services.LocationTaskService
+ADDED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:16:9-18:40
+	android:exported
+		ADDED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:18:13-37
+	android:name
+		ADDED from [:expo-location] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-location\android\build\intermediates\library_manifest\release\AndroidManifest.xml:17:13-78
+provider#expo.modules.sharing.SharingFileProvider
+ADDED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:12:9-20:20
+	android:grantUriPermissions
+		ADDED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:16:13-47
+	android:authorities
+		ADDED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:14:13-71
+	android:exported
+		ADDED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:expo-sharing] C:\Users\Cortts Limited\Desktop\cortts\node_modules\expo-sharing\android\build\intermediates\library_manifest\release\AndroidManifest.xml:13:13-68
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-base-16.0.1.aar\7d57594ef4506432bd62e8c56966ba62\AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\4b679dc72720d6a58ecfc46f96af5fbc\AndroidManifest.xml:24:13-58
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:13:5-79
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:13:22-76
+uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:15:5-98
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:15:22-95
+uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:16:5-94
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:16:22-91
+service#io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:19:9-21:40
+	android:exported
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:21:13-37
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:20:13-132
+service#io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:22:9-24:40
+	android:exported
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:24:13-37
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:23:13-127
+service#io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService
+ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:25:9-27:40
+	android:exported
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\Cortts Limited\.gradle\caches\transforms-1\files-1.1\library-3.2.11.aar\cd15a965260ffaf1816d017ad89ea0ee\AndroidManifest.xml:26:13-120
