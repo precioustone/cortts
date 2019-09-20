@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, ActivityIndicator, Image, ImageBackground, Modal, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ActivityIndicator, Image, ImageBackground, Modal, FlatList, PermissionsAndroid, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ActionButton from 'react-native-action-button';
 import { connect } from 'react-redux';
@@ -36,41 +36,50 @@ class ViewPhotos extends Component{
     
 
     componentDidMount(){
-        this.setState({downloading: true});
+        //this.setState({downloading: true});
+        this.requestStoragePermission();
+    }
+
+    downloadImages = () => {
         const downloadOption = {
             fromUrl: this.state.webUri,
             toFile: this.state.zipFile,
             begin: _ => this.setState({downloading: true})
         }
         
-        writeFile(this.state.zipFile, "", 'base64').catch(err => this.onError(err.message));
-        
-        mkdir(this.state.extractDir).catch(err => {
-            this.onError(err.message);
-        });
-
-        
-
-        if(this.state.webUri != '' && this.state.webUri != null){
-            downloadFile(downloadOption).promise.then(result => {
-                if(result){  
-                    unzip(this.state.zipFile, this.state.extractDir)
-                    .catch(err => this.onError(err.message));
+        writeFile(this.state.zipFile, "", 'base64')
+        .then(_ =>{
+            mkdir(this.state.extractDir)
+            .then(_ => {
+                if(this.state.webUri != '' && this.state.webUri != null){
+                    downloadFile(downloadOption).promise
+                    .then(result => {
+                        if(result){  
+                            unzip(this.state.zipFile, this.state.extractDir)
+                            .then(_ => {
+                                readDir(this.state.extractDir).then(files => {
+                                    //this.onError(JSON.stringify(files));
+                                    this.setState({imageUrls: files, downloading: false})
+                                }).catch(err => {
+                                    this.onError(err.message);
+                                })
+                            })
+                            .catch(err => this.onError(err.message));
+                        }
+                    }).catch(err => {
+                       this.onError(err.message);
+                    })
                 }
-            }).then(_ => {
-                readDir(this.state.extractDir).then(files => {
-                    this.onError(JSON.stringify(files));
-                    this.setState({imageUrls: files, downloading: false})
-                }).catch(err => {
-                    this.onError(err.message);
-                })
-            }).catch(err => {
-               this.onError(err.message);
             })
-        }
+            .catch(err => {
+                this.onError(err.message);
+            });
+        })
+        .catch(err => this.onError(err.message));
+        
     }
 
-    componentWillMount(){
+    componentWillUnmount(){
         unlink(this.state.extractDir)
         .catch(err => {
             this.onError(err.message);
@@ -79,6 +88,25 @@ class ViewPhotos extends Component{
         .catch(err => {
             this.onError(err.message);
         });
+    }
+
+    requestStoragePermission = async () => {
+        try {
+          const granted = await PermissionsAndroid.requestMultiple(
+            [PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE]
+          );
+          if (granted['android.permission.READ_EXTERNAL_STORAGE']
+          && granted['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED) {
+            this.downloadImages();
+          } else {
+            Alert.alert('Storage permission denied');
+            this.setState({downloading: false});
+          }
+        } catch (err) {
+            Alert.alert(err.message);
+            this.setState({downloading: false});
+        }
     }
 
     onError = (response) => {

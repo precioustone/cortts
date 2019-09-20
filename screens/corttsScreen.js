@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, WebView } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, WebView } from 'react-native';
 
 
 export default class Cortts extends Component{
@@ -10,12 +10,18 @@ export default class Cortts extends Component{
 
     render(){
         return (
+            
             <WebView 
                 style={styles.webview}
                 source={{uri: 'https://cortts.com'}}
+                onLoadStart={}
             />
         );
     };
+
+    indicator(){
+        
+    }
 }
 
 const styles = StyleSheet.create({
